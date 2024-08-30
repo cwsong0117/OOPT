@@ -33,7 +33,7 @@ public class OOPT {
             switch(option) {
                 case 1:
                     System.out.println("\nStock Management");
-                    CategoryMenu.categoryMenu();
+                    StockMenu.stockMenu();
                     break;
                 case 2:
                     break;

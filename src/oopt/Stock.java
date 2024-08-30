@@ -4,6 +4,7 @@
  */
 package oopt;
 
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -124,5 +125,30 @@ public class Stock {
                     stockID, name, quantity, price, 
                     supplier, expiryDate, 
                     arrivalDate, location);
+    }
+    
+    public static void operationAfterSearch() {
+        
+        Scanner scanner = new Scanner(System.in);
+        StockMenu stockMenu = new StockMenu();
+
+        
+        System.out.println("1. Update Stock Details");
+        System.out.println("2. Remove Stock");
+        System.out.println("3. Exit");
+        System.out.print("Option > ");
+        int option = scanner.nextInt();
+        
+        switch(option) {
+            case 1:
+                //updateStockDetails();
+                break;
+            case 2:
+                Remove.removeFood();
+                break;
+            case 3:
+                stockMenu.stockMenu();
+                break;
+        }
     }
 }

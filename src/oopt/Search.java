@@ -4,7 +4,7 @@
  */
 package oopt;
 
-import static oopt.Food.operationAfterSearch;
+import static oopt.Stock.operationAfterSearch;
 import java.util.Scanner;
 
 /**
@@ -62,7 +62,7 @@ public class Search {
                     break;
             }
         }
-        stockMenu.foodMenu();
+        stockMenu.stockMenu();
     }
     
     public static void searchByID() {

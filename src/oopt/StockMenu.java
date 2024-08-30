@@ -4,8 +4,6 @@
  */
 package oopt;
 
-import static oopt.Food.displayFood;
-import static oopt.Food.foodIn;
 import java.util.Scanner;
 
 /**
@@ -13,7 +11,7 @@ import java.util.Scanner;
  * @author User
  */
 public class StockMenu {
-    public static void foodMenu() {
+    public static void stockMenu() {
     
         Boolean running = true;
         Scanner scanner = new Scanner(System.in);
@@ -28,17 +26,17 @@ public class StockMenu {
             System.out.println("7. EXIT");
             System.out.print("Your Option : ");
             int option = scanner.nextInt();
-            System.out.println("\n");
+            System.out.print("\n");
             
             switch(option) {
 
                 case 1:
                     System.out.println("Add Stock Option Selected...\n");
-                    foodIn();
+                    CategoryMenu.addStockMenu();
                     break;
                 case 2:
                     System.out.println("Display Stock Option Selected...\n");
-                    displayFood();
+                    CategoryMenu.displayStockMenu();
                     break;
                 case 3:
                     System.out.println("Remove Stock Level Option Selected...\n");

@@ -10,62 +10,62 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class Food extends Stock{
-    
-    private String isOrganic;
-    private String allergens;
-    private double storageTemperature;
-    
-    public Food() {
+public class Beverage extends Stock {
+
+    private double alcoholContent;
+    private String isCarbonated;
+    private int volume;
+
+    public Beverage() {
         super();
-        this.isOrganic = "";
-        this.allergens = "";
-        this.storageTemperature = 0.0;
+        this.alcoholContent = alcoholContent;
+        this.isCarbonated = isCarbonated;
+        this.volume = volume;
     }
-    
-    public Food(String stockID, String name, int quantity, double price, 
-            String supplier, String expiryDate, 
-            String arrivalDate, String location, String isOrganic,
-            String allergens, double storageTemperature) {
+
+    public Beverage(String stockID, String name, int quantity, double price,
+            String supplier, String expiryDate,
+            String arrivalDate, String location, double alcoholContent,
+            String isCarbonated, int volume) {
         super(stockID, name, quantity, price, supplier, expiryDate,
                 arrivalDate, location);
-        this.isOrganic = isOrganic;
-        this.allergens = allergens;
-        this.storageTemperature = storageTemperature;
+        this.alcoholContent = alcoholContent;
+        this.isCarbonated = isCarbonated;
+        this.volume = volume;
     }
-    
-    public String getIsOrganic() {
-        return isOrganic;
+
+    public double getAlcoholContent() {
+        return alcoholContent;
     }
-    
-    public String getAllergens() {
-        return allergens;
+
+    public String getIsCarbonated() {
+        return isCarbonated;
     }
-    
-    public double getStorageTemperature() {
-        return storageTemperature;
+
+    public int getVolume() {
+        return volume;
     }
-    
-    public void setIsOrganic(String isOrganic) {
-        this.isOrganic = isOrganic;
+
+    public void setAlcoholContent(double alcoholContent) {
+        this.alcoholContent = alcoholContent;
     }
-    
-    public void setAllergens(String allergens) {
-        this.allergens = allergens;
+
+    public void setIsCarbonated(String isCarbonated) {
+        this.isCarbonated = isCarbonated;
     }
-    
-    public void setStorageTemperature(double storageTemperature) {
-        this.storageTemperature = storageTemperature;
+
+    public void setVolume(int volume) {
+        this.volume = volume;
     }
-    
+
     @Override
     public String toString() {
-        return String.format("%s %-11s %-10s %-15.2f",
+        return String.format("%s %-11s %-10s %-15d",
                 super.toString(), // Calls the toString() from Stock
-                isOrganic, allergens, storageTemperature);
+                alcoholContent, isCarbonated, volume);
     }
     
-    public static void foodIn() {
+    public static void beverageIn() {
     
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
@@ -75,27 +75,27 @@ public class Food extends Stock{
             Stock stock = stockIn();
             File file = new File();
                 
-            System.out.print("Organic?(yes/no) : ");
-            String isOrganic = scanner.nextLine().toLowerCase();
-            while (!isOrganic.equals("yes") && !isOrganic.equals("no")) {
+            System.out.print("Alcohol Content(%) : ");
+            double alcoholContent = scanner.nextDouble();
+            
+            System.out.print("Carbonated?(yes/no) : ");
+            String isCarbonated = scanner.nextLine().toLowerCase();
+            while (!isCarbonated.equals("yes") && !isCarbonated.equals("no")) {
                 System.out.print("Invalid input. Please enter 'yes' or 'no': ");
-                isOrganic = scanner.nextLine().toLowerCase();
+                isCarbonated = scanner.nextLine().toLowerCase();
             }
             
-            System.out.print("Allergens : ");
-            String allergens = scanner.nextLine();
-            
-            System.out.print("Storage Temperature : ");
-            double storageTemperature = scanner.nextDouble();
+            System.out.print("Volume : ");
+            int volume = scanner.nextInt();
             
             scanner.nextLine();
             
-            Food food = new Food(stock.getStockID(), stock.getName(), stock.getQuantity(),
+            Beverage beverage = new Beverage(stock.getStockID(), stock.getName(), stock.getQuantity(),
                                 stock.getPrice(), stock.getSupplier(),
                                 stock.getExpiryDate(), stock.getArrivalDate() ,stock.getLocation(),
-                                isOrganic, allergens, storageTemperature);
+                                alcoholContent, isCarbonated, volume);
             
-            file.appendFood(food);
+            file.appendBeverage(beverage);
             
             System.out.print("\n");
             System.out.println("You can press any key to stop.");
@@ -107,7 +107,7 @@ public class Food extends Stock{
             }
         }
         System.out.println("\n");
-        Display.displayFood();
+        Display.displayBeverage();
     }
     
     public static Stock stockIn() {
