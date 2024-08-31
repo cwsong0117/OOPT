@@ -153,7 +153,7 @@ public class File {
     }
     
     public static void writeBeverage(Beverage[] beverages) {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("Food.txt", false))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("Beverage.txt", false))){
             for(Beverage beverage : beverages) {
                 writer.write(
                     beverage.getStockID() + "|" +
@@ -176,7 +176,7 @@ public class File {
     
     
     public static void appendIngredient(Ingredient ingredient) {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("Beverage.txt", true))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("Ingredient.txt", true))){
             writer.append(
                     ingredient.getStockID() + "|" +
                     ingredient.getName() + "|" +
@@ -198,7 +198,7 @@ public class File {
     public static Ingredient[] readIngredient() {
         //read only then create a array to store the arrayList from the text file
         List<Ingredient> ingredients = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader("Beverage.txt"))){
+        try(BufferedReader reader = new BufferedReader(new FileReader("Ingredient.txt"))){
             String line;
             while((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
@@ -232,7 +232,7 @@ public class File {
     }
     
     public static void writeIngredient(Ingredient[] ingredients) {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("Food.txt", false))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("Ingredient.txt", false))){
             for(Ingredient ingredient : ingredients) {
                 writer.write(
                     ingredient.getStockID() + "|" +

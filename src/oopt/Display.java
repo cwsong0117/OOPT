@@ -22,7 +22,7 @@ public class Display {
         for (Food f : foods) {
             System.out.println(f.toString());
         }
-        System.out.println("\n\n");
+        System.out.print("\n\n");
         stockMenu.stockMenu();
     }
     
@@ -40,7 +40,7 @@ public class Display {
         for (Beverage b : beverages) {
             System.out.println(b.toString());
         }
-        System.out.println("\n\n");
+        System.out.print("\n\n");
         stockMenu.stockMenu();
     }
     
@@ -57,7 +57,7 @@ public class Display {
         for (Ingredient i : ingredients) {
             System.out.println(i.toString());
         }
-        System.out.println("\n\n");
+        System.out.print("\n\n");
         stockMenu.stockMenu();
     }
 }

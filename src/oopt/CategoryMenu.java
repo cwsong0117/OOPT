@@ -56,6 +56,7 @@ public class CategoryMenu {
         
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
+        Display d = new Display();
         
         while(running) {
             System.out.println("1. Food");
@@ -69,15 +70,15 @@ public class CategoryMenu {
             switch(option) {
                 case 1:
                     System.out.println("Food Category Selected...");
-                    Display.displayFood();
+                    d.displayFood();
                     break;
                 case 2:
                     System.out.println("Beverage Category Selected...");
-                    Display.displayBeverage();
+                    d.displayBeverage();
                     break;
                 case 3:
                     System.out.println("Ingredient Category Selected...");
-                    Display.displayIngredient();
+                    d.displayIngredient();
                     break;
                 case 4:
                     System.out.println("Exiting...");
