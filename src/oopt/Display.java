@@ -9,17 +9,38 @@ package oopt;
  * @author User
  */
 public class Display {
-    public static void displayFood() {
-        File file = new File();
-        Food[] foods = file.readFood();
-        StockMenu stockMenu = new StockMenu();
-
+    
+    public static void displayFoodTitle() {
         System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
                           "ID", "Name", "Quantity", "Price", "Supplier", 
                           "Expiry Date", "Arrival Date", "Location", 
                           "Organic", "Allergens", "Storage Temp");
+    }
     
-        for (Food f : foods) {
+    public static void displayBeverageTitle() {
+        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
+                          "ID", "Name", "Quantity", "Price", "Supplier", 
+                          "Expiry Date", "Arrival Date", "Location", 
+                          "Alcohol Content", "Carbonated", "Volume");
+    }
+    
+    public static void displayIngredientTitle() {
+        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
+                      "ID", "Name", "Quantity", "Price", "Supplier", 
+                      "Expiry Date", "Arrival Date", "Location", 
+                      "Ingredient Type", "Gluten", "Calory");
+    }
+        
+    //the purpose of create those method is to ensure the reusability in other method
+        
+    public static void displayFood() {
+        File file = new File();
+        AddFood[] foods = file.readFood();
+        StockMenu stockMenu = new StockMenu();
+        
+        displayFoodTitle();
+    
+        for (AddFood f : foods) {
             System.out.println(f.toString());
         }
         System.out.print("\n\n");
@@ -29,15 +50,12 @@ public class Display {
     
     public static void displayBeverage() {
         File file = new File();
-        Beverage[] beverages = file.readBeverage();
+        AddBeverage[] beverages = file.readBeverage();
         StockMenu stockMenu = new StockMenu();
 
-        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                          "ID", "Name", "Quantity", "Price", "Supplier", 
-                          "Expiry Date", "Arrival Date", "Location", 
-                          "Alcohol Content", "Carbonated", "Volume");
+        displayBeverageTitle();
     
-        for (Beverage b : beverages) {
+        for (AddBeverage b : beverages) {
             System.out.println(b.toString());
         }
         System.out.print("\n\n");
@@ -46,15 +64,12 @@ public class Display {
     
     public static void displayIngredient() {
         File file = new File();
-        Ingredient[] ingredients = file.readIngredient();
+        AddIngredient[] ingredients = file.readIngredient();
         StockMenu stockMenu = new StockMenu();
 
-        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                      "ID", "Name", "Quantity", "Price", "Supplier", 
-                      "Expiry Date", "Arrival Date", "Location", 
-                      "Ingredient Type", "Gluten", "Calory");
+        displayIngredientTitle();
     
-        for (Ingredient i : ingredients) {
+        for (AddIngredient i : ingredients) {
             System.out.println(i.toString());
         }
         System.out.print("\n\n");

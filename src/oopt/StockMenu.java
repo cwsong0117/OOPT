@@ -15,15 +15,15 @@ public class StockMenu {
     
         Boolean running = true;
         Scanner scanner = new Scanner(System.in);
+        CategoryMenu c = new CategoryMenu();
         
         while(running) {
             System.out.println("1: ADD Stock");
             System.out.println("2. DISPLAY Stock");
             System.out.println("3. REMOVE Stock");
             System.out.println("4. SEARCH Stock");
-            System.out.println("5. SHIP Stock");
-            System.out.println("6. LOW-LEVEL Stock Check");
-            System.out.println("7. EXIT");
+            System.out.println("5. LOW-LEVEL Stock Check");
+            System.out.println("6. EXIT");
             System.out.print("Your Option : ");
             int option = scanner.nextInt();
             System.out.print("\n");
@@ -31,32 +31,30 @@ public class StockMenu {
             switch(option) {
 
                 case 1:
-                    System.out.println("Add Stock Option Selected...\n");
-                    CategoryMenu.addStockMenu();
+                    System.out.print("Add Stock Option Selected...\n");
+                    c.addStockMenu();
                     break;
                 case 2:
-                    System.out.println("Display Stock Option Selected...\n");
-                    CategoryMenu.displayStockMenu();
+                    System.out.print("Display Stock Option Selected...\n");
+                    c.displayStockMenu();
                     break;
                 case 3:
-                    System.out.println("Remove Stock Level Option Selected...\n");
-                    Remove.removeFood();
+                    System.out.print("Remove Stock Level Option Selected...\n");
+                    c.removeStockMenu();
                     break;
                 case 4:
-                    System.out.println("Search Stock Level Option Selected...\n");
-                    Search.searchFoodMenu();
+                    System.out.print("Search Stock Level Option Selected...\n");
+                    c.searchStockMenu();
                     break;
                 case 5:
-                    System.out.println("Ship Stock Option Selected...\n");
-                    break;
+                    System.out.print("Stock Level Checking...\n");
+                    c.stockBalanceAlert();
                 case 6:
-                    System.out.println("Stock Level Checking...\n");
-                case 7:
-                    System.out.println("Exiting...\n");
+                    System.out.print("Exiting...\n");
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid Option...\n");
+                    System.out.print("Invalid Option...\n");
                     break;
             }
             return;

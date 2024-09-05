@@ -4,7 +4,6 @@
  */
 package oopt;
 
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -13,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Stock {
     
-    private static String stockID;
+    private String stockID;
     private String name;
     private int quantity;
     private double price;
@@ -48,11 +47,6 @@ public class Stock {
         this.expiryDate = expiryDate;
         this.arrivalDate = arrivalDate;
         this.location = location;
-    }
-    
-    public static String generateID(String prefix, AtomicInteger counter) {
-        int uniqueNumber = counter.incrementAndGet();//increase the value by one and return
-        return prefix + String.format("%03d", uniqueNumber);
     }
     
     public String getStockID() {
@@ -125,30 +119,5 @@ public class Stock {
                     stockID, name, quantity, price, 
                     supplier, expiryDate, 
                     arrivalDate, location);
-    }
-    
-    public static void operationAfterSearch() {
-        
-        Scanner scanner = new Scanner(System.in);
-        StockMenu stockMenu = new StockMenu();
-
-        
-        System.out.println("1. Update Stock Details");
-        System.out.println("2. Remove Stock");
-        System.out.println("3. Exit");
-        System.out.print("Option > ");
-        int option = scanner.nextInt();
-        
-        switch(option) {
-            case 1:
-                //updateStockDetails();
-                break;
-            case 2:
-                Remove.removeFood();
-                break;
-            case 3:
-                stockMenu.stockMenu();
-                break;
-        }
     }
 }

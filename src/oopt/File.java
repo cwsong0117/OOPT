@@ -17,7 +17,7 @@ import java.util.List;
  * @author User
  */
 public class File {
-    public static void appendFood(Food food) {
+    public static void appendFood(AddFood food) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("Food.txt", true))){
             writer.append(
                     food.getStockID() + "|" +
@@ -37,9 +37,9 @@ public class File {
         }
     }
     
-    public static Food[] readFood() {
+    public static AddFood[] readFood() {
         //read only then create a array to store the arrayList from the text file
-        List<Food> foods = new ArrayList<>();
+        List<AddFood> foods = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new FileReader("Food.txt"))){
             String line;
             while((line = reader.readLine()) != null) {
@@ -58,7 +58,7 @@ public class File {
                         String allergens = parts[9];
                         double storageTemperature = Double.parseDouble(parts[10]);
                         
-                        Food food = new Food(stockID, name, quantity, price, 
+                        AddFood food = new AddFood(stockID, name, quantity, price, 
                                 supplier, expiryDate, arrivalDate,
                                 location, isOrganic, allergens, storageTemperature);
                         foods.add(food);
@@ -70,12 +70,12 @@ public class File {
         }catch(IOException e){
             e.printStackTrace();
         }
-        return foods.toArray(new Food[0]);
+        return foods.toArray(new AddFood[0]);
     }
     
-    public static void writeFood(Food[] foods) {
+    public static void writeFood(AddFood[] foods) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("Food.txt", false))){
-            for(Food food : foods) {
+            for(AddFood food : foods) {
                 writer.write(
                     food.getStockID() + "|" +
                     food.getName() + "|" +
@@ -95,8 +95,7 @@ public class File {
         }
     }
     
-    
-    public static void appendBeverage(Beverage beverage) {
+    public static void appendBeverage(AddBeverage beverage) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("Beverage.txt", true))){
             writer.append(
                     beverage.getStockID() + "|" +
@@ -116,9 +115,9 @@ public class File {
         }
     }
     
-    public static Beverage[] readBeverage() {
+    public static AddBeverage[] readBeverage() {
         //read only then create a array to store the arrayList from the text file
-        List<Beverage> beverages = new ArrayList<>();
+        List<AddBeverage> beverages = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new FileReader("Beverage.txt"))){
             String line;
             while((line = reader.readLine()) != null) {
@@ -137,7 +136,7 @@ public class File {
                         String isCarbonated = parts[9];
                         int volume = Integer.parseInt(parts[10]);
                         
-                        Beverage beverage = new Beverage(stockID, name, quantity, price, 
+                        AddBeverage beverage = new AddBeverage(stockID, name, quantity, price, 
                                 supplier, expiryDate, arrivalDate,
                                 location, alcoholContent, isCarbonated, volume);
                         beverages.add(beverage);
@@ -149,12 +148,12 @@ public class File {
         }catch(IOException e){
             e.printStackTrace();
         }
-        return beverages.toArray(new Beverage[0]);
+        return beverages.toArray(new AddBeverage[0]);
     }
     
-    public static void writeBeverage(Beverage[] beverages) {
+    public static void writeBeverage(AddBeverage[] beverages) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("Beverage.txt", false))){
-            for(Beverage beverage : beverages) {
+            for(AddBeverage beverage : beverages) {
                 writer.write(
                     beverage.getStockID() + "|" +
                     beverage.getName() + "|" +
@@ -175,7 +174,7 @@ public class File {
     }
     
     
-    public static void appendIngredient(Ingredient ingredient) {
+    public static void appendIngredient(AddIngredient ingredient) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("Ingredient.txt", true))){
             writer.append(
                     ingredient.getStockID() + "|" +
@@ -195,9 +194,9 @@ public class File {
         }
     }
     
-    public static Ingredient[] readIngredient() {
+    public static AddIngredient[] readIngredient() {
         //read only then create a array to store the arrayList from the text file
-        List<Ingredient> ingredients = new ArrayList<>();
+        List<AddIngredient> ingredients = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new FileReader("Ingredient.txt"))){
             String line;
             while((line = reader.readLine()) != null) {
@@ -216,7 +215,7 @@ public class File {
                         String gluten = parts[9];
                         int calory = Integer.parseInt(parts[10]);
                         
-                        Ingredient ingredient = new Ingredient(stockID, name, quantity, price, 
+                        AddIngredient ingredient = new AddIngredient(stockID, name, quantity, price, 
                                 supplier, expiryDate, arrivalDate,
                                 location, ingredientType, gluten, calory);
                         ingredients.add(ingredient);
@@ -228,12 +227,12 @@ public class File {
         }catch(IOException e){
             e.printStackTrace();
         }
-        return ingredients.toArray(new Ingredient[0]);
+        return ingredients.toArray(new AddIngredient[0]);
     }
     
-    public static void writeIngredient(Ingredient[] ingredients) {
+    public static void writeIngredient(AddIngredient[] ingredients) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("Ingredient.txt", false))){
-            for(Ingredient ingredient : ingredients) {
+            for(AddIngredient ingredient : ingredients) {
                 writer.write(
                     ingredient.getStockID() + "|" +
                     ingredient.getName() + "|" +

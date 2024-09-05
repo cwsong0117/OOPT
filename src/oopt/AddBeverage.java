@@ -10,20 +10,20 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class Beverage extends Stock {
+public class AddBeverage extends Stock {
 
     private double alcoholContent;
     private String isCarbonated;
     private int volume;
 
-    public Beverage() {
+    public AddBeverage() {
         super();
         this.alcoholContent = alcoholContent;
         this.isCarbonated = isCarbonated;
         this.volume = volume;
     }
 
-    public Beverage(String stockID, String name, int quantity, double price,
+    public AddBeverage(String stockID, String name, int quantity, double price,
             String supplier, String expiryDate,
             String arrivalDate, String location, double alcoholContent,
             String isCarbonated, int volume) {
@@ -60,7 +60,7 @@ public class Beverage extends Stock {
 
     @Override
     public String toString() {
-        return String.format("%s %-11s %-10s %-15d",
+        return String.format("%s %-15s %-10s %-15d",
                 super.toString(), // Calls the toString() from Stock
                 alcoholContent, isCarbonated, volume);
     }
@@ -78,6 +78,8 @@ public class Beverage extends Stock {
             System.out.print("Alcohol Content(%) : ");
             double alcoholContent = scanner.nextDouble();
             
+            scanner.nextLine();
+            
             System.out.print("Carbonated?(yes/no) : ");
             String isCarbonated = scanner.nextLine().toLowerCase();
             while (!isCarbonated.equals("yes") && !isCarbonated.equals("no")) {
@@ -90,7 +92,7 @@ public class Beverage extends Stock {
             
             scanner.nextLine();
             
-            Beverage beverage = new Beverage(stock.getStockID(), stock.getName(), stock.getQuantity(),
+            AddBeverage beverage = new AddBeverage(stock.getStockID(), stock.getName(), stock.getQuantity(),
                                 stock.getPrice(), stock.getSupplier(),
                                 stock.getExpiryDate(), stock.getArrivalDate() ,stock.getLocation(),
                                 alcoholContent, isCarbonated, volume);
@@ -114,8 +116,8 @@ public class Beverage extends Stock {
     
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Stock ID : ");
-        String stockID = scanner.nextLine();
+        String beverageID = StockIDGenerator.generateBeverageID();
+        System.out.print("Stock ID : " + beverageID + "\n");
         
         System.out.print("Name : ");
         String name = scanner.nextLine();
@@ -132,17 +134,23 @@ public class Beverage extends Stock {
 
         System.out.print("Supplier : ");
         String supplier = scanner.nextLine();
-
-        System.out.print("Expiry Date : ");
-        String expiryDate = scanner.nextLine();
         
-        System.out.print("Arrival Date : ");
-        String arrivalDate = scanner.nextLine();
+        String arrivalDate = Validation.getLocalDate();
+        System.out.print("Arrival Date : " + arrivalDate + "\n");
+
+        String expiryDate;
+        do {
+            System.out.print("Expiry Date : ");
+            expiryDate = scanner.nextLine();
+            if(!Validation.isValidDate(expiryDate)) {
+                System.out.println("Invalid date format. Please enter in the format YYYY-MM-DD.");
+            }
+        }while(!Validation.isValidDate(expiryDate));
         
         System.out.print("Location : ");
         String location = scanner.nextLine();
         
-        return new Stock(stockID, name, quantity, price, supplier, expiryDate, arrivalDate, location);
+        return new Stock(beverageID, name, quantity, price, supplier, expiryDate, arrivalDate, location);
         
     }
 }
