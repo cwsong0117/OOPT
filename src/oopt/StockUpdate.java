@@ -29,8 +29,8 @@ public class StockUpdate {
         boolean found = false;
             
         if (n == 1) { // Update stock level for food
-            AddFood[] foods = file.readFood();
-            for (AddFood f : foods) {
+            StockAddFood[] foods = file.readFood();
+            for (StockAddFood f : foods) {
                 if (f.getStockID().equalsIgnoreCase(id)) {
                     int newStock = f.getQuantity() + receivedStock; // Add received stock to current stock
                     f.setQuantity(newStock);
@@ -43,8 +43,8 @@ public class StockUpdate {
                 System.out.println("Stock level updated successfully.");
             }
         } else if (n == 2) { // Update stock level for beverage
-            AddBeverage[] beverages = file.readBeverage();
-            for (AddBeverage b : beverages) {
+            StockAddBeverage[] beverages = file.readBeverage();
+            for (StockAddBeverage b : beverages) {
                 if (b.getStockID().equalsIgnoreCase(id)) {
                     int newStock = b.getQuantity() + receivedStock; // Add received stock to current stock
                     b.setQuantity(newStock);
@@ -57,8 +57,8 @@ public class StockUpdate {
                 System.out.println("Stock level updated successfully.");
             }
         } else if (n == 3) { // Update stock level for ingredient
-            AddIngredient[] ingredients = file.readIngredient();
-            for (AddIngredient i : ingredients) {
+            StockAddIngredient[] ingredients = file.readIngredient();
+            for (StockAddIngredient i : ingredients) {
                 if (i.getStockID().equalsIgnoreCase(id)) {
                     int newStock = i.getQuantity() + receivedStock; // Add received stock to current stock
                     i.setQuantity(newStock);

@@ -10,20 +10,20 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class AddIngredient extends Stock{
+public class StockAddIngredient extends Stock{
     
     private String ingredientType;
     private String gluten;
     private int calory;
     
-    public AddIngredient() {
+    public StockAddIngredient() {
         super();
         this.ingredientType = ingredientType;
         this.gluten = gluten;
         this.calory = calory;
     }
     
-    public AddIngredient(String stockID, String name, int quantity, double price, 
+    public StockAddIngredient(String stockID, String name, int quantity, double price, 
             String supplier, String expiryDate, 
             String arrivalDate, String location, String ingredientType,
             String gluten, int calory) {
@@ -90,7 +90,7 @@ public class AddIngredient extends Stock{
             
             scanner.nextLine();
             
-            AddIngredient ingredient = new AddIngredient(stock.getStockID(), stock.getName(), stock.getQuantity(),
+            StockAddIngredient ingredient = new StockAddIngredient(stock.getStockID(), stock.getName(), stock.getQuantity(),
                                 stock.getPrice(), stock.getSupplier(),
                                 stock.getExpiryDate(), stock.getArrivalDate() ,stock.getLocation(),
                                 ingredientType, gluten, calory);

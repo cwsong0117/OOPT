@@ -80,37 +80,37 @@ public class StockSearch {
         
         if(n == 1) {
         //1 means user select food
-            AddFood[] foods = file.readFood();
+            StockAddFood[] foods = file.readFood();
             
             d.displayFoodTitle();
         
-            for(AddFood f : foods) {
+            for(StockAddFood f : foods) {
                 if(f.getStockID().equalsIgnoreCase(id)) {
                     System.out.println(f.toString());
                     found = true;
                 }
             }
         }else if(n == 2) {//2 means beverage
-            AddBeverage[] beverages = file.readBeverage();
+            StockAddBeverage[] beverages = file.readBeverage();
             System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
                           "ID", "Name", "Quantity", "Price", "Supplier", 
                           "Expiry Date", "Arrival Date", "Location", 
                           "Alcohol Content", "Carbonated", "Volume");
         
-            for(AddBeverage b : beverages) {
+            for(StockAddBeverage b : beverages) {
                 if(b.getStockID().equalsIgnoreCase(id)) {
                     System.out.println(b.toString());
                     found = true;
                 }
             }
         }else if(n == 3) {//3 means ingredient
-            AddIngredient[] ingredients = file.readIngredient();
+            StockAddIngredient[] ingredients = file.readIngredient();
             System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
                       "ID", "Name", "Quantity", "Price", "Supplier", 
                       "Expiry Date", "Arrival Date", "Location", 
                       "Ingredient Type", "Gluten", "Calory");
         
-            for(AddIngredient i : ingredients) {
+            for(StockAddIngredient i : ingredients) {
                 if(i.getStockID().equalsIgnoreCase(id)) {
                     System.out.println(i.toString());
                     found = true;
@@ -136,39 +136,39 @@ public class StockSearch {
         String name = scanner.nextLine();
         
         if(n == 1) {
-            AddFood[] foods = file.readFood();
+            StockAddFood[] foods = file.readFood();
             System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
                           "ID", "Name", "Quantity", "Price", "Supplier", 
                           "Expiry Date", "Arrival Date", "Location", 
                           "Organic", "Allergens", "Storage Temp");
         
-            for(AddFood f : foods) {
+            for(StockAddFood f : foods) {
                 if(f.getName().equalsIgnoreCase(name)) {
                     System.out.println(f.toString());
                     found = true;
                 }
             }
         }else if(n == 2) {
-            AddBeverage[] beverages = file.readBeverage();
+            StockAddBeverage[] beverages = file.readBeverage();
             System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
                           "ID", "Name", "Quantity", "Price", "Supplier", 
                           "Expiry Date", "Arrival Date", "Location", 
                           "Alcohol Content", "Carbonated", "Volume");
         
-            for(AddBeverage b : beverages) {
+            for(StockAddBeverage b : beverages) {
                 if(b.getName().equalsIgnoreCase(name)) {
                     System.out.println(b.toString());
                     found = true;
                 }
             }
         }else if(n == 3) {
-            AddIngredient[] ingredients = file.readIngredient();
+            StockAddIngredient[] ingredients = file.readIngredient();
             System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
                       "ID", "Name", "Quantity", "Price", "Supplier", 
                       "Expiry Date", "Arrival Date", "Location", 
                       "Ingredient Type", "Gluten", "Calory");
         
-            for(AddIngredient i : ingredients) {
+            for(StockAddIngredient i : ingredients) {
                 if(i.getName().equalsIgnoreCase(name)) {
                     System.out.println(i.toString());
                     found = true;
@@ -193,33 +193,33 @@ public class StockSearch {
         
         StockDisplay display = new StockDisplay();
         if(n == 1) {
-            AddFood[] foods = file.readFood();
+            StockAddFood[] foods = file.readFood();
             
             display.displayFoodTitle();
         
-            for(AddFood f : foods) {
+            for(StockAddFood f : foods) {
                 if(f.getSupplier().equalsIgnoreCase(supplier)) {
                     System.out.println(f.toString());
                     found = true;
                 }
             }
         }else if(n == 2) {
-            AddBeverage[] beverages = file.readBeverage();
+            StockAddBeverage[] beverages = file.readBeverage();
             
             display.displayBeverageTitle();
         
-            for(AddBeverage b : beverages) {
+            for(StockAddBeverage b : beverages) {
                 if(b.getSupplier().equalsIgnoreCase(supplier)) {
                     System.out.println(b.toString());
                     found = true;
                 }
             }
         }else if(n == 3) {
-            AddIngredient[] ingredients = file.readIngredient();
+            StockAddIngredient[] ingredients = file.readIngredient();
             
             display.displayIngredientTitle();
         
-            for(AddIngredient i : ingredients) {
+            for(StockAddIngredient i : ingredients) {
                 if(i.getSupplier().equalsIgnoreCase(supplier)) {
                     System.out.println(i.toString());
                     found = true;
@@ -243,33 +243,33 @@ public class StockSearch {
         
         StockDisplay display = new StockDisplay();
         if(n == 1) {
-            AddFood[] foods = file.readFood();
+            StockAddFood[] foods = file.readFood();
             
             display.displayFoodTitle();
         
-            for(AddFood f : foods) {
+            for(StockAddFood f : foods) {
                 if(f.getExpiryDate().equalsIgnoreCase(expiryDate)) {
                     System.out.println(f.toString());
                     found = true;
                 }
             }
         }else if(n == 2) {
-            AddBeverage[] beverages = file.readBeverage();
+            StockAddBeverage[] beverages = file.readBeverage();
             
             display.displayBeverageTitle();
         
-            for(AddBeverage b : beverages) {
+            for(StockAddBeverage b : beverages) {
                 if(b.getExpiryDate().equalsIgnoreCase(expiryDate)) {
                     System.out.println(b.toString());
                     found = true;
                 }
             }
         }else if(n == 3) {
-            AddIngredient[] ingredients = file.readIngredient();
+            StockAddIngredient[] ingredients = file.readIngredient();
             
             display.displayIngredientTitle();
         
-            for(AddIngredient i : ingredients) {
+            for(StockAddIngredient i : ingredients) {
                 if(i.getExpiryDate().equalsIgnoreCase(expiryDate)) {
                     System.out.println(i.toString());
                     found = true;
@@ -293,33 +293,33 @@ public class StockSearch {
         
         StockDisplay display = new StockDisplay();
         if(n == 1) {
-            AddFood[] foods = file.readFood();
+            StockAddFood[] foods = file.readFood();
             
             display.displayFoodTitle();
         
-            for(AddFood f : foods) {
+            for(StockAddFood f : foods) {
                 if(f.getArrivalDate().equalsIgnoreCase(arrivalDate)) {
                     System.out.println(f.toString());
                     found = true;
                 }
             }
         }else if(n == 2) {
-            AddBeverage[] beverages = file.readBeverage();
+            StockAddBeverage[] beverages = file.readBeverage();
             
             display.displayBeverageTitle();
         
-            for(AddBeverage b : beverages) {
+            for(StockAddBeverage b : beverages) {
                 if(b.getArrivalDate().equalsIgnoreCase(arrivalDate)) {
                     System.out.println(b.toString());
                     found = true;
                 }
             }
         }else if(n == 3) {
-            AddIngredient[] ingredients = file.readIngredient();
+            StockAddIngredient[] ingredients = file.readIngredient();
             
             display.displayIngredientTitle();
         
-            for(AddIngredient i : ingredients) {
+            for(StockAddIngredient i : ingredients) {
                 if(i.getArrivalDate().equalsIgnoreCase(arrivalDate)) {
                     System.out.println(i.toString());
                     found = true;
@@ -343,33 +343,33 @@ public class StockSearch {
         
         StockDisplay display = new StockDisplay();
         if(n == 1) {
-            AddFood[] foods = file.readFood();
+            StockAddFood[] foods = file.readFood();
             
             display.displayFoodTitle();
         
-            for(AddFood f : foods) {
+            for(StockAddFood f : foods) {
                 if(f.getLocation().equalsIgnoreCase(location)) {
                     System.out.println(f.toString());
                     found = true;
                 }
             }
         }else if(n == 2) {
-            AddBeverage[] beverages = file.readBeverage();
+            StockAddBeverage[] beverages = file.readBeverage();
             
             display.displayBeverageTitle();
         
-            for(AddBeverage b : beverages) {
+            for(StockAddBeverage b : beverages) {
                 if(b.getLocation().equalsIgnoreCase(location)) {
                     System.out.println(b.toString());
                     found = true;
                 }
             }
         }else if(n == 3) {
-            AddIngredient[] ingredients = file.readIngredient();
+            StockAddIngredient[] ingredients = file.readIngredient();
             
             display.displayIngredientTitle();
         
-            for(AddIngredient i : ingredients) {
+            for(StockAddIngredient i : ingredients) {
                 if(i.getLocation().equalsIgnoreCase(location)) {
                     System.out.println(i.toString());
                     found = true;

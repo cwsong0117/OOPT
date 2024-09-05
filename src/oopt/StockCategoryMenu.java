@@ -28,15 +28,15 @@ public class StockCategoryMenu {
             switch(option) {
                 case 1:
                     System.out.println("Food Category Selected...");
-                    AddFood.foodIn();
+                    StockAddFood.foodIn();
                     break;
                 case 2:
                     System.out.println("Beverage Category Selected...");
-                    AddBeverage.beverageIn();
+                    StockAddBeverage.beverageIn();
                     break;
                 case 3:
                     System.out.println("Ingredient Category Selected...");
-                    AddIngredient.ingredientIn();
+                    StockAddIngredient.ingredientIn();
                     break;
                 case 4:
                     System.out.println("Exiting...");

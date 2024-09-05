@@ -35,12 +35,12 @@ public class StockDisplay {
         
     public static void displayFood() {
         StockFile file = new StockFile();
-        AddFood[] foods = file.readFood();
+        StockAddFood[] foods = file.readFood();
         StockMenu stockMenu = new StockMenu();
         
         displayFoodTitle();
     
-        for (AddFood f : foods) {
+        for (StockAddFood f : foods) {
             System.out.println(f.toString());
         }
         System.out.print("\n\n");
@@ -50,12 +50,12 @@ public class StockDisplay {
     
     public static void displayBeverage() {
         StockFile file = new StockFile();
-        AddBeverage[] beverages = file.readBeverage();
+        StockAddBeverage[] beverages = file.readBeverage();
         StockMenu stockMenu = new StockMenu();
 
         displayBeverageTitle();
     
-        for (AddBeverage b : beverages) {
+        for (StockAddBeverage b : beverages) {
             System.out.println(b.toString());
         }
         System.out.print("\n\n");
@@ -64,12 +64,12 @@ public class StockDisplay {
     
     public static void displayIngredient() {
         StockFile file = new StockFile();
-        AddIngredient[] ingredients = file.readIngredient();
+        StockAddIngredient[] ingredients = file.readIngredient();
         StockMenu stockMenu = new StockMenu();
 
         displayIngredientTitle();
     
-        for (AddIngredient i : ingredients) {
+        for (StockAddIngredient i : ingredients) {
             System.out.println(i.toString());
         }
         System.out.print("\n\n");
