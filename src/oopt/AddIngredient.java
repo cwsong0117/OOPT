@@ -73,7 +73,7 @@ public class AddIngredient extends Stock{
         while(running) {
                         
             Stock stock = stockIn();
-            File file = new File();
+            StockFile file = new StockFile();
                 
             System.out.print("Ingredient Type : ");
             String ingredientType = scanner.nextLine();
@@ -107,7 +107,7 @@ public class AddIngredient extends Stock{
             }
         }
         System.out.println("\n");
-        Display.displayIngredient();
+        StockDisplay.displayIngredient();
     }
     
     public static Stock stockIn() {

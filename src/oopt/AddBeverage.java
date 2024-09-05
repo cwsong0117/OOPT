@@ -73,7 +73,7 @@ public class AddBeverage extends Stock {
         while(running) {
                         
             Stock stock = stockIn();
-            File file = new File();
+            StockFile file = new StockFile();
                 
             System.out.print("Alcohol Content(%) : ");
             double alcoholContent = scanner.nextDouble();
@@ -109,7 +109,7 @@ public class AddBeverage extends Stock {
             }
         }
         System.out.println("\n");
-        Display.displayBeverage();
+        StockDisplay.displayBeverage();
     }
     
     public static Stock stockIn() {

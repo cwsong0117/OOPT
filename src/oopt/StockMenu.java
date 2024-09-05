@@ -15,7 +15,7 @@ public class StockMenu {
     
         Boolean running = true;
         Scanner scanner = new Scanner(System.in);
-        CategoryMenu c = new CategoryMenu();
+        StockCategoryMenu c = new StockCategoryMenu();
         
         while(running) {
             System.out.println("1: ADD Stock");

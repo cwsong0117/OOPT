@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author User
  */
-public class File {
+public class StockFile {
     public static void appendFood(AddFood food) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("Food.txt", true))){
             writer.append(

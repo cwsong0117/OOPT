@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class Alert {
+public class StockAlert {
     
     public static void displayLowStock(int n) {
     
@@ -30,7 +30,7 @@ public class Alert {
                 System.out.println("No items with low stock...\n");
             }else {
                 System.out.println("Items with stock less than " + lowBalance + " : ");
-                Display.displayFoodTitle();
+                StockDisplay.displayFoodTitle();
                 for(AddFood f : lowStockItems) {
                     System.out.println(f.toString());
                 }
@@ -44,7 +44,7 @@ public class Alert {
                     System.out.println("No items with low stock...\n");
                 }else {
                     System.out.println("Items with stock less than " + lowBalance + " : ");
-                    Display.displayFoodTitle();
+                    StockDisplay.displayFoodTitle();
                     for(AddBeverage b : lowStockItems) {
                         System.out.println(b.toString());
                     }
@@ -58,7 +58,7 @@ public class Alert {
                 System.out.println("No items with low stock...\n");
             }else {
                 System.out.println("Items with stock less than " + lowBalance + " : ");
-                Display.displayFoodTitle();
+                StockDisplay.displayFoodTitle();
                 for(AddIngredient i : lowStockItems) {
                     System.out.println(i.toString());
                 }
@@ -68,7 +68,7 @@ public class Alert {
     
     private static List<AddFood> getFoodBalance(int quantity) {
         List<AddFood> lowStockItems = new ArrayList<>();
-        AddFood[] Foods = File.readFood();
+        AddFood[] Foods = StockFile.readFood();
 
         for(AddFood f : Foods) {
             if(f.getQuantity() <= quantity) {
@@ -80,7 +80,7 @@ public class Alert {
     
     private static List<AddBeverage> getBeverageBalance(int quantity) {
         List<AddBeverage> lowStockItems = new ArrayList<>();
-        AddBeverage[] Beverages = File.readBeverage();
+        AddBeverage[] Beverages = StockFile.readBeverage();
 
         for(AddBeverage b : Beverages) {
             if(b.getQuantity() <= quantity) {
@@ -92,7 +92,7 @@ public class Alert {
     
     private static List<AddIngredient> getIngredientBalance(int quantity) {
         List<AddIngredient> lowStockItems = new ArrayList<>();
-        AddIngredient[] Ingredients = File.readIngredient();
+        AddIngredient[] Ingredients = StockFile.readIngredient();
 
         for(AddIngredient i : Ingredients) {
             if(i.getQuantity() <= quantity) {

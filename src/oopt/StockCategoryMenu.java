@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class CategoryMenu {
+public class StockCategoryMenu {
     public static void addStockMenu() {
         
         Scanner scanner = new Scanner(System.in);
@@ -56,7 +56,7 @@ public class CategoryMenu {
         
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
-        Display d = new Display();
+        StockDisplay d = new StockDisplay();
         
         while(running) {
             System.out.println("1. Food");
@@ -98,7 +98,7 @@ public class CategoryMenu {
         
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
-        Remove r = new Remove();
+        StockRemove r = new StockRemove();
         
         while(running) {
             System.out.println("1. Food");
@@ -140,7 +140,7 @@ public class CategoryMenu {
         
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
-        Search s = new Search();
+        StockSearch s = new StockSearch();
         
         while(running) {
             System.out.println("1. Food");
@@ -182,7 +182,7 @@ public class CategoryMenu {
         
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
-        Update u = new Update();
+        StockUpdate u = new StockUpdate();
         
         while(running) {
             System.out.println("1. Food");
@@ -217,7 +217,7 @@ public class CategoryMenu {
         
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
-        Alert a = new Alert();
+        StockAlert a = new StockAlert();
         
         while(running) {
             System.out.println("1. Food");

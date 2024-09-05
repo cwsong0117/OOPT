@@ -73,7 +73,7 @@ public class AddFood extends Stock{
         while(running) {
                         
             Stock stock = stockIn();
-            File file = new File();
+            StockFile file = new StockFile();
                 
             System.out.print("Organic?(yes/no) : ");
             String isOrganic = scanner.nextLine().toLowerCase();
@@ -107,7 +107,7 @@ public class AddFood extends Stock{
             }
         }
         System.out.println("\n");
-        Display.displayFood();
+        StockDisplay.displayFood();
     }
     
     public static Stock stockIn() {

@@ -12,11 +12,11 @@ import java.util.Scanner;
  */
 
 
-public class Update {
+public class StockUpdate {
     public static void updateStock(int n){
         
         Scanner scanner = new Scanner(System.in);
-        Search s = new Search();
+        StockSearch s = new StockSearch();
         
         //Search Stock that need to update using ID
         String id = s.searchByID(n);
@@ -25,7 +25,7 @@ public class Update {
         System.out.println("\nStock Received: ");
         int receivedStock = scanner.nextInt();
         
-        File file = new File();
+        StockFile file = new StockFile();
         boolean found = false;
             
         if (n == 1) { // Update stock level for food

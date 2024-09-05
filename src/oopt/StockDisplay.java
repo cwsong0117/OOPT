@@ -8,7 +8,7 @@ package oopt;
  *
  * @author User
  */
-public class Display {
+public class StockDisplay {
     
     public static void displayFoodTitle() {
         System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
@@ -34,7 +34,7 @@ public class Display {
     //the purpose of create those method is to ensure the reusability in other method
         
     public static void displayFood() {
-        File file = new File();
+        StockFile file = new StockFile();
         AddFood[] foods = file.readFood();
         StockMenu stockMenu = new StockMenu();
         
@@ -49,7 +49,7 @@ public class Display {
     
     
     public static void displayBeverage() {
-        File file = new File();
+        StockFile file = new StockFile();
         AddBeverage[] beverages = file.readBeverage();
         StockMenu stockMenu = new StockMenu();
 
@@ -63,7 +63,7 @@ public class Display {
     }
     
     public static void displayIngredient() {
-        File file = new File();
+        StockFile file = new StockFile();
         AddIngredient[] ingredients = file.readIngredient();
         StockMenu stockMenu = new StockMenu();
 

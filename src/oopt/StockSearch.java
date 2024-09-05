@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class Search {
+public class StockSearch {
     
     public static void searchMenu(int opt) {
         //opt represent the category as parameter that pass to this method
@@ -71,9 +71,9 @@ public class Search {
         //n means the number entered by user,food, beverage or ingredient
         //search and display the relevant id
         Scanner scanner = new Scanner(System.in);
-        File file = new File();
+        StockFile file = new StockFile();
         boolean found = false;
-        Display d = new Display();
+        StockDisplay d = new StockDisplay();
         
         System.out.print("Enter the ID : ");
         String id = scanner.nextLine();
@@ -129,7 +129,7 @@ public class Search {
     public static void searchByName(int n) {
     
         Scanner scanner = new Scanner(System.in);
-        File file = new File();
+        StockFile file = new StockFile();
         boolean found = false;
         
         System.out.print("Enter the Name : ");
@@ -185,13 +185,13 @@ public class Search {
     public static void searchBySupplier(int n) {
         
         Scanner scanner = new Scanner(System.in);
-        File file = new File();
+        StockFile file = new StockFile();
         boolean found = false;
         
         System.out.print("Enter the Supplier : ");
         String supplier = scanner.nextLine();
         
-        Display display = new Display();
+        StockDisplay display = new StockDisplay();
         if(n == 1) {
             AddFood[] foods = file.readFood();
             
@@ -235,13 +235,13 @@ public class Search {
     public static void searchByExpiryDate(int n) {
     
         Scanner scanner = new Scanner(System.in);
-        File file = new File();
+        StockFile file = new StockFile();
         boolean found = false;
         
         System.out.print("Enter the Expiry Date : ");
         String expiryDate = scanner.nextLine();
         
-        Display display = new Display();
+        StockDisplay display = new StockDisplay();
         if(n == 1) {
             AddFood[] foods = file.readFood();
             
@@ -285,13 +285,13 @@ public class Search {
     public static void searchByArrivalDate(int n) {
         
         Scanner scanner = new Scanner(System.in);
-        File file = new File();
+        StockFile file = new StockFile();
         boolean found = false;
         
         System.out.print("Enter the Arrival Date : ");
         String arrivalDate = scanner.nextLine();
         
-        Display display = new Display();
+        StockDisplay display = new StockDisplay();
         if(n == 1) {
             AddFood[] foods = file.readFood();
             
@@ -335,13 +335,13 @@ public class Search {
     public static void searchByLocation(int n) {
         
         Scanner scanner = new Scanner(System.in);
-        File file = new File();
+        StockFile file = new StockFile();
         boolean found = false;
         
         System.out.print("Enter the Location : ");
         String location = scanner.nextLine();
         
-        Display display = new Display();
+        StockDisplay display = new StockDisplay();
         if(n == 1) {
             AddFood[] foods = file.readFood();
             
@@ -386,7 +386,7 @@ public class Search {
         
         Scanner scanner = new Scanner(System.in);
         StockMenu stockMenu = new StockMenu();
-        CategoryMenu c = new CategoryMenu();
+        StockCategoryMenu c = new StockCategoryMenu();
         
         System.out.println("1. Update Stock Details");
         System.out.println("2. Exit");

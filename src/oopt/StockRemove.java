@@ -14,12 +14,12 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class Remove {
+public class StockRemove {
     public static void removeFood() {
     
         Scanner scanner = new Scanner(System.in);
         StockMenu s = new StockMenu();
-        File file = new File();
+        StockFile file = new StockFile();
         AddFood[] foods = file.readFood();
         boolean found = false;
         
@@ -58,7 +58,7 @@ public class Remove {
     
         Scanner scanner = new Scanner(System.in);
         StockMenu s = new StockMenu();
-        File file = new File();
+        StockFile file = new StockFile();
         AddBeverage[] beverages = file.readBeverage();
         boolean found = false;
         
@@ -97,7 +97,7 @@ public class Remove {
     
         Scanner scanner = new Scanner(System.in);
         StockMenu s = new StockMenu();
-        File file = new File();
+        StockFile file = new StockFile();
         AddIngredient[] ingredients = file.readIngredient();
         boolean found = false;
         
