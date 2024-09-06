@@ -78,11 +78,11 @@ public class StockSearch {
         System.out.print("Enter the ID : ");
         String id = scanner.nextLine();
         
+        Display display = new Display();
         if(n == 1) {
-        //1 means user select food
             StockAddFood[] foods = file.readFood();
             
-            d.displayFoodTitle();
+            display.displayFoodTitle();
         
             for(StockAddFood f : foods) {
                 if(f.getStockID().equalsIgnoreCase(id)) {
@@ -90,12 +90,10 @@ public class StockSearch {
                     found = true;
                 }
             }
-        }else if(n == 2) {//2 means beverage
+        }else if(n == 2) {
             StockAddBeverage[] beverages = file.readBeverage();
-            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                          "ID", "Name", "Quantity", "Price", "Supplier", 
-                          "Expiry Date", "Arrival Date", "Location", 
-                          "Alcohol Content", "Carbonated", "Volume");
+            
+            display.displayBeverageTitle();
         
             for(StockAddBeverage b : beverages) {
                 if(b.getStockID().equalsIgnoreCase(id)) {
@@ -103,24 +101,21 @@ public class StockSearch {
                     found = true;
                 }
             }
-        }else if(n == 3) {//3 means ingredient
+        }else if(n == 3) {
             StockAddIngredient[] ingredients = file.readIngredient();
-            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                      "ID", "Name", "Quantity", "Price", "Supplier", 
-                      "Expiry Date", "Arrival Date", "Location", 
-                      "Ingredient Type", "Gluten", "Calory");
+            
+            display.displayIngredientTitle();
         
             for(StockAddIngredient i : ingredients) {
-                if(i.getStockID().equalsIgnoreCase(id)) {
+                if(i.getStockID ().equalsIgnoreCase(id)) {
                     System.out.println(i.toString());
                     found = true;
                 }
             }
         }
         if(!found) {
-            System.out.println("No Such ID in file.\n");
+            System.out.println("No Such Supplier in file.\n");
         }
-        System.out.println("\n");
         operationAfterSearch();
         
         return id;
@@ -135,12 +130,11 @@ public class StockSearch {
         System.out.print("Enter the Name : ");
         String name = scanner.nextLine();
         
+        Display display = new Display();
         if(n == 1) {
             StockAddFood[] foods = file.readFood();
-            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                          "ID", "Name", "Quantity", "Price", "Supplier", 
-                          "Expiry Date", "Arrival Date", "Location", 
-                          "Organic", "Allergens", "Storage Temp");
+            
+            display.displayFoodTitle();
         
             for(StockAddFood f : foods) {
                 if(f.getName().equalsIgnoreCase(name)) {
@@ -150,10 +144,8 @@ public class StockSearch {
             }
         }else if(n == 2) {
             StockAddBeverage[] beverages = file.readBeverage();
-            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                          "ID", "Name", "Quantity", "Price", "Supplier", 
-                          "Expiry Date", "Arrival Date", "Location", 
-                          "Alcohol Content", "Carbonated", "Volume");
+            
+            display.displayBeverageTitle();
         
             for(StockAddBeverage b : beverages) {
                 if(b.getName().equalsIgnoreCase(name)) {
@@ -163,10 +155,8 @@ public class StockSearch {
             }
         }else if(n == 3) {
             StockAddIngredient[] ingredients = file.readIngredient();
-            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                      "ID", "Name", "Quantity", "Price", "Supplier", 
-                      "Expiry Date", "Arrival Date", "Location", 
-                      "Ingredient Type", "Gluten", "Calory");
+            
+            display.displayIngredientTitle();
         
             for(StockAddIngredient i : ingredients) {
                 if(i.getName().equalsIgnoreCase(name)) {
@@ -175,9 +165,8 @@ public class StockSearch {
                 }
             }
         }
-        
         if(!found) {
-            System.out.println("No Such ID in file.\n");
+            System.out.println("No Such Supplier in file.\n");
         }
         operationAfterSearch();
     }
@@ -386,7 +375,6 @@ public class StockSearch {
         
         Scanner scanner = new Scanner(System.in);
         StockMenu stockMenu = new StockMenu();
-        StockCategoryMenu c = new StockCategoryMenu();
         
         System.out.println("1. Update Stock Details");
         System.out.println("2. Exit");
@@ -395,7 +383,7 @@ public class StockSearch {
         
         switch(option) {
             case 1:
-                c.updateStockMenu();
+                stockMenu.updateStockMenu();
                 break;
             case 2:
                 stockMenu.stockMenu();

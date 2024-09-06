@@ -110,7 +110,7 @@ public class StockAddIngredient extends Stock{
         Display.displayIngredient();
     }
     
-    public static Stock stockIn(int num) {
+    public static StockAddIngredient stockIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
 
@@ -161,7 +161,7 @@ public class StockAddIngredient extends Stock{
             }
         }while(!Validation.isValidLocation(location));
         
-        return new Stock(stockID, name, quantity, price, supplier, expiryDate, arrivalDate, location);
+        return new StockAddIngredient(stockID, name, quantity, price, supplier, expiryDate, arrivalDate, location, "", "no", 0);
         
     }
 }

@@ -112,7 +112,7 @@ public class StockAddBeverage extends Stock {
         Display.displayBeverage();
     }
     
-    public static Stock stockIn(int num) {
+    public static StockAddBeverage stockIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
 
@@ -163,7 +163,7 @@ public class StockAddBeverage extends Stock {
             }
         }while(!Validation.isValidLocation(location));
         
-        return new Stock(beverageID, name, quantity, price, supplier, expiryDate, arrivalDate, location);
+        return new StockAddBeverage(beverageID, name, quantity, price, supplier, expiryDate, arrivalDate, location, 0.0, "no", 0);
         
     }
 }
