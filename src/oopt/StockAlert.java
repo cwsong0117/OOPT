@@ -30,7 +30,7 @@ public class StockAlert {
                 System.out.println("No items with low stock...\n");
             }else {
                 System.out.println("Items with stock less than " + lowBalance + " : ");
-                StockDisplay.displayFoodTitle();
+                Display.displayFoodTitle();
                 for(StockAddFood f : lowStockItems) {
                     System.out.println(f.toString());
                 }
@@ -44,7 +44,7 @@ public class StockAlert {
                     System.out.println("No items with low stock...\n");
                 }else {
                     System.out.println("Items with stock less than " + lowBalance + " : ");
-                    StockDisplay.displayFoodTitle();
+                    Display.displayFoodTitle();
                     for(StockAddBeverage b : lowStockItems) {
                         System.out.println(b.toString());
                     }
@@ -58,7 +58,7 @@ public class StockAlert {
                 System.out.println("No items with low stock...\n");
             }else {
                 System.out.println("Items with stock less than " + lowBalance + " : ");
-                StockDisplay.displayFoodTitle();
+                Display.displayFoodTitle();
                 for(StockAddIngredient i : lowStockItems) {
                     System.out.println(i.toString());
                 }

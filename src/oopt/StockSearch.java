@@ -73,7 +73,7 @@ public class StockSearch {
         Scanner scanner = new Scanner(System.in);
         StockFile file = new StockFile();
         boolean found = false;
-        StockDisplay d = new StockDisplay();
+        Display d = new Display();
         
         System.out.print("Enter the ID : ");
         String id = scanner.nextLine();
@@ -191,7 +191,7 @@ public class StockSearch {
         System.out.print("Enter the Supplier : ");
         String supplier = scanner.nextLine();
         
-        StockDisplay display = new StockDisplay();
+        Display display = new Display();
         if(n == 1) {
             StockAddFood[] foods = file.readFood();
             
@@ -241,7 +241,7 @@ public class StockSearch {
         System.out.print("Enter the Expiry Date : ");
         String expiryDate = scanner.nextLine();
         
-        StockDisplay display = new StockDisplay();
+        Display display = new Display();
         if(n == 1) {
             StockAddFood[] foods = file.readFood();
             
@@ -291,7 +291,7 @@ public class StockSearch {
         System.out.print("Enter the Arrival Date : ");
         String arrivalDate = scanner.nextLine();
         
-        StockDisplay display = new StockDisplay();
+        Display display = new Display();
         if(n == 1) {
             StockAddFood[] foods = file.readFood();
             
@@ -341,7 +341,7 @@ public class StockSearch {
         System.out.print("Enter the Location : ");
         String location = scanner.nextLine();
         
-        StockDisplay display = new StockDisplay();
+        Display display = new Display();
         if(n == 1) {
             StockAddFood[] foods = file.readFood();
             

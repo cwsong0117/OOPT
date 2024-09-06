@@ -8,7 +8,7 @@ package oopt;
  *
  * @author User
  */
-public class StockDisplay {
+public class Display {
     
     public static void displayFoodTitle() {
         System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 

@@ -56,7 +56,7 @@ public class StockCategoryMenu {
         
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
-        StockDisplay d = new StockDisplay();
+        Display d = new Display();
         
         while(running) {
             System.out.println("1. Food");

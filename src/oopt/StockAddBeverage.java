@@ -109,7 +109,7 @@ public class StockAddBeverage extends Stock {
             }
         }
         System.out.println("\n");
-        StockDisplay.displayBeverage();
+        Display.displayBeverage();
     }
     
     public static Stock stockIn() {
