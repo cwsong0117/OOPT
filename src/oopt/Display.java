@@ -33,46 +33,40 @@ public class Display {
         
     //the purpose of create those method is to ensure the reusability in other method
         
-    public static void displayFood() {
+    public static void display(int n) {
+        
         StockFile file = new StockFile();
-        StockAddFood[] foods = file.readFood();
         StockMenu stockMenu = new StockMenu();
         
-        displayFoodTitle();
+        if(n == 1) {
+            StockAddFood[] foods = file.readFood();
+            displayFoodTitle();
     
-        for (StockAddFood f : foods) {
-            System.out.println(f.toString());
+            for (StockAddFood f : foods) {
+                System.out.println(f.toString());
+            }
+            System.out.print("\n\n");
+            stockMenu.stockMenu();
         }
-        System.out.print("\n\n");
-        stockMenu.stockMenu();
-    }
+        else if(n == 2) {
+            StockAddBeverage[] beverages = file.readBeverage();
+            displayBeverageTitle();
     
-    
-    public static void displayBeverage() {
-        StockFile file = new StockFile();
-        StockAddBeverage[] beverages = file.readBeverage();
-        StockMenu stockMenu = new StockMenu();
-
-        displayBeverageTitle();
-    
-        for (StockAddBeverage b : beverages) {
-            System.out.println(b.toString());
+            for (StockAddBeverage b : beverages) {
+                System.out.println(b.toString());
+            }
+            System.out.print("\n\n");
+            stockMenu.stockMenu();
         }
-        System.out.print("\n\n");
-        stockMenu.stockMenu();
-    }
+        else if(n == 3) {
+            StockAddIngredient[] ingredients = file.readIngredient();
+            displayIngredientTitle();
     
-    public static void displayIngredient() {
-        StockFile file = new StockFile();
-        StockAddIngredient[] ingredients = file.readIngredient();
-        StockMenu stockMenu = new StockMenu();
-
-        displayIngredientTitle();
-    
-        for (StockAddIngredient i : ingredients) {
-            System.out.println(i.toString());
-        }
-        System.out.print("\n\n");
-        stockMenu.stockMenu();
+            for (StockAddIngredient i : ingredients) {
+                System.out.println(i.toString());
+            }
+            System.out.print("\n\n");
+            stockMenu.stockMenu();
+        } 
     }
 }

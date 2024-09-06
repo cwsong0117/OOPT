@@ -107,7 +107,7 @@ public class StockAddFood extends Stock{
             }
         }
         System.out.println("\n");
-        Display.displayFood();
+        Display.display(num);
     }
     
     public static StockAddFood stockIn(int num) {

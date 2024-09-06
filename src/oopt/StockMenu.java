@@ -35,7 +35,7 @@ public class StockMenu {
                     break;
                 case 2:
                     System.out.print("Display Stock Option Selected...\n");
-                    displayStockMenu();
+                    displayStockMenu(option);
                     break;
                 case 3:
                     System.out.print("Remove Stock Level Option Selected...\n");
@@ -103,7 +103,7 @@ public class StockMenu {
         scanner.close();
     }
     
-    public static void displayStockMenu() {
+    public static void displayStockMenu(int option) {
         
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
@@ -115,21 +115,14 @@ public class StockMenu {
             System.out.println("3. Iegredient");
             System.out.println("4. Exit");
             System.out.print("Option > ");
-            int option = scanner.nextInt();
+            option = scanner.nextInt();
             System.out.print("\n");
 
             switch(option) {
                 case 1:
-                    System.out.println("Food Category Selected...");
-                    d.displayFood();
-                    break;
                 case 2:
-                    System.out.println("Beverage Category Selected...");
-                    d.displayBeverage();
-                    break;
                 case 3:
-                    System.out.println("Ingredient Category Selected...");
-                    d.displayIngredient();
+                    d.display(option);
                     break;
                 case 4:
                     System.out.println("Exiting...");
