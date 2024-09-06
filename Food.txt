@@ -6,3 +6,4 @@ FD002|nef|34|3.7|elrni|lenvr|dlfnv|env|no|soy|3.5
 FD001|anew|33|3.3|senf|ef|wef|wef|yes|senf|4.1
 FD002|lnasef|324|32.7|snfg|lwjef|lwfejbn|zusd|no|jr|1.1
 FD003|hwef|33|3.3|lwnef|lwef|lkwebf|owhef|yes|wsebfn|7.4
+FD004|www|23|4.4|sn|2025-10-10|2024-09-06|A001|yes|senfw|3.0
