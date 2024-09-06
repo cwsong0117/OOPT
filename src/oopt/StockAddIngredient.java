@@ -65,14 +65,14 @@ public class StockAddIngredient extends Stock{
                 ingredientType, gluten, calory);
     }
     
-    public static void ingredientIn() {
+    public static void ingredientIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         
         while(running) {
                         
-            Stock stock = stockIn();
+            Stock stock = stockIn(num);
             StockFile file = new StockFile();
                 
             System.out.print("Ingredient Type : ");
@@ -110,15 +110,21 @@ public class StockAddIngredient extends Stock{
         Display.displayIngredient();
     }
     
-    public static Stock stockIn() {
+    public static Stock stockIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Stock ID : ");
         String stockID = scanner.nextLine();
         
-        System.out.print("Name : ");
-        String name = scanner.nextLine();
+        String name;
+        do{
+            System.out.print("Name : ");
+            name = scanner.nextLine();
+            if(!Validation.isValidName(name, num)) {
+                System.out.println("Name already exists. Please select UPDATE or enter other name.");
+            }
+        }while(!Validation.isValidName(name, num));
 
         System.out.print("Quantity : ");
         int quantity = scanner.nextInt();

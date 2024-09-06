@@ -32,4 +32,32 @@ public class Validation {
     public static boolean isValidLocation(String location) {
             return location.matches("^[A-Z]\\d{3}$"); //Regex to ensure 1 character and 3 digit
     }
+    
+    public static boolean isValidName(String name, int n) {
+        if(n == 1) {
+            StockAddFood[] foods = StockFile.readFood();
+            for(StockAddFood f : foods) {
+                if(f.getName().equalsIgnoreCase(name)) {
+                    return false;
+                }
+            }
+        }
+        else if(n == 2) {
+            StockAddBeverage[] beverages = StockFile.readBeverage();
+            for(StockAddBeverage b : beverages) {
+                if(b.getName().equalsIgnoreCase(name)) {
+                    return false;
+                }
+            }
+        }
+        else if(n == 3) {
+            StockAddIngredient[] ingredients = StockFile.readIngredient();
+            for(StockAddIngredient i : ingredients) {
+                if(i.getName().equalsIgnoreCase(name)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

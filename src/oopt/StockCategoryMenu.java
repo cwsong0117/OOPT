@@ -15,6 +15,7 @@ public class StockCategoryMenu {
         
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
+        int option;
         
         while(running) {
             System.out.println("1. Food");
@@ -22,21 +23,21 @@ public class StockCategoryMenu {
             System.out.println("3. Iegredient");
             System.out.println("4. Exit");
             System.out.print("Option > ");
-            int option = scanner.nextInt();
+            option = scanner.nextInt();
             System.out.print("\n");
 
             switch(option) {
                 case 1:
                     System.out.println("Food Category Selected...");
-                    StockAddFood.foodIn();
+                    StockAddFood.foodIn(option);
                     break;
                 case 2:
                     System.out.println("Beverage Category Selected...");
-                    StockAddBeverage.beverageIn();
+                    StockAddBeverage.beverageIn(option);
                     break;
                 case 3:
                     System.out.println("Ingredient Category Selected...");
-                    StockAddIngredient.ingredientIn();
+                    StockAddIngredient.ingredientIn(option);
                     break;
                 case 4:
                     System.out.println("Exiting...");

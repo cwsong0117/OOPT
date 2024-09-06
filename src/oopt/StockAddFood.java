@@ -65,14 +65,14 @@ public class StockAddFood extends Stock{
                 isOrganic, allergens, storageTemperature);
     }
     
-    public static void foodIn() {
+    public static void foodIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         
         while(running) {
                         
-            Stock stock = stockIn();
+            Stock stock = stockIn(num);
             StockFile file = new StockFile();
                 
             System.out.print("Organic?(yes/no) : ");
@@ -110,15 +110,21 @@ public class StockAddFood extends Stock{
         Display.displayFood();
     }
     
-    public static Stock stockIn() {
+    public static Stock stockIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
         
         String foodID = StockIDGenerator.generateFoodID();
         System.out.print("Stock ID : " + foodID + "\n");
         
-        System.out.print("Name : ");
-        String name = scanner.nextLine();
+        String name;
+        do{
+            System.out.print("Name : ");
+            name = scanner.nextLine();
+            if(!Validation.isValidName(name, num)) {
+                System.out.println("Name already exists. Please select UPDATE or enter other name.");
+            }
+        }while(!Validation.isValidName(name, num));
 
         System.out.print("Quantity : ");
         int quantity = scanner.nextInt();

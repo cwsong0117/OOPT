@@ -65,14 +65,14 @@ public class StockAddBeverage extends Stock {
                 alcoholContent, isCarbonated, volume);
     }
     
-    public static void beverageIn() {
+    public static void beverageIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         
         while(running) {
-                        
-            Stock stock = stockIn();
+            
+            Stock stock = stockIn(num);
             StockFile file = new StockFile();
                 
             System.out.print("Alcohol Content(%) : ");
@@ -112,15 +112,21 @@ public class StockAddBeverage extends Stock {
         Display.displayBeverage();
     }
     
-    public static Stock stockIn() {
+    public static Stock stockIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
 
         String beverageID = StockIDGenerator.generateBeverageID();
         System.out.print("Stock ID : " + beverageID + "\n");
         
-        System.out.print("Name : ");
-        String name = scanner.nextLine();
+        String name;
+        do{
+            System.out.print("Name : ");
+            name = scanner.nextLine();
+            if(!Validation.isValidName(name, num)) {
+                System.out.println("Name already exists. Please select UPDATE or enter other name.");
+            }
+        }while(!Validation.isValidName(name, num));
 
         System.out.print("Quantity : ");
         int quantity = scanner.nextInt();
