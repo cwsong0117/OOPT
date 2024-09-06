@@ -44,6 +44,7 @@ public class StaffLogin {
                     Employee employee = Employee.loadFromFile(staffID);
                     if (employee != null) {
                         System.out.println("Welcome back, " + employee.getName() + "!");
+                        OOPT.warehouseMenu();
                     } else {
                         System.out.println("No matching record found.");
                     }

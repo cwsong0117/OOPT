@@ -28,4 +28,8 @@ public class Validation {
     public static String getLocalDate() {
         return LocalDate.now().toString();
     }
+    
+    public static boolean isValidLocation(String location) {
+            return location.matches("^[A-Z]\\d{3}$"); //Regex to ensure 1 character and 3 digit
+    }
 }

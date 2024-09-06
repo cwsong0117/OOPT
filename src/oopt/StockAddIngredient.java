@@ -138,15 +138,22 @@ public class StockAddIngredient extends Stock{
         
         String expiryDate;
         do {
-            System.out.print("Expiry Date : ");
+            System.out.print("Expiry Date(YYYY-MM-DD) : ");
             expiryDate = scanner.nextLine();
             if(!Validation.isValidDate(expiryDate)) {
                 System.out.println("Invalid date format. Please enter in the format YYYY-MM-DD.");
             }
         }while(!Validation.isValidDate(expiryDate));
         
-        System.out.print("Location : ");
-        String location = scanner.nextLine();
+        String location;
+        do{
+            System.out.print("Location : ");
+            location = scanner.nextLine();
+            if(!Validation.isValidLocation(location)) {
+                System.out.println("Invalid location format. Please enter again.");
+                System.out.println("Example: A001");
+            }
+        }while(!Validation.isValidLocation(location));
         
         return new Stock(stockID, name, quantity, price, supplier, expiryDate, arrivalDate, location);
         
