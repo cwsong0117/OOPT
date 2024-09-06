@@ -17,12 +17,14 @@ public class StockMenu {
         Scanner scanner = new Scanner(System.in);
         
         while(running) {
+            System.out.println("Enter '-1' to back to this menu.");
             System.out.println("1: ADD Stock");
-            System.out.println("2. DISPLAY Stock");
-            System.out.println("3. REMOVE Stock");
-            System.out.println("4. SEARCH Stock");
-            System.out.println("5. LOW-LEVEL Stock Check");
-            System.out.println("6. EXIT");
+            System.out.println("2. UPDATE Stock");
+            System.out.println("3. DISPLAY Stock");
+            System.out.println("4. REMOVE Stock");
+            System.out.println("5. SEARCH Stock");
+            System.out.println("6. LOW-LEVEL Stock Check");
+            System.out.println("7. EXIT");
             System.out.print("Your Option : ");
             int option = scanner.nextInt();
             System.out.print("\n");
@@ -34,21 +36,25 @@ public class StockMenu {
                     addStockMenu();
                     break;
                 case 2:
-                    System.out.print("Display Stock Option Selected...\n");
-                    displayStockMenu(option);
+                    System.out.println("Update Stock Option Selected...\n");
+                    updateStockMenu();
                     break;
                 case 3:
+                    System.out.print("Display Stock Option Selected...\n");
+                    displayStockMenu();
+                    break;
+                case 4:
                     System.out.print("Remove Stock Level Option Selected...\n");
                     removeStockMenu();
                     break;
-                case 4:
+                case 5:
                     System.out.print("Search Stock Level Option Selected...\n");
                     searchStockMenu();
                     break;
-                case 5:
+                case 6:
                     System.out.print("Stock Level Checking...\n");
                     stockBalanceAlert();
-                case 6:
+                case 7:
                     System.out.print("Exiting...\n");
                     running = false;
                     break;
@@ -103,7 +109,7 @@ public class StockMenu {
         scanner.close();
     }
     
-    public static void displayStockMenu(int option) {
+    public static void displayStockMenu() {
         
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
@@ -115,7 +121,7 @@ public class StockMenu {
             System.out.println("3. Iegredient");
             System.out.println("4. Exit");
             System.out.print("Option > ");
-            option = scanner.nextInt();
+            int option = scanner.nextInt();
             System.out.print("\n");
 
             switch(option) {

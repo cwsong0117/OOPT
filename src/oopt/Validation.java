@@ -17,6 +17,7 @@ public class Validation {
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     
     public static boolean isValidDate(String dateStr) {
+        //unified the date format
         try{
             LocalDate.parse(dateStr, DATE_FORMAT);
             return true;
@@ -30,7 +31,8 @@ public class Validation {
     }
     
     public static boolean isValidLocation(String location) {
-            return location.matches("^[A-Z]\\d{3}$"); //Regex to ensure 1 character and 3 digit
+        //the place of placing the inventory like aisle A followed by the shelf number 001
+        return location.matches("^[A-Z]\\d{3}$"); //Regex to ensure 1 character and 3 digit
     }
     
     public static boolean isValidName(String name, int n) {
@@ -59,5 +61,15 @@ public class Validation {
             }
         }
         return true;
+    }
+    
+    public static boolean isValidName(String name) {
+        //only character
+        //no digit and special character
+        return name.matches("^[A-Za-z]+$");
+    }
+    
+    public static boolean isNotNullOrEmpty(String input) {
+        return input != null && !input.trim().isEmpty();
     }
 }

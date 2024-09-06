@@ -114,38 +114,94 @@ public class StockAddIngredient extends Stock{
     
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Stock ID : ");
-        String stockID = scanner.nextLine();
+        String stockID = StockIDGenerator.generateIngredientID();
+        System.out.print("Stock ID : " + stockID + "\n");
         
         String name;
         do{
             System.out.print("Name : ");
             name = scanner.nextLine();
-            if(!Validation.isValidName(name, num)) {
+            if(name.equals("-1")) {
+                System.out.println("Existing...\n");
+                StockMenu.stockMenu();
+                return null;
+            }
+            if(!Validation.isValidName(name)) {
+                System.out.println("Invalid Name format. Please try again.");
+            }
+            else if(!Validation.isValidName(name, num)) {
                 System.out.println("Name already exists. Please select UPDATE or enter other name.");
             }
-        }while(!Validation.isValidName(name, num));
+            else if(!Validation.isNotNullOrEmpty(name)) {
+                System.out.println("Name cannot be empty. Please enter a name.");
+            }
+        }while(!Validation.isValidName(name, num) || !Validation.isValidName(name));
 
-        System.out.print("Quantity : ");
-        int quantity = scanner.nextInt();
+        int quantity = 0;
+        do{
+            System.out.print("Quantity : ");
+            quantity = scanner.nextInt();
+            if (quantity == -1) {
+                System.out.println("Existing...\n");
+                StockMenu.stockMenu();
+            }
+            if(quantity <= 0) {
+                System.out.println("The price cannot be zero or negative. Please enter a price");
+            }
+        }while(quantity <= 0);
         
         scanner.nextLine();
 
-        System.out.print("Price : ");
-        double price = scanner.nextDouble();
+        String priceInput;
+        double price = 0.0;
+        do{
+            System.out.print("Price : ");
+            priceInput = scanner.nextLine();
+            if(priceInput.equals("-1")) {
+                System.out.println("Existing...\n");
+                StockMenu.stockMenu();
+                return null;
+            }
+            if(!Validation.isNotNullOrEmpty(priceInput)) {
+                System.out.println("Price cannot be empty.");
+            }else{
+                try{
+                    price = Double.parseDouble(priceInput);
+                    if(price <= 0.0) {
+                        System.out.println("Price cannot be zero or negative.");
+                    }
+                }catch(NumberFormatException e) {
+                    System.out.println("Invald price format. Please enter a valid price.");
+                }
+            }
+        }while(price <= 0);
         
-        scanner.nextLine();
-
-        System.out.print("Supplier : ");
-        String supplier = scanner.nextLine();
-                
+        String supplier;
+        do{
+            System.out.println("Supplier : ");
+            supplier = scanner.nextLine();
+            if(supplier.equals("-1")) {
+                System.out.println("Existing...\n");
+                StockMenu.stockMenu();
+                return null;
+            }
+            if(!Validation.isNotNullOrEmpty(supplier)) {
+                System.out.println("Supplier cannot be empty. Please enter a supplier.");
+            }
+        }while(!Validation.isNotNullOrEmpty(supplier));
+        
         String arrivalDate = Validation.getLocalDate();
         System.out.print("Arrival Date : " + arrivalDate + "\n");
-        
+
         String expiryDate;
         do {
             System.out.print("Expiry Date(YYYY-MM-DD) : ");
             expiryDate = scanner.nextLine();
+            if(expiryDate.equals("-1")) {
+                System.out.println("Existing...\n");
+                StockMenu.stockMenu();
+                return null;
+            }
             if(!Validation.isValidDate(expiryDate)) {
                 System.out.println("Invalid date format. Please enter in the format YYYY-MM-DD.");
             }
@@ -155,6 +211,11 @@ public class StockAddIngredient extends Stock{
         do{
             System.out.print("Location : ");
             location = scanner.nextLine();
+            if(location.equals("-1")) {
+                System.out.println("Existing...\n");
+                StockMenu.stockMenu();
+                return null;
+            }
             if(!Validation.isValidLocation(location)) {
                 System.out.println("Invalid location format. Please enter again.");
                 System.out.println("Example: A001");

@@ -48,12 +48,13 @@ public class StockRemove {
                         }
                         file.writeFood(remainFoods.toArray(new StockAddFood[0]));
                     }
-                    if(!found) {
-                        System.out.println("No Such ID in file.\n");
-                    }
-                    StockMenu.stockMenu();
                 }
+                if(!found) {
+                        System.out.println("No Such ID in file.\n");
+                }
+                StockMenu.stockMenu();
                 break;
+                
             case 2:
                 StockAddBeverage[] beverages = file.readBeverage();
                 System.out.print("Please enter the Stock ID that need to deleted > ");
@@ -86,6 +87,7 @@ public class StockRemove {
                 }
                 StockMenu.stockMenu();
                 break;
+                
             case 3:
                 StockMenu s = new StockMenu();
                 StockAddIngredient[] ingredients = file.readIngredient();
