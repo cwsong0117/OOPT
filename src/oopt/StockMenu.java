@@ -122,7 +122,7 @@ public class StockMenu {
                 case 1:
                 case 2:
                 case 3:
-                    d.display(option);
+                    d.displayStock(option);
                     break;
                 case 4:
                     System.out.println("Exiting...");
@@ -155,16 +155,9 @@ public class StockMenu {
 
             switch(option) {
                 case 1:
-                    System.out.println("Food Category Selected...");
-                    r.removeFood();
-                    break;
                 case 2:
-                    System.out.println("Beverage Category Selected...");
-                    r.removeBeverage();
-                    break;
                 case 3:
-                    System.out.println("Ingredient Category Selected...");
-                    r.removeIngredient();
+                    r.removeStock(option);
                     break;
                 case 4:
                     System.out.println("Exiting...");

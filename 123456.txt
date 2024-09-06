@@ -1,0 +1,6 @@
+Name: Bryan
+Staff ID: 123456
+Phone Number: 0166818085
+Email: bryan@gmail.com
+Age: 19
+Password: abc123

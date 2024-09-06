@@ -33,7 +33,7 @@ public class Display {
         
     //the purpose of create those method is to ensure the reusability in other method
         
-    public static void display(int n) {
+    public static void displayStock(int n) {
         
         StockFile file = new StockFile();
         StockMenu stockMenu = new StockMenu();
