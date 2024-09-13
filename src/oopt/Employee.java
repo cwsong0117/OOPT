@@ -1,6 +1,22 @@
-import java.io.*;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package oopt;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Scanner;
 
+/**
+ *
+ * @author User
+ */
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -8,10 +24,10 @@ public class Employee implements Serializable {
     private String staffID;
     private String phoneNum;
     private String email;
-    private String age;
+    private int age;
     private String password;
 
-    public Employee(String name, String staffID, String phoneNum, String email, String age, String password) {
+    public Employee(String name, String staffID, String phoneNum, String email, int age, String password) {
         this.name = name;
         this.staffID = staffID;
         this.phoneNum = phoneNum;
@@ -36,7 +52,7 @@ public class Employee implements Serializable {
         return email;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
@@ -54,6 +70,7 @@ public class Employee implements Serializable {
         do {
             System.out.print("Enter staff ID: ");
             staffID = scanner.nextLine();
+
             if (doesStaffIDExist(staffID)) {
                 System.out.println("A user with this Staff ID already exists. Please type a different Staff ID.");
             }
@@ -64,7 +81,7 @@ public class Employee implements Serializable {
             System.out.print("Enter phone number: ");
             phoneNum = scanner.nextLine();
             if (!isValidPhoneNum(phoneNum)) {
-                System.out.println("Invalid Phone Number Format. Please type the correct phone number!");
+                System.out.println("Wrong Phone Number Format. Please type the correct phone number!");
             }
         } while (!isValidPhoneNum(phoneNum));
 
@@ -73,12 +90,13 @@ public class Employee implements Serializable {
             System.out.print("Enter email: ");
             email = scanner.nextLine();
             if (!isValidEmail(email)) {
-                System.out.println("Invalid Email Format. Please type the correct email format!");
+                System.out.println("Wrong Email Format. Please type the correct email format!");
             }
         } while (!isValidEmail(email));
 
         System.out.print("Enter age: ");
-        String age = scanner.nextLine();
+        int age = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
@@ -95,30 +113,32 @@ public class Employee implements Serializable {
             this.name = newName;
         }
 
-        System.out.print("Update phone number (current: " + this.phoneNum + ") or press Enter to keep current: ");
-        String newPhoneNum = scanner.nextLine();
-        if (!newPhoneNum.isEmpty() && isValidPhoneNum(newPhoneNum)) {
-            this.phoneNum = newPhoneNum;
-        } else if (!newPhoneNum.isEmpty()) {
-            System.out.println("Invalid Phone Number Format.");
-        }
+        String newPhoneNum;
+        do {
+            System.out.print("Update phone number (current: " + this.phoneNum + ") or press Enter to keep current: ");
+            newPhoneNum = scanner.nextLine();
+            if (!newPhoneNum.isEmpty() && !isValidPhoneNum(newPhoneNum)) {
+                System.out.println("Wrong Phone Number Format. Please type correct phone number!");
+            } else if (!newPhoneNum.isEmpty()) {
+                this.phoneNum = newPhoneNum;
+            }
+        } while (!newPhoneNum.isEmpty() && !isValidPhoneNum(newPhoneNum));
 
-        System.out.print("Update email (current: " + this.email + ") or press Enter to keep current: ");
-        String newEmail = scanner.nextLine();
-        if (!newEmail.isEmpty() && isValidEmail(newEmail)) {
-            this.email = newEmail;
-        } else if (!newEmail.isEmpty()) {
-            System.out.println("Invalid Email Format.");
-        }
+        String newEmail;
+        do {
+            System.out.print("Update email (current: " + this.email + ") or press Enter to keep current: ");
+            newEmail = scanner.nextLine();
+            if (!newEmail.isEmpty() && !isValidEmail(newEmail)) {
+                System.out.println("Wrong Email Format. Please type correct email format!");
+            } else if (!newEmail.isEmpty()) {
+                this.email = newEmail;
+            }
+        } while (!newEmail.isEmpty() && !isValidEmail(newEmail));
 
         System.out.print("Update age (current: " + this.age + ") or press Enter to keep current: ");
-        String newAgeStr = scanner.nextLine();
-        if (!newAgeStr.isEmpty()) {
-            try {
-                this.age = newAgeStr;
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid age. Age not updated.");
-            }
+        String newAge = scanner.nextLine();
+        if (!newAge.isEmpty()) {
+            this.age = Integer.parseInt(newAge);
         }
 
         System.out.print("Update password or press Enter to keep current: ");
@@ -170,7 +190,7 @@ public class Employee implements Serializable {
             String name = reader.readLine().split(": ", 2)[1];
             String phoneNum = reader.readLine().split(": ", 2)[1];
             String email = reader.readLine().split(": ", 2)[1];
-            String age = reader.readLine().split(": ", 2)[1];
+            int age = Integer.parseInt(reader.readLine().split(": ", 2)[1]);
             String password = reader.readLine().split(": ", 2)[1];
 
             return new Employee(name, staffID, phoneNum, email, age, password);

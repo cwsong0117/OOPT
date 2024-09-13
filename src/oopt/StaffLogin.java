@@ -1,19 +1,20 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package oopt;
+
 /**
  *
  * @author User
  */
+
 import java.util.List;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
-public class StaffLogin {
-
+public class StaffLogin{
     final static List<Employee> people = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -104,7 +105,7 @@ public class StaffLogin {
     }
 
     public static void loadAllEmployees() {
-         File dir = new File(".");
+        File dir = new File(".");
         File[] files = dir.listFiles((d, name) -> name.endsWith(".txt"));
         if (files != null) {
             for (File file : files) {
@@ -116,5 +117,4 @@ public class StaffLogin {
             }
         }
     }
-    
 }

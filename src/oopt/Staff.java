@@ -1,9 +1,20 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package oopt;
+
+/**
+ *
+ * @author User
+ */
+
 import java.util.Scanner;
 
-public class Staff extends Employee {
-    private String position;
+public class Staff extends Employee{
+        private String position;
 
-    public Staff(String name, String staffID, String phoneNum, String email, String age, String password, String position) {
+    public Staff(String name, String staffID, String phoneNum, String email, int age, String password, String position) {
         super(name, staffID, phoneNum, email, age, password);
         this.position = position;
     }
@@ -23,7 +34,8 @@ public class Staff extends Employee {
         System.out.print("Enter position: ");
         String position = scanner.nextLine();
 
-        return new Staff(employee.getName(), employee.getStaffID(), employee.getPhoneNum(), employee.getEmail(), employee.getAge(), employee.getPassword(), position);
+        return new Staff(employee.getName(), employee.getStaffID(), employee.getPhoneNum(),
+                employee.getEmail(), employee.getAge(), employee.getPassword(), position);
     }
 
     @Override
@@ -32,10 +44,7 @@ public class Staff extends Employee {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Update position (current: " + this.position + "): ");
-        String newPosition = scanner.nextLine();
-        if (!newPosition.isEmpty()) {
-            this.position = newPosition;
-        }
+        this.position = scanner.nextLine();
 
         System.out.println("Staff profile updated successfully!");
     }
