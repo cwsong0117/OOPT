@@ -8,13 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 /**
  *
  * @author User
  */
 public class StockAlert {
-    
     public static void displayLowStock(int n) {
     
         Scanner scanner = new Scanner(System.in);

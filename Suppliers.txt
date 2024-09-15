@@ -1,0 +1,20 @@
+ECONSAVE/F001/012-3456789/john@econsave.com/Vegetables
+Aeon/F002/012-4567897/joan@aeon.com.my/Meat
+MBG/F003/013-4567890/johnson@giant.com.my/Fruit
+FreshFISH/F004/016-4467890/jenny@nsk.com.my/Seafood
+99 SpeedMart/B001/014-7995327/jen@99speedmrt.com.my/Malts, Oats & Water
+CarboDrink/B002/011-44447777/joe@carbo.com.my/Carbonated Drinks
+Ah Huat/B003/03-87348772/supply@huat.com.my/Coffee
+Carlsberg/B004/03-87876969/amir@beer.com.my/Alcoholic 
+NSK/I001/03-78757479/jaychou@nsk.com/Salt,sugar & pepper
+Giant/I002/03-83235742/thohal@giant.com.my/Flour
+Maggi/I003/03-89767645/terry@maggi.com.my/Soy sauce, Vinegar
+Nutella/I004/03-87270406/kz@nut.com.my/Jam
+Jacob/F005/03-87349724/jared@jacob.com.my/Biscuit
+100plus/B005/03-87358735/quah@100plus.com.my/Carbonated Drink
+Coca Cola/B010/03-87348773/hannah@cola.com.my/Carbonated Drink
+Lotus's/F006/011-22431734/larry@lotus.com.my/Rice
+PopPop/B011/03-87248776/steve@pop.com/Carbonated Drinks
+OrganicStore/I005/012-8889999/bob@organic.com.my/Msg
+Horlick/B012/03-12355678/agent@horlick.com.my/Oats
+Mr Noodle/F007/011-7774545/kenny@mrnoodle.com/Noodles

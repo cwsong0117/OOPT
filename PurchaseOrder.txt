@@ -1,0 +1,22 @@
+PO-00001/F001/Cabbage/20.0/5.0/Broccoli/20.0/7.0/240.0/Fri Sep 06 23:42:31 SGT 2024/Online Banking
+PO-00002/F002/Chicken/50.0/8.0/400.0/Fri Sep 06 23:42:31 SGT 2024/E-wallet
+PO-00003/F002/Chicken/50.0/8.0/Beef Steak/70.0/10.0/1100.0/Fri Sep 06 23:47:31 SGT 2024/E-wallet
+PO-00005/I001/Pepper/40.0/0.35/14.0/Mon Sep 09 00:52:26 SGT 2024/Online Banking
+PO-00006/F002/Salmon/20.0/7.3/146.0/Mon Sep 09 01:01:25 SGT 2024/Online Banking
+PO-00009/I003/Soy Sauce/20.0/7.2/Vinegar/30.0/5.3/303.0/Mon Sep 09 01:52:58 SGT 2024/E-wallet
+PO-00010/B002/Fanta/13.0/2.0/Seven Up/31.0/2.0/88.0/Mon Sep 09 02:25:26 SGT 2024/E-wallet
+PO-00011/F001/Cucumber/20.0/3.0/Carrot/13.0/2.0/86.0/Mon Sep 09 13:59:49 SGT 2024/Online Banking
+PO-00012/I001/Salt/30.0/0.2/6.0/Tue Sep 10 00:19:12 SGT 2024/Online Banking
+PO-00013/F002/Salmon/20.0/7.3/Chicken/20.0/8.0/Beef Steak/32.0/10.0/626.0/Tue Sep 10 00:23:56 SGT 2024/E-wallet
+PO-00014/F001/Broccoli/20.0/2.0/40.0/Tue Sep 10 02:58:42 SGT 2024/Online Banking
+PO-00015/B005/100plus Can/200.0/2.5/500.0/Tue Sep 10 03:02:00 SGT 2024/Online Banking
+PO-00016/F002/Beef Steak/50.0/10.0/500.0/Tue Sep 10 03:07:51 SGT 2024/Online Banking
+PO-00017/F002/Beef Steak/5.4/10.0/54.0/Tue Sep 10 03:08:49 SGT 2024/Online Banking
+PO-00018/I001/Pepper/64.7/0.35/22.645/Tue Sep 10 03:11:50 SGT 2024/Online Banking
+PO-00020/I003/Soy Sauce/2.0/7.2/14.4/Tue Sep 10 03:18:45 SGT 2024/Online Banking
+PO-00021/F002/Salmon/45.6/7.3/332.88/Wed Sep 11 03:15:44 SGT 2024/Online Banking
+PO-00022/I001/Pepper/36.7/0.35/12.845/Wed Sep 11 03:18:11 SGT 2024/Online Banking
+PO-00023/I001/Pepper/20.5/0.35/Sugar/60.4/0.2/19.255/Thu Sep 12 22:31:54 SGT 2024/E-wallet
+PO-00024/I003/Soy Sauce/6.0/7.2/43.2/Fri Sep 13 22:25:06 SGT 2024/E-wallet
+PO-00026/F006/Basmati Rice/16.0/25.0/tiantangniao/30.0/40.0/1600.0/Sat Sep 14 02:54:25 SGT 2024/Online Banking
+PO-00027/F007/BeeHoon/30.0/1.1/33.0/Sat Sep 14 17:07:09 SGT 2024/E-wallet
