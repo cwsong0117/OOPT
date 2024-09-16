@@ -38,10 +38,13 @@ public class StaffLogin {
                 case 1:
                     System.out.print("Enter staff ID: ");
                     String staffID = scanner.nextLine();
+                    System.out.println("Password: ");
+                    String password = scanner.nextLine();
 
                     Employee employee = Employee.loadFromFile(staffID);
                     if (employee != null) {
-                        System.out.println("Welcome back, " + employee.getName() + "!");
+                        System.out.println("Welcome back, " + employee.getName() + "!\n");
+                        OOPT.functionMenu();
                     } else {
                         System.out.println("No matching record found.");
                     }
