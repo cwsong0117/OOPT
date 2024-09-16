@@ -11,23 +11,20 @@ package oopt;
 public class Display {
     
     public static void displayFoodTitle() {
-        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
+        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-11s %-10s %-15s\n", 
                           "ID", "Name", "Quantity", "Price", "Supplier", 
-                          "Expiry Date", "Arrival Date", "Location", 
                           "Organic", "Allergens", "Storage Temp");
     }
     
     public static void displayBeverageTitle() {
-        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
+        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-11s %-10s %-15s\n", 
                           "ID", "Name", "Quantity", "Price", "Supplier", 
-                          "Expiry Date", "Arrival Date", "Location", 
                           "Alcohol Content", "Carbonated", "Volume");
     }
     
     public static void displayIngredientTitle() {
-        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                      "ID", "Name", "Quantity", "Price", "Supplier", 
-                      "Expiry Date", "Arrival Date", "Location", 
+        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-11s %-10s %-15s\n", 
+                      "ID", "Name", "Quantity", "Price", "Supplier",
                       "Ingredient Type", "Gluten", "Calory");
     }
         
