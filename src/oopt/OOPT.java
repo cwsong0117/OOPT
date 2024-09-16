@@ -27,7 +27,7 @@ public class OOPT {
             System.out.println("1. Stock Management");//add stock, update stock, remove stock, view stock level, search stock
             System.out.println("2. Purchcase Order Management");//Create new order, Update order status(Processing, Shipped, Delivered, etc.), Cancel Order, view order history
             System.out.println("3. Supplier Management");//Add new supplier, update supplier information, remove supplier, view supplier list
-            System.out.println("4. EXIT");//Quit the whole program
+            System.out.println("4. LOG OUT");//Quit the whole program
             System.out.print("Your Option > ");
             int option = scanner.nextInt();
 
@@ -49,10 +49,9 @@ public class OOPT {
                     break;
                 default:
                     System.out.println("Invalid Option...");
-                    break;
+                    return;
             }
         }
-        System.exit(0);
     }
     
 }
