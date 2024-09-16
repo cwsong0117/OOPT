@@ -1,0 +1,2 @@
+FD001|Fish|100|3.3|aeon|yes|none|-1.1
+FD002|meat|150|4.1|farm fresh|yes|none|2.0

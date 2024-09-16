@@ -123,16 +123,13 @@ public class StockAddFood extends Stock{
                 StockMenu.stockMenu();
                 return null;
             }
-            if(!Validation.isValidName(name)) {
-                System.out.println("Invalid Name format. Please try again.");
-            }
             else if(!Validation.isValidName(name, num)) {
                 System.out.println("Name already exists. Please select UPDATE or enter other name.");
             }
             else if(!Validation.isNotNullOrEmpty(name)) {
                 System.out.println("Name cannot be empty. Please enter a name.");
             }
-        }while(!Validation.isValidName(name, num) || !Validation.isValidName(name));
+        }while(!Validation.isValidName(name, num));
 
         int quantity = 0;
         do{
@@ -184,6 +181,12 @@ public class StockAddFood extends Stock{
             }
             if(!Validation.isNotNullOrEmpty(supplier)) {
                 System.out.println("Supplier cannot be empty. Please enter a supplier.");
+            }
+            else if(!Validation.checkSupplier(supplier)) {
+                System.out.println("No such supplier in system...\n");
+            }
+            else{
+                break;
             }
         }while(!Validation.isNotNullOrEmpty(supplier));
         

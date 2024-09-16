@@ -7,6 +7,7 @@ package oopt;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  *
@@ -63,13 +64,19 @@ public class Validation {
         return true;
     }
     
-    public static boolean isValidName(String name) {
-        //only character
-        //no digit and special character
-        return name.matches("^[A-Za-z]+$");
-    }
-    
     public static boolean isNotNullOrEmpty(String input) {
         return input != null && !input.trim().isEmpty();
+    }
+    
+    public static boolean checkSupplier(String supplier) {
+        Supplier readSupplier = new Supplier();
+        ArrayList<Supplier> suppliers = readSupplier.readTextFile();
+        
+        for(Supplier s : suppliers) {
+            if(s.getSupplierName().equalsIgnoreCase(supplier)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
