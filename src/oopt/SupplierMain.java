@@ -12,8 +12,9 @@ import java.util.Scanner;
  * @author User
  */
 public class SupplierMain {
-    
-    public static void SupplierMenu(){
+
+    public static void SupplierMenu() {
+        
         boolean valid = false;
         int choice = 0;
         System.out.println("\n\t\t******Welcome to Supplier Module******");
@@ -24,9 +25,9 @@ public class SupplierMain {
         System.out.println("\t\t\t5.Add supplier's items");
         System.out.println("\t\t\tAny number to leave here");
         
-        do{
-        System.out.print("Choice: ");
-        
+        do {
+            System.out.print("Choice: ");
+
             Scanner input = new Scanner(System.in);
             try {
                 choice = input.nextInt();
@@ -40,8 +41,9 @@ public class SupplierMain {
                     System.exit(0);
                 }
             }
+            
         } while (!valid);
-      
+
         if (valid) {
             switch (choice) {
                 case 1:
@@ -61,7 +63,8 @@ public class SupplierMain {
                     SupplierStock.addSupplierItems();
                     break;
                 default:
-                    System.exit(0);
+                    System.out.println("Exitng...\n");
+                    return;
             }
 
         }

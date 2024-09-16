@@ -186,8 +186,10 @@ public class Employee implements Serializable {
     }
 
     public static Employee loadFromFile(String staffID) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(staffID + ".txt"))) {
+        String filePath = staffID + ".txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String name = reader.readLine().split(": ", 2)[1];
+            String id = reader.readLine().split(": ", 2)[1];
             String phoneNum = reader.readLine().split(": ", 2)[1];
             String email = reader.readLine().split(": ", 2)[1];
             int age = Integer.parseInt(reader.readLine().split(": ", 2)[1]);

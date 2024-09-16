@@ -15,7 +15,7 @@ public class OOPT {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void functionMenu() {
 
         Scanner scanner = new Scanner(System.in);
         StockMenu stockMenu = new StockMenu();

@@ -53,7 +53,8 @@ public class PurchaseOrderMain {
                 po.cancelPurchaseOrder();
                 break;
             default:
-                System.exit(0);
+                System.out.println("Exiting...\n");
+                return;
         }
 
     }
