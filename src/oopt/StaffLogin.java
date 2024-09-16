@@ -8,13 +8,13 @@ package oopt;
  *
  * @author User
  */
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 
-public class StaffLogin{
+public class StaffLogin {
+
     final static List<Employee> people = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -47,14 +47,14 @@ public class StaffLogin{
                     }
                     break;
 
-                 case 2:
-                    Employee newStaff = Staff.signup(); 
+                case 2:
+                    Employee newStaff = Staff.signup();
                     addPerson(newStaff);
                     newStaff.saveToFile();
                     break;
 
                 case 3:
-                    Employee newManager = Manager.signup(); 
+                    Employee newManager = Manager.signup();
                     addPerson(newManager);
                     newManager.saveToFile();
                     break;
@@ -89,8 +89,8 @@ public class StaffLogin{
 
         } while (choice != 5);
 
-         // Auto-load users
-         loadAllEmployees();
+        // Auto-load users
+        loadAllEmployees();
 
         scanner.close();
     }

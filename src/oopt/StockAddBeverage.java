@@ -24,11 +24,9 @@ public class StockAddBeverage extends Stock {
     }
 
     public StockAddBeverage(String stockID, String name, int quantity, double price,
-            String supplier, String expiryDate,
-            String arrivalDate, String location, double alcoholContent,
+            String supplier, double alcoholContent,
             String isCarbonated, int volume) {
-        super(stockID, name, quantity, price, supplier, expiryDate,
-                arrivalDate, location);
+        super(stockID, name, quantity, price, supplier);
         this.alcoholContent = alcoholContent;
         this.isCarbonated = isCarbonated;
         this.volume = volume;
@@ -94,7 +92,6 @@ public class StockAddBeverage extends Stock {
             
             StockAddBeverage beverage = new StockAddBeverage(stock.getStockID(), stock.getName(), stock.getQuantity(),
                                 stock.getPrice(), stock.getSupplier(),
-                                stock.getExpiryDate(), stock.getArrivalDate() ,stock.getLocation(),
                                 alcoholContent, isCarbonated, volume);
             
             file.appendBeverage(beverage);
@@ -192,39 +189,7 @@ public class StockAddBeverage extends Stock {
             }
         }while(!Validation.isNotNullOrEmpty(supplier));
         
-        String arrivalDate = Validation.getLocalDate();
-        System.out.print("Arrival Date : " + arrivalDate + "\n");
-
-        String expiryDate;
-        do {
-            System.out.print("Expiry Date(YYYY-MM-DD) : ");
-            expiryDate = scanner.nextLine();
-            if(expiryDate.equals("-1")) {
-                System.out.println("Existing...\n");
-                StockMenu.stockMenu();
-                return null;
-            }
-            if(!Validation.isValidDate(expiryDate)) {
-                System.out.println("Invalid date format. Please enter in the format YYYY-MM-DD.");
-            }
-        }while(!Validation.isValidDate(expiryDate));
-        
-        String location;
-        do{
-            System.out.print("Location : ");
-            location = scanner.nextLine();
-            if(location.equals("-1")) {
-                System.out.println("Existing...\n");
-                StockMenu.stockMenu();
-                return null;
-            }
-            if(!Validation.isValidLocation(location)) {
-                System.out.println("Invalid location format. Please enter again.");
-                System.out.println("Example: A001");
-            }
-        }while(!Validation.isValidLocation(location));
-        
-        return new StockAddBeverage(stockID, name, quantity, price, supplier, expiryDate, arrivalDate, location, 0.0, "no", 0);
+        return new StockAddBeverage(stockID, name, quantity, price, supplier, 0.0, "no", 0);
         
     }
 }

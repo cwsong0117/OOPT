@@ -17,9 +17,6 @@ public abstract class Stock {
     private int quantity;
     private double price;
     private String supplier;
-    private String expiryDate;
-    private String arrivalDate;
-    private String location;
     
     private static final AtomicInteger FOOD_COUNTER = new AtomicInteger(0);
     private static final AtomicInteger BEVERAGE_COUNTER = new AtomicInteger(0);
@@ -31,22 +28,15 @@ public abstract class Stock {
         this.quantity = 0;
         this.price = 0.0;
         this.supplier = "";
-        this.expiryDate = "";
-        this.arrivalDate = "";
-        this.location = "";
     }
     
     public Stock(String stockID, String name, int quantity, double price, 
-            String supplier, String expiryDate, 
-            String arrivalDate, String location) {
+            String supplier) {
         this.stockID = stockID;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.supplier = supplier;
-        this.expiryDate = expiryDate;
-        this.arrivalDate = arrivalDate;
-        this.location = location;
     }
     
     public String getStockID() {
@@ -67,18 +57,6 @@ public abstract class Stock {
     
     public String getSupplier() {
         return supplier;
-    }
-        
-    public String getExpiryDate() {
-        return expiryDate;
-    }
-    
-    public String getArrivalDate() {
-        return arrivalDate;
-    }
-    
-    public String getLocation() {
-        return location;
     }
     
     public void setStockID(String stockID) {
@@ -101,23 +79,10 @@ public abstract class Stock {
         this.supplier = supplier;
     }
     
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-    
-    public void setArrivalDate(String arrivalDate) {
-        this.arrivalDate = arrivalDate;
-    }
-        
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    
     @Override
     public String toString() {
-        return String.format("%-7s %-12s %-9d %-7.2f %-14s %-23s %-14s %-15s", 
+        return String.format("%-7s %-12s %-9d %-7.2f %-14s", 
                     stockID, name, quantity, price, 
-                    supplier, expiryDate, 
-                    arrivalDate, location);
+                    supplier);
     }
 }

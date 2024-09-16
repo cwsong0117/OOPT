@@ -24,11 +24,9 @@ public class StockAddFood extends Stock{
     }
     
     public StockAddFood(String stockID, String name, int quantity, double price, 
-            String supplier, String expiryDate, 
-            String arrivalDate, String location, String isOrganic,
+            String supplier, String isOrganic,
             String allergens, double storageTemperature) {
-        super(stockID, name, quantity, price, supplier, expiryDate,
-                arrivalDate, location);
+        super(stockID, name, quantity, price, supplier);
         this.isOrganic = isOrganic;
         this.allergens = allergens;
         this.storageTemperature = storageTemperature;
@@ -92,7 +90,6 @@ public class StockAddFood extends Stock{
             
             StockAddFood food = new StockAddFood(stock.getStockID(), stock.getName(), stock.getQuantity(),
                                 stock.getPrice(), stock.getSupplier(),
-                                stock.getExpiryDate(), stock.getArrivalDate() ,stock.getLocation(),
                                 isOrganic, allergens, storageTemperature);
             
             file.appendFood(food);
@@ -178,7 +175,7 @@ public class StockAddFood extends Stock{
         
         String supplier;
         do{
-            System.out.println("Supplier : ");
+            System.out.print("Supplier : ");
             supplier = scanner.nextLine();
             if(supplier.equals("-1")) {
                 System.out.println("Existing...\n");
@@ -190,39 +187,7 @@ public class StockAddFood extends Stock{
             }
         }while(!Validation.isNotNullOrEmpty(supplier));
         
-        String arrivalDate = Validation.getLocalDate();
-        System.out.print("Arrival Date : " + arrivalDate + "\n");
-
-        String expiryDate;
-        do {
-            System.out.print("Expiry Date(YYYY-MM-DD) : ");
-            expiryDate = scanner.nextLine();
-            if(expiryDate.equals("-1")) {
-                System.out.println("Existing...\n");
-                StockMenu.stockMenu();
-                return null;
-            }
-            if(!Validation.isValidDate(expiryDate)) {
-                System.out.println("Invalid date format. Please enter in the format YYYY-MM-DD.");
-            }
-        }while(!Validation.isValidDate(expiryDate));
-        
-        String location;
-        do{
-            System.out.print("Location : ");
-            location = scanner.nextLine();
-            if(location.equals("-1")) {
-                System.out.println("Existing...\n");
-                StockMenu.stockMenu();
-                return null;
-            }
-            if(!Validation.isValidLocation(location)) {
-                System.out.println("Invalid location format. Please enter again.");
-                System.out.println("Example: A001");
-            }
-        }while(!Validation.isValidLocation(location));
-        
-        return new StockAddFood(stockID, name, quantity, price, supplier, expiryDate, arrivalDate, location, "no", "", 0.0);
+        return new StockAddFood(stockID, name, quantity, price, supplier, "no", "", 0.0);
         
     }
 }

@@ -1,8 +1,0 @@
-FD001|lashef|23|3.3|wle|iwlehr|slrhnf|wer|yes|none|3.3
-FD001|slrg|23|3.3|seriv|lswefn|woiefn|serf|yes|none|3.3
-FD001|subgrg|24|3.3|zdb|souf|osbuef|osbef|yes|none|4.4
-FD001|lkjsefesw|23|43.5|lef|wer|lwer|lsrnfg|yes|lsnr|3.3
-FD002|nef|34|3.7|elrni|lenvr|dlfnv|env|no|soy|3.5
-FD001|anew|33|3.3|senf|ef|wef|wef|yes|senf|4.1
-FD002|lnasef|324|32.7|snfg|lwjef|lwfejbn|zusd|no|jr|1.1
-FD004|www|23|4.4|sn|2025-10-10|2024-09-06|F001|yes|senfw|3.0

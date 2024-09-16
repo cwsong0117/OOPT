@@ -8,11 +8,11 @@ package oopt;
  *
  * @author User
  */
-
 import java.util.Scanner;
 
-public class Staff extends Employee{
-        private String position;
+public class Staff extends Employee {
+
+    private String position;
 
     public Staff(String name, String staffID, String phoneNum, String email, int age, String password, String position) {
         super(name, staffID, phoneNum, email, age, password);

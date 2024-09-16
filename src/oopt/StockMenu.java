@@ -18,8 +18,8 @@ public class StockMenu {
         
         while(running) {
             System.out.println("Enter '-1' to back to this menu.");
-            System.out.println("1: ADD Stock");
-            System.out.println("2. UPDATE Stock");
+            System.out.println("1: ADD NEW Stock");
+            System.out.println("2. UPDATE Stock Level");
             System.out.println("3. DISPLAY Stock");
             System.out.println("4. REMOVE Stock");
             System.out.println("5. SEARCH Stock");

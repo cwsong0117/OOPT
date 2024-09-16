@@ -25,10 +25,7 @@ public class StockSearch {
             System.out.println("1. ID");
             System.out.println("2. Name");
             System.out.println("3. Supplier");
-            System.out.println("4. Expiry Date");
-            System.out.println("5. Arrival Date");
-            System.out.println("6. Location");
-            System.out.println("7. Exit");
+            System.out.println("4. Exit");
             System.out.print("Option > ");
             int option = scanner.nextInt();
             
@@ -47,15 +44,6 @@ public class StockSearch {
                     searchBySupplier(opt);
                     break;
                 case 4:
-                    searchByExpiryDate(opt);
-                    break;
-                case 5:
-                    searchByArrivalDate(opt);
-                    break;
-                case 6:
-                    searchByLocation(opt);
-                    break;
-                case 7:
                     System.out.println("Exiting...\n\n");
                     running = false;
                     break;
@@ -217,156 +205,6 @@ public class StockSearch {
         }
         if(!found) {
             System.out.println("No Such Supplier in file.\n");
-        }
-        operationAfterSearch();
-    }
-    
-    public static void searchByExpiryDate(int n) {
-    
-        Scanner scanner = new Scanner(System.in);
-        StockFile file = new StockFile();
-        boolean found = false;
-        
-        System.out.print("Enter the Expiry Date : ");
-        String expiryDate = scanner.nextLine();
-        
-        Display display = new Display();
-        if(n == 1) {
-            StockAddFood[] foods = file.readFood();
-            
-            display.displayFoodTitle();
-        
-            for(StockAddFood f : foods) {
-                if(f.getExpiryDate().equalsIgnoreCase(expiryDate)) {
-                    System.out.println(f.toString());
-                    found = true;
-                }
-            }
-        }else if(n == 2) {
-            StockAddBeverage[] beverages = file.readBeverage();
-            
-            display.displayBeverageTitle();
-        
-            for(StockAddBeverage b : beverages) {
-                if(b.getExpiryDate().equalsIgnoreCase(expiryDate)) {
-                    System.out.println(b.toString());
-                    found = true;
-                }
-            }
-        }else if(n == 3) {
-            StockAddIngredient[] ingredients = file.readIngredient();
-            
-            display.displayIngredientTitle();
-        
-            for(StockAddIngredient i : ingredients) {
-                if(i.getExpiryDate().equalsIgnoreCase(expiryDate)) {
-                    System.out.println(i.toString());
-                    found = true;
-                }
-            }
-        }
-        if(!found) {
-            System.out.println("No Such Expiry Date in file.\n");
-        }
-        operationAfterSearch();
-    }
-        
-    public static void searchByArrivalDate(int n) {
-        
-        Scanner scanner = new Scanner(System.in);
-        StockFile file = new StockFile();
-        boolean found = false;
-        
-        System.out.print("Enter the Arrival Date : ");
-        String arrivalDate = scanner.nextLine();
-        
-        Display display = new Display();
-        if(n == 1) {
-            StockAddFood[] foods = file.readFood();
-            
-            display.displayFoodTitle();
-        
-            for(StockAddFood f : foods) {
-                if(f.getArrivalDate().equalsIgnoreCase(arrivalDate)) {
-                    System.out.println(f.toString());
-                    found = true;
-                }
-            }
-        }else if(n == 2) {
-            StockAddBeverage[] beverages = file.readBeverage();
-            
-            display.displayBeverageTitle();
-        
-            for(StockAddBeverage b : beverages) {
-                if(b.getArrivalDate().equalsIgnoreCase(arrivalDate)) {
-                    System.out.println(b.toString());
-                    found = true;
-                }
-            }
-        }else if(n == 3) {
-            StockAddIngredient[] ingredients = file.readIngredient();
-            
-            display.displayIngredientTitle();
-        
-            for(StockAddIngredient i : ingredients) {
-                if(i.getArrivalDate().equalsIgnoreCase(arrivalDate)) {
-                    System.out.println(i.toString());
-                    found = true;
-                }
-            }
-        }
-        if(!found) {
-            System.out.println("No Such Arrival Date in file.\n");
-        }
-        operationAfterSearch();
-    }
-    
-    public static void searchByLocation(int n) {
-        
-        Scanner scanner = new Scanner(System.in);
-        StockFile file = new StockFile();
-        boolean found = false;
-        
-        System.out.print("Enter the Location : ");
-        String location = scanner.nextLine();
-        
-        Display display = new Display();
-        if(n == 1) {
-            StockAddFood[] foods = file.readFood();
-            
-            display.displayFoodTitle();
-        
-            for(StockAddFood f : foods) {
-                if(f.getLocation().equalsIgnoreCase(location)) {
-                    System.out.println(f.toString());
-                    found = true;
-                }
-            }
-        }else if(n == 2) {
-            StockAddBeverage[] beverages = file.readBeverage();
-            
-            display.displayBeverageTitle();
-        
-            for(StockAddBeverage b : beverages) {
-                if(b.getLocation().equalsIgnoreCase(location)) {
-                    System.out.println(b.toString());
-                    found = true;
-                }
-            }
-        }else if(n == 3) {
-            StockAddIngredient[] ingredients = file.readIngredient();
-            
-            display.displayIngredientTitle();
-        
-            for(StockAddIngredient i : ingredients) {
-                if(i.getLocation().equalsIgnoreCase(location)) {
-                    System.out.println(i.toString());
-                    found = true;
-                }
-            }
-        }
-        if(!found) {
-            System.out.println("No Such Location in file.\n");
         }
         operationAfterSearch();
     }

@@ -25,9 +25,6 @@ public class StockFile {
                     food.getQuantity() + "|" + 
                     food.getPrice() + "|" + 
                     food.getSupplier() + "|" +
-                    food.getExpiryDate() + "|" +
-                    food.getArrivalDate() + "|" + 
-                    food.getLocation() + "|" +
                     food.getIsOrganic() + "|" +
                     food.getAllergens() + "|" +
                     food.getStorageTemperature());
@@ -44,23 +41,19 @@ public class StockFile {
             String line;
             while((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
-                if(parts.length == 11) {
+                if(parts.length == 8) {
                     try{
                         String stockID = parts[0];
                         String name = parts[1];
                         int quantity = Integer.parseInt(parts[2]);
                         double price = Double.parseDouble(parts[3]);
                         String supplier = parts[4];
-                        String expiryDate = parts[5];
-                        String arrivalDate = parts[6];
-                        String location = parts[7];
-                        String isOrganic = parts[8];
-                        String allergens = parts[9];
-                        double storageTemperature = Double.parseDouble(parts[10]);
+                        String isOrganic = parts[5];
+                        String allergens = parts[6];
+                        double storageTemperature = Double.parseDouble(parts[7]);
                         
                         StockAddFood food = new StockAddFood(stockID, name, quantity, price, 
-                                supplier, expiryDate, arrivalDate,
-                                location, isOrganic, allergens, storageTemperature);
+                                supplier, isOrganic, allergens, storageTemperature);
                         foods.add(food);
                     }catch(NumberFormatException e) {
                         e.printStackTrace();
@@ -82,9 +75,6 @@ public class StockFile {
                     food.getQuantity() + "|" + 
                     food.getPrice() + "|" + 
                     food.getSupplier() + "|" +
-                    food.getExpiryDate() + "|" +
-                    food.getArrivalDate() + "|" + 
-                    food.getLocation() + "|" +
                     food.getIsOrganic() + "|" +
                     food.getAllergens() + "|" +
                     food.getStorageTemperature());
@@ -103,9 +93,6 @@ public class StockFile {
                     beverage.getQuantity() + "|" + 
                     beverage.getPrice() + "|" + 
                     beverage.getSupplier() + "|" +
-                    beverage.getExpiryDate() + "|" +
-                    beverage.getArrivalDate() + "|" + 
-                    beverage.getLocation() + "|" +
                     beverage.getAlcoholContent() + "|" +
                     beverage.getIsCarbonated() + "|" +
                     beverage.getVolume());
@@ -122,23 +109,19 @@ public class StockFile {
             String line;
             while((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
-                if(parts.length == 11) {
+                if(parts.length == 8) {
                     try{
                         String stockID = parts[0];
                         String name = parts[1];
                         int quantity = Integer.parseInt(parts[2]);
                         double price = Double.parseDouble(parts[3]);
                         String supplier = parts[4];
-                        String expiryDate = parts[5];
-                        String arrivalDate = parts[6];
-                        String location = parts[7];
-                        double alcoholContent = Double.parseDouble(parts[8]);
-                        String isCarbonated = parts[9];
-                        int volume = Integer.parseInt(parts[10]);
+                        double alcoholContent = Double.parseDouble(parts[5]);
+                        String isCarbonated = parts[6];
+                        int volume = Integer.parseInt(parts[7]);
                         
                         StockAddBeverage beverage = new StockAddBeverage(stockID, name, quantity, price, 
-                                supplier, expiryDate, arrivalDate,
-                                location, alcoholContent, isCarbonated, volume);
+                                supplier, alcoholContent, isCarbonated, volume);
                         beverages.add(beverage);
                     }catch(NumberFormatException e) {
                         e.printStackTrace();
@@ -160,9 +143,6 @@ public class StockFile {
                     beverage.getQuantity() + "|" + 
                     beverage.getPrice() + "|" + 
                     beverage.getSupplier() + "|" +
-                    beverage.getExpiryDate() + "|" +
-                    beverage.getArrivalDate() + "|" + 
-                    beverage.getLocation() + "|" +
                     beverage.getAlcoholContent() + "|" +
                     beverage.getIsCarbonated() + "|" +
                     beverage.getVolume());
@@ -182,9 +162,6 @@ public class StockFile {
                     ingredient.getQuantity() + "|" + 
                     ingredient.getPrice() + "|" + 
                     ingredient.getSupplier() + "|" +
-                    ingredient.getExpiryDate() + "|" +
-                    ingredient.getArrivalDate() + "|" + 
-                    ingredient.getLocation() + "|" +
                     ingredient.getIngredientType() + "|" +
                     ingredient.getGluten() + "|" +
                     ingredient.getCalory());
@@ -201,23 +178,19 @@ public class StockFile {
             String line;
             while((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
-                if(parts.length == 11) {
+                if(parts.length == 8) {
                     try{
                         String stockID = parts[0];
                         String name = parts[1];
                         int quantity = Integer.parseInt(parts[2]);
                         double price = Double.parseDouble(parts[3]);
                         String supplier = parts[4];
-                        String expiryDate = parts[5];
-                        String arrivalDate = parts[6];
-                        String location = parts[7];
-                        String ingredientType = parts[8];
-                        String gluten = parts[9];
-                        int calory = Integer.parseInt(parts[10]);
+                        String ingredientType = parts[5];
+                        String gluten = parts[6];
+                        int calory = Integer.parseInt(parts[7]);
                         
                         StockAddIngredient ingredient = new StockAddIngredient(stockID, name, quantity, price, 
-                                supplier, expiryDate, arrivalDate,
-                                location, ingredientType, gluten, calory);
+                                supplier, ingredientType, gluten, calory);
                         ingredients.add(ingredient);
                     }catch(NumberFormatException e) {
                         e.printStackTrace();
@@ -239,9 +212,6 @@ public class StockFile {
                     ingredient.getQuantity() + "|" + 
                     ingredient.getPrice() + "|" + 
                     ingredient.getSupplier() + "|" +
-                    ingredient.getExpiryDate() + "|" +
-                    ingredient.getArrivalDate() + "|" + 
-                    ingredient.getLocation() + "|" +
                     ingredient.getIngredientType() + "|" +
                     ingredient.getGluten() + "|" +
                     ingredient.getCalory());

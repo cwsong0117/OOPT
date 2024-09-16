@@ -1,3 +1,0 @@
-IG001|lsnef|33|3.3|SNEF|oreog|lwnrgo|orbg|spice|yes|44
-IG002|jawnef|39|1.7|wirf|weif|oweihf|wefh|wlefn|yes|41
-IG001|sebf|84|8.4|iuwef|wuf|wefb|wef|spice|no|42

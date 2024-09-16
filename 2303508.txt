@@ -1,0 +1,6 @@
+Name: Chan
+Staff ID: 2303508
+Phone Number: 0123456789
+Email: chanws@cincai.com
+Age: 88
+Password: abc123456

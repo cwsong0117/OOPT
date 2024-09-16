@@ -11,6 +11,7 @@ import java.util.Scanner;
  * @author User
  */
 public class Manager extends Employee {
+
     private String department;
 
     public Manager(String name, String staffID, String phoneNum, String email, int age, String password, String department) {
