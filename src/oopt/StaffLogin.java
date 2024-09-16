@@ -38,8 +38,6 @@ public class StaffLogin {
                 case 1:
                     System.out.print("Enter staff ID: ");
                     String staffID = scanner.nextLine();
-                    System.out.println("Password: ");
-                    String password = scanner.nextLine();
 
                     Employee employee = Employee.loadFromFile(staffID);
                     if (employee != null) {
