@@ -1,0 +1,6 @@
+IG001|Salt|1000|0.8|nsk|seasoning|no|0
+IG002|jam|200|3.5|nutella|jam|no|163
+IG003|pepper|750|10.9|nsk|spice|no|0
+IG004|soy sauce|2000|8.5|maggi|seasoning|no|8
+IG005|flour|2000|3.4|giant|baking product|yes|20
+IG006|msg|1000|3.9|organicstore|seasoning|no|1

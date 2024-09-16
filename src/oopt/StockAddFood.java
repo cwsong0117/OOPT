@@ -118,6 +118,7 @@ public class StockAddFood extends Stock{
         do{
             System.out.print("Name : ");
             name = scanner.nextLine();
+            
             if(name.equals("-1")) {
                 System.out.println("Existing...\n");
                 StockMenu.stockMenu();
@@ -156,7 +157,7 @@ public class StockAddFood extends Stock{
                 StockMenu.stockMenu();
                 return null;
             }
-            if(!Validation.isNotNullOrEmpty(priceInput)) {
+            else if(!Validation.isNotNullOrEmpty(priceInput)) {
                 System.out.println("Price cannot be empty.");
             }else{
                 try{
@@ -174,21 +175,19 @@ public class StockAddFood extends Stock{
         do{
             System.out.print("Supplier : ");
             supplier = scanner.nextLine();
+            
             if(supplier.equals("-1")) {
                 System.out.println("Existing...\n");
                 StockMenu.stockMenu();
                 return null;
             }
-            if(!Validation.isNotNullOrEmpty(supplier)) {
+            else if(!Validation.isNotNullOrEmpty(supplier)) {
                 System.out.println("Supplier cannot be empty. Please enter a supplier.");
             }
             else if(!Validation.checkSupplier(supplier)) {
-                System.out.println("No such supplier in system...\n");
+                System.out.println("No such supplier in system...Please enter a valid supplier.");
             }
-            else{
-                break;
-            }
-        }while(!Validation.isNotNullOrEmpty(supplier));
+        }while(!Validation.isNotNullOrEmpty(supplier) || !Validation.checkSupplier(supplier));
         
         return new StockAddFood(stockID, name, quantity, price, supplier, "no", "", 0.0);
         

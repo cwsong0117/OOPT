@@ -17,17 +17,19 @@ public class StockUpdate {
         
         Scanner scanner = new Scanner(System.in);
         StockSearch s = new StockSearch();
+        Display display = new Display();
         
         //Search Stock that need to update using ID
-        String id = s.searchByID(n);
+        System.out.print("Enter the ID : ");
+        String id = scanner.nextLine();
         
         //Enter the amount of stock receive
         int quantity = 0;
         do{
-            System.out.println("\nStock Received: ");
+            System.out.print("Stock Received: ");
             quantity = scanner.nextInt();
             if(quantity == -1) {
-                System.out.println("Exiting...\n");
+                System.out.println("Exiting...\n\n");
                 StockMenu.stockMenu();
             }else if(quantity <= 0){
                 System.out.println("Cannot be zero or negative...\n");
@@ -36,53 +38,61 @@ public class StockUpdate {
         
         StockFile file = new StockFile();
         boolean found = false;
-            
+        
+        System.out.println("\n");
+        
         if (n == 1) { // Update stock level for food
             StockAddFood[] foods = file.readFood();
-            for (StockAddFood f : foods) {
-                if (f.getStockID().equalsIgnoreCase(id)) {
+            display.displayFoodTitle();
+            for(StockAddFood f : foods) {
+                if(f.getStockID().equalsIgnoreCase(id)) {
                     int newStock = f.getQuantity() + quantity; // Add received stock to current stock
                     f.setQuantity(newStock);
+                    System.out.println(f.toString());
                     found = true;
                     break;
                 }
             }
             if (found) {
                 file.writeFood(foods); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\nStock level updated successfully.\n");
             }
         } else if (n == 2) { // Update stock level for beverage
             StockAddBeverage[] beverages = file.readBeverage();
-            for (StockAddBeverage b : beverages) {
-                if (b.getStockID().equalsIgnoreCase(id)) {
+            display.displayBeverageTitle();
+            for(StockAddBeverage b : beverages) {
+                if(b.getStockID().equalsIgnoreCase(id)) {
                     int newStock = b.getQuantity() + quantity; // Add received stock to current stock
                     b.setQuantity(newStock);
+                    System.out.println(b.toString());
                     found = true;
                     break;
                 }
             }
             if (found) {
                 file.writeBeverage(beverages); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\nStock level updated successfully.\n");
             }
         } else if (n == 3) { // Update stock level for ingredient
             StockAddIngredient[] ingredients = file.readIngredient();
-            for (StockAddIngredient i : ingredients) {
-                if (i.getStockID().equalsIgnoreCase(id)) {
+            display.displayIngredientTitle();
+            for(StockAddIngredient i : ingredients) {
+                if(i.getStockID().equalsIgnoreCase(id)) {
                     int newStock = i.getQuantity() + quantity; // Add received stock to current stock
                     i.setQuantity(newStock);
+                    System.out.println(i.toString());
                     found = true;
                     break;
                 }
             }
             if (found) {
                 file.writeIngredient(ingredients); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\nStock level updated successfully.\n");
             }
         }
         
         if (!found) {
-            System.out.println("Failed to update stock level. ID not found.");
+            System.out.println("\nFailed to update stock level. ID not found.\n");
         }
     }
     
@@ -107,7 +117,7 @@ public class StockUpdate {
             }
             if (found) {
                 file.writeFood(foods); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\nStock level updated successfully.\n");
             }
         } else if (n == 2) { // Update stock level for beverage
             StockAddBeverage[] beverages = file.readBeverage();
@@ -125,7 +135,7 @@ public class StockUpdate {
             }
             if (found) {
                 file.writeBeverage(beverages); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\nStock level updated successfully.\n");
             }
         } else if (n == 3) { // Update stock level for ingredient
             StockAddIngredient[] ingredients = file.readIngredient();
@@ -143,12 +153,12 @@ public class StockUpdate {
             }
             if (found) {
                 file.writeIngredient(ingredients); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\nStock level updated successfully.\n");
             }
         }
         
         if (!found) {
-            System.out.println("Failed to update stock level. ID not found.");
+            System.out.println("\nFailed to update stock level. ID not found.\n");
         }
             
     

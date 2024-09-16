@@ -55,7 +55,7 @@ public class StockMenu {
                     System.out.print("Stock Level Checking...\n");
                     stockBalanceAlert();
                 case 7:
-                    System.out.print("Exiting...\n");
+                    System.out.print("Exiting...\n\n");
                     running = false;
                     break;
                 default:

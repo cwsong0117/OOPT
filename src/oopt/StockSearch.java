@@ -102,7 +102,7 @@ public class StockSearch {
             }
         }
         if(!found) {
-            System.out.println("No Such Supplier in file.\n");
+            System.out.println("No Such ID in file.\n");
         }
         operationAfterSearch();
         
@@ -154,7 +154,7 @@ public class StockSearch {
             }
         }
         if(!found) {
-            System.out.println("No Such Supplier in file.\n");
+            System.out.println("No Such Name in file.\n");
         }
         operationAfterSearch();
     }
@@ -214,7 +214,7 @@ public class StockSearch {
         Scanner scanner = new Scanner(System.in);
         StockMenu stockMenu = new StockMenu();
         
-        System.out.println("1. Update Stock Details");
+        System.out.println("\n\n1. Update Stock Details");
         System.out.println("2. Exit");
         System.out.print("Option > ");
         int option = scanner.nextInt();

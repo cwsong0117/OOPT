@@ -1,7 +1,0 @@
-Name: Hoh Lap Him
-Staff ID: 2303857
-Phone Number: 0162980208
-Email: hohlaphim@gmail.com
-Age: 19
-Password: hoh0911
-Type: Staff

@@ -139,7 +139,7 @@ public class StockAddIngredient extends Stock{
                 System.out.println("Existing...\n");
                 StockMenu.stockMenu();
             }
-            if(quantity <= 0) {
+            else if(quantity <= 0) {
                 System.out.println("The price cannot be zero or negative. Please enter a price");
             }
         }while(quantity <= 0);
@@ -156,7 +156,7 @@ public class StockAddIngredient extends Stock{
                 StockMenu.stockMenu();
                 return null;
             }
-            if(!Validation.isNotNullOrEmpty(priceInput)) {
+            else if(!Validation.isNotNullOrEmpty(priceInput)) {
                 System.out.println("Price cannot be empty.");
             }else{
                 try{
@@ -172,17 +172,21 @@ public class StockAddIngredient extends Stock{
         
         String supplier;
         do{
-            System.out.println("Supplier : ");
+            System.out.print("Supplier : ");
             supplier = scanner.nextLine();
+            
             if(supplier.equals("-1")) {
                 System.out.println("Existing...\n");
                 StockMenu.stockMenu();
                 return null;
             }
-            if(!Validation.isNotNullOrEmpty(supplier)) {
+            else if(!Validation.isNotNullOrEmpty(supplier)) {
                 System.out.println("Supplier cannot be empty. Please enter a supplier.");
             }
-        }while(!Validation.isNotNullOrEmpty(supplier));
+            else if(!Validation.checkSupplier(supplier)) {
+                System.out.println("No such supplier in system...Please enter a valid supplier.");
+            }
+        }while(!Validation.isNotNullOrEmpty(supplier) || !Validation.checkSupplier(supplier));
         
         return new StockAddIngredient(stockID, name, quantity, price, supplier, "", "no", 0);
         

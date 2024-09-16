@@ -81,7 +81,7 @@ public abstract class Stock {
     
     @Override
     public String toString() {
-        return String.format("%-7s %-12s %-9d %-7.2f %-14s", 
+        return String.format("%-7s %-25s %-9d %-7.2f %-18s", 
                     stockID, name, quantity, price, 
                     supplier);
     }

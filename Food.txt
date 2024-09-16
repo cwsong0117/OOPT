@@ -1,2 +1,7 @@
-FD001|Fish|100|3.3|aeon|yes|none|-1.1
+FD001|Fish|300|3.3|aeon|yes|none|-1.1
 FD002|meat|150|4.1|farm fresh|yes|none|2.0
+FD003|lamb|120|3.8|lalaland|no|none|4.0
+FD004|Cucumber|80|2.9|ECONSAVE|no|none|14.0
+FD005|brown rice|1000|9.9|lotus's|no|no|12.0
+FD006|white rice|1500|7.2|lotus's|yes|no|10.0
+FD007|instant noodles|1500|1.3|Mr noodle|no|egg|19.0
