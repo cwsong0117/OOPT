@@ -19,6 +19,8 @@ public class OOPT {
 
         Scanner scanner = new Scanner(System.in);
         StockMenu stockMenu = new StockMenu();
+        PurchaseOrderMain po = new PurchaseOrderMain();
+        SupplierMain supplier = new SupplierMain();
         Boolean running = true;
         while(running) {
             System.out.println("Cincai Warehouse Management System");
@@ -31,12 +33,15 @@ public class OOPT {
 
             switch(option) {
                 case 1:
-                    System.out.println("\nStock Management");
+                    System.out.println("\nStock Management\n");
                     StockMenu.stockMenu();
                     break;
                 case 2:
+                    System.out.println("\nPurchcase Order Management\n");
+                    po.PurchaseOrderMenu();
                     break;
                 case 3:
+                    supplier.SupplierMenu();
                     break;
                 case 4:
                     System.out.println("You're quit...");

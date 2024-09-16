@@ -13,10 +13,6 @@ import java.util.Scanner;
  */
 public class PurchaseOrderMain {
 
-    public static void main(String[] args) {
-        PurchaseOrderMenu();
-    }
-
     public static void PurchaseOrderMenu() {
         boolean valid = false;
         int choice = 0;

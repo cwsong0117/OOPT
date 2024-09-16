@@ -12,10 +12,6 @@ import java.util.Scanner;
  * @author User
  */
 public class SupplierMain {
-    public static void main(String[] args) {
-        // Invoke the readTextFile method
-        SupplierMenu();
-    }
     
     public static void SupplierMenu(){
         boolean valid = false;

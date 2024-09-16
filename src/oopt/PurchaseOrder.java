@@ -396,10 +396,10 @@ public class PurchaseOrder {
 
             if (valid) {
                 System.out.println("************");
-                System.out.printf("%-10s   %-30s\n", "Items", "Price");
+                System.out.printf("%-10s %-16s %-30s\n", "ID", "Items", "Price");
                 for (SupplierStock i : stocks) {
                     if (i.getSupplier().equalsIgnoreCase(chooseSupplier)) {
-                        System.out.printf("%-10s %-10s  %-10.2f\n", i.getStockID(), i.getName(), i.getPrice());
+                        System.out.printf("%-10s %-15s  %-10.2f\n", i.getStockID(), i.getName(), i.getPrice());
                     }
                 }
                 // Call addPurchaseOrder method and pass the relevant category
