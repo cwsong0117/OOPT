@@ -82,6 +82,7 @@ public class StaffLogin {
 
                 case 5:
                     System.out.println("Exiting the system. Goodbye!");
+                    System.exit(0);
                     break;
 
                 default:

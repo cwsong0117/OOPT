@@ -1,0 +1,6 @@
+Name: liew
+Staff ID: 2303543
+Phone Number: 0123456789
+Email: liew@gmail.com
+Age: 1000
+Password: abcd123456
