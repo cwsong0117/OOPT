@@ -14,18 +14,21 @@ public class Display {
         System.out.printf("%-7s %-25s %-9s %-7s %-14s %-11s %-10s %-15s\n",
                 "ID", "Name", "Quantity", "Price", "Supplier",
                 "Organic", "Allergens", "Storage Temp");
+        System.out.println("======================================================================================================");
     }
 
     public static void displayBeverageTitle() {
         System.out.printf("%-7s %-25s %-9s %-7s %-14s %-11s %-10s %-15s\n",
                 "ID", "Name", "Quantity", "Price", "Supplier",
                 "Alcohol Content", "Carbonated", "Volume");
+        System.out.println("======================================================================================================");
     }
 
     public static void displayIngredientTitle() {
         System.out.printf("%-7s %-25s %-9s %-7s %-14s %-11s %-10s %-15s\n",
                 "ID", "Name", "Quantity", "Price", "Supplier",
                 "Ingredient Type", "Gluten", "Calory");
+        System.out.println("======================================================================================================");
     }
 
     //the purpose of create those method is to ensure the reusability in other method
