@@ -29,6 +29,14 @@ public abstract class Stock {
         this.price = 0.0;
         this.supplier = "";
     }
+
+    public Stock(String stockID, int quantity) {
+        this.stockID = stockID;
+        this.name = "";
+        this.quantity = quantity;
+        this.price = 0;
+        this.supplier = "";
+    }
     
     public Stock(String stockID, String name, int quantity, double price, 
             String supplier) {
