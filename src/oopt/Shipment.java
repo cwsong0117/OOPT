@@ -1,4 +1,4 @@
-package oopt;
+
 import java.util.InputMismatchException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,29 +20,29 @@ public class Shipment {
     private String shipmentId;
     private Date departureDate;
     private Date departureTime;
-    private String branchId;
-    private String transportationPlateNo;
+    private Branches branch;
+    private Transportation transportation;
     private String status;
-    private String[] itemId = new String[MAX_TRANSPORT_STOCK];
-    private int[] itemQuantity = new int[MAX_TRANSPORT_STOCK];
+    private Stock[] stock = new Stock[MAX_TRANSPORT_STOCK];
 
-    public Shipment(String shipmentId, Date departureDate, Date departureTime, String branchId, String transportationPlateNo, String status, String[] itemId, int[] itemQuantity) {
+//    private String[] itemId = new String[MAX_TRANSPORT_STOCK];
+//    private int[] itemQuantity = new int[MAX_TRANSPORT_STOCK];
+    public Shipment(String shipmentId, Date departureDate, Date departureTime, Branches branch, Transportation transportation, String status, Stock[] stock) {
         this.shipmentId = shipmentId;
         this.departureDate = departureDate;
         this.departureTime = departureTime;
-        this.branchId = branchId;
-        this.transportationPlateNo = transportationPlateNo;
+        this.branch = branch;
+        this.transportation = transportation;
         this.status = status;
-        this.itemId = itemId;
-        this.itemQuantity = itemQuantity;
+        this.stock = stock;
     }
 
     public Shipment() {
         this.shipmentId = "SP00001";
         this.departureDate = new Date();
         this.departureTime = new Date();
-        this.branchId = "";
-        this.transportationPlateNo = "";
+        this.branch = new Branches();
+        this.transportation = new Transportation();
         this.status = "Pending";
     }
 
@@ -54,36 +54,28 @@ public class Shipment {
         return departureTime;
     }
 
-    public String getBranchId() {
-        return branchId;
+    public Branches getBranch() {
+        return branch;
     }
 
-    public String getTransportationPlateNo() {
-        return transportationPlateNo;
+    public Transportation getTransportation() {
+        return transportation;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public String[] getItemId() {
-        return itemId;
+    public Stock[] getStock() {
+        return stock;
     }
 
-    public int[] getItemQuantity() {
-        return itemQuantity;
+    public void setStock(Stock[] stock) {
+        this.stock = stock;
     }
 
     public String getShipmentId() {
         return shipmentId;
-    }
-
-    public void setItemId(String[] itemId) {
-        this.itemId = itemId;
-    }
-
-    public void setItemQuantity(int[] itemQuantity) {
-        this.itemQuantity = itemQuantity;
     }
 
     public void setStatus(String status) {
@@ -98,12 +90,12 @@ public class Shipment {
         this.departureTime = departureTime;
     }
 
-    public void setBranchId(String branchId) {
-        this.branchId = branchId;
+    public void setBranch(Branches branch) {
+        this.branch = branch;
     }
 
-    public void setTransportationPlateNo(String transportationPlateNo) {
-        this.transportationPlateNo = transportationPlateNo;
+    public void setTransportation(Transportation transportation) {
+        this.transportation = transportation;
     }
 
     public boolean validateDate() {
@@ -122,12 +114,12 @@ public class Shipment {
                 shipmentId,
                 dateForm.format(departureDate),
                 timeForm.format(departureTime),
-                branchId,
-                transportationPlateNo,
-                status, itemId[0], itemQuantity[0]);
-        for (int i = 1; i < itemId.length; i++) {
-            if (!itemId[i].equals("null")) {
-                System.out.printf("%-15s %-14s %-14s %-15s %-18s %-10s %-10s %-13d\n", " ", " ", " ", " ", " ", " ", itemId[i], itemQuantity[i]);
+                branch.getBranchID(),
+                transportation.getPlateNo(),
+                status, stock[0].getStockID(), stock[0].getQuantity());
+        for (int i = 1; i < stock.length; i++) {
+            if (!stock[i].getStockID().equals("null")) {
+                System.out.printf("%-15s %-14s %-14s %-15s %-18s %-10s %-10s %-13d\n", " ", " ", " ", " ", " ", " ", stock[i].getStockID(), stock[i].getQuantity());
             }
         }
     }
@@ -160,28 +152,24 @@ public class Shipment {
 
     @Override
     public String toString() {
-        String items = itemId[0];
-        String qty = "" + itemQuantity[0];
-        for (int i = 1; i < itemId.length; i++) {
-            items = items + "," + itemId[i];
+        String items = stock[0].getStockID();
+        String qty = "" + stock[0].getQuantity();
+        for (int i = 1; i < stock.length; i++) {
+            items = items + "," + stock[i].getStockID();
         }
 
-        for (int i = 1; i < itemQuantity.length; i++) {
-            qty = qty + "," + itemQuantity[i];
+        for (int i = 1; i < stock.length; i++) {
+            qty = qty + "," + stock[i].getQuantity();
         }
-        return String.format("%s|%s|%s|%s|%s|%s|%s|%s|\n", shipmentId, dateForm.format(departureDate), timeForm.format(departureTime), branchId, transportationPlateNo, status, items, qty);
+        return String.format("%s|%s|%s|%s|%s|%s|%s|%s|\n", shipmentId, dateForm.format(departureDate), timeForm.format(departureTime), branch.getBranchID(), transportation.getPlateNo(), status, items, qty);
 
     }
 
     @Override
     public boolean equals(Object O) {
         Shipment temp = (Shipment) O;
-        if (transportationPlateNo.equals(temp.getTransportationPlateNo()) && !temp.getStatus().equals("Cancalled")) {
-            if (departureDate.equals(temp.getDepartureDate())) {
-                return true;
-            } else {
-                return false;
-            }
+        if (transportation.getPlateNo().equals(temp.getTransportation().getPlateNo()) && !temp.getStatus().equals("Cancalled")) {
+            return departureDate.equals(temp.getDepartureDate());
         } else {
             return false;
         }
@@ -264,6 +252,7 @@ class actionShipment {
                 String[] parts = data.split("\\|");
 
                 //convert to correct type of value
+                Stock[] tempStock = new Stock[Shipment.MAX_TRANSPORT_STOCK];
                 String shipmentId = parts[0];
                 Date departureDate = dateForm.parse(parts[1]);
                 Date departureTime = timeForm.parse(parts[2]);
@@ -271,14 +260,14 @@ class actionShipment {
                 String plateNo = parts[4];
                 String status = parts[5];
                 String[] items = parts[6].split(",");
-                String[] quantity = parts[7].split(",");
-                int[] qty = new int[Shipment.MAX_TRANSPORT_STOCK];
-
+                String[] quantity = parts[7].split(",");                
+             
                 for (int i = 0; i < items.length; i++) {
-                    qty[i] = Integer.parseInt(quantity[i]);
+                    tempStock[i] = new Stock(items[i] ,Integer.parseInt(quantity[i]));
+                
                 }
 
-                shipment.add(new Shipment(shipmentId, departureDate, departureTime, branchId, plateNo, status, items, qty));
+                shipment.add(new Shipment(shipmentId, departureDate, departureTime, new Branches(branchId), new Transportation(plateNo), status, tempStock));
             }
             read.close();
         } catch (FileNotFoundException e) {
@@ -320,7 +309,7 @@ class actionShipment {
         if (branchId.isEmpty()) {
             empty = true;
         } else {
-            shipment.get(index).setBranchId(branchId);
+            shipment.get(index).setBranch(new Branches(branchId));
         }
 
         //get transportation
@@ -328,7 +317,7 @@ class actionShipment {
             System.out.print("Enter transportation plate No.: ");
             String plateNo = scanner.nextLine();
             plateNo = actionTransportation.passTransportation(plateNo);
-            shipment.get(index).setTransportationPlateNo(plateNo);
+            shipment.get(index).setTransportation(new Transportation(plateNo));
             if (!plateNo.isEmpty()) {
                 do {
                     continueInput = true;
@@ -479,9 +468,13 @@ class actionShipment {
                         }
                     } while (error && !exit);
                 }
+                Stock[] tempStock = new Stock[Shipment.MAX_TRANSPORT_STOCK];
 
-                shipment.get(index).setItemId(stock);
-                shipment.get(index).setItemQuantity(qty);
+                for (int i = 0; i < stock.length; i++) {
+                    tempStock[i] = new Stock(stock[i],qty[i]);
+                }
+                shipment.get(index).setStock(tempStock);
+
             }
 
         }
@@ -514,7 +507,7 @@ class actionShipment {
 //String shipmentId, Date departureDate, Date departureTime, String branchId,
 //String transportationPlateNo, String status, String[] itemId, int[] itemQuantity
             do {
-                Shipment temp = new Shipment(shipment.get(index).getShipmentId(), shipment.get(index).getDepartureDate(), shipment.get(index).getDepartureTime(), shipment.get(index).getBranchId(), shipment.get(index).getTransportationPlateNo(), shipment.get(index).getStatus(), shipment.get(index).getItemId(), shipment.get(index).getItemQuantity());
+                Shipment temp = new Shipment(shipment.get(index).getShipmentId(), shipment.get(index).getDepartureDate(), shipment.get(index).getDepartureTime(), shipment.get(index).getBranch(), shipment.get(index).getTransportation(), shipment.get(index).getStatus(), shipment.get(index).getStock());
                 System.out.println("Select what to modify:");
                 System.out.println("1. Departure Date and time");
                 System.out.println("2. Transportation");
@@ -573,11 +566,11 @@ class actionShipment {
                             case 2:
                                 do {
                                     continueInput = false;
-                                    System.out.println("Previous Plate No.: " + temp.getTransportationPlateNo());
+                                    System.out.println("Previous Plate No.: " + temp.getTransportation().getPlateNo());
                                     System.out.print("Enter transportation plate No.: ");
                                     String plateNo = scanner.nextLine();
                                     plateNo = actionTransportation.passTransportation(plateNo);
-                                    shipment.get(index).setTransportationPlateNo(plateNo);
+                                    shipment.get(index).setTransportation(new Transportation(plateNo));
                                     for (int i = 0; i < shipment.size() - 1; i++) {
                                         if (shipment.get(index).equals(shipment.get(i))) {
                                             if (index != i) {
@@ -589,7 +582,7 @@ class actionShipment {
                                 } while (continueInput);
                                 break;
                             case 3:
-                                returnStock(shipment.get(index).getItemId(), shipment.get(index).getItemQuantity());
+                                returnStock(shipment.get(index).getStock());
                                 String[] stock = new String[Shipment.MAX_TRANSPORT_STOCK];
                                 int[] qty = new int[Shipment.MAX_TRANSPORT_STOCK];
                                 int count = 0;
@@ -702,8 +695,13 @@ class actionShipment {
                                     } while (error && !exit);
                                 }
                                 exit = false;
-                                shipment.get(index).setItemId(stock);
-                                shipment.get(index).setItemQuantity(qty);
+                                Stock[] tempStock = new Stock[Shipment.MAX_TRANSPORT_STOCK];
+
+                                for (int i = 0; i < stock.length; i++) {
+                                    tempStock[i] = new Stock(stock[i],qty[i]);
+                                }
+                                shipment.get(index).setStock(tempStock);
+
                                 break;
                             case 4:
                                 exit = true;
@@ -758,7 +756,7 @@ class actionShipment {
                                     id = id.toUpperCase().replace(" ", "");
                                     for (int i = 0; i < shipment.size(); i++) {
                                         if (shipment.get(i).getShipmentId().equals(id) && shipment.get(i).getStatus().equals("Cancelled")) {
-                                            returnStock(shipment.get(i).getItemId(), shipment.get(i).getItemQuantity());
+                                            returnStock(shipment.get(i).getStock());
                                             System.out.println("Shipment(" + shipment.get(i).getShipmentId() + ") already removed!!");
                                             shipment.remove(i);
                                             found = true;
@@ -772,7 +770,7 @@ class actionShipment {
                                     found = false;
                                     for (int i = 0; i < shipment.size(); i++) {
                                         if (shipment.get(i).getStatus().equals("Cancelled")) {
-                                            returnStock(shipment.get(i).getItemId(), shipment.get(i).getItemQuantity());
+                                            returnStock(shipment.get(i).getStock());
                                             System.out.println("Shipment(" + shipment.get(i).getShipmentId() + ") already removed!!");
                                             shipment.remove(i);
                                             found = true;
@@ -875,24 +873,25 @@ class actionShipment {
                     case 2:
                         for (int i = 0; i < shipment.size(); i++) {
 
-                            if (!actionBranches.findBranches(shipment.get(i).getBranchId()) && !shipment.get(i).getStatus().equals("Cancelled")) {
+                            if (!actionBranches.findBranches(shipment.get(i).getBranch().getBranchID()) && !shipment.get(i).getStatus().equals("Cancelled")) {
                                 System.out.println("The Branch was removed!");
                                 System.out.println("Status of shipment(" + shipment.get(i).getShipmentId() + ") changed to Cancelled.");
                                 shipment.get(i).setStatus("Cancelled");
-                            } else if (!actionTransportation.findTransportation(shipment.get(i).getTransportationPlateNo()) && !shipment.get(i).getStatus().equals("Cancelled")) {
+                                
+                            } else if (!actionTransportation.findTransportation(shipment.get(i).getTransportation().getPlateNo()) && !shipment.get(i).getStatus().equals("Cancelled")) {
                                 System.out.println("The Transportation was removed!");
                                 System.out.println("Status of shipment(" + shipment.get(i).getShipmentId() + ") changed to Cancelled.");
                                 shipment.get(i).setStatus("Cancelled");
                             }
 
-                            if (shipment.get(i).expectedArrivalTime(actionBranches.getBranchesDistance(shipment.get(i).getBranchId())).before(new Date()) && shipment.get(i).getStatus().equals("Shipping")) {
-                                System.out.println("The expected Arrival Date is " + dateForm.format(shipment.get(i).expectedArrivalTime(actionBranches.getBranchesDistance(shipment.get(i).getBranchId()))));
+                            if (shipment.get(i).expectedArrivalTime(actionBranches.getBranchesDistance(shipment.get(i).getBranch().getBranchID())).before(new Date()) && shipment.get(i).getStatus().equals("Shipping")) {
+                                System.out.println("The expected Arrival Date is " + dateForm.format(shipment.get(i).expectedArrivalTime(actionBranches.getBranchesDistance(shipment.get(i).getBranch().getBranchID()))));
                                 System.out.println("Status of shipment(" + shipment.get(i).getShipmentId() + ") changed to \"Completed\"");
                                 shipment.get(i).setStatus("Completed");
                             }
-                            
+
                             if (shipment.get(i).getDepartureDate().equals(new Date()) && shipment.get(i).getStatus().equals("Pending")) {
-                                System.out.println("The Departure Date is " + dateForm.format(shipment.get(i).expectedArrivalTime(actionBranches.getBranchesDistance(shipment.get(i).getBranchId()))));
+                                System.out.println("The Departure Date is " + dateForm.format(shipment.get(i).expectedArrivalTime(actionBranches.getBranchesDistance(shipment.get(i).getBranch().getBranchID()))));
                                 System.out.println("Status of shipment(" + shipment.get(i).getShipmentId() + ") changed to \"Shipping\"");
                                 shipment.get(i).setStatus("CShipping");
                             }
@@ -939,13 +938,12 @@ class actionShipment {
                 System.out.println((i + 1) + ". " + shipment.get(i).getShipmentId());
             }
         }
-
     }
 
-    public static void returnStock(String[] stock, int[] qty) {
+    public static void returnStock(Stock[] stock) {
         for (int i = 0; i < stock.length; i++) {
-            if (qty[i] != 0) {
-                StockUpdate.returnStock(stock[i], qty[i]);
+            if (stock[i].getQuantity() != 0) {
+                StockUpdate.returnStock(stock[i].getStockID(), stock[i].getQuantity());
             }
         }
     }
