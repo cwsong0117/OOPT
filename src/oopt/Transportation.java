@@ -1,4 +1,4 @@
-package oopt;
+
 import java.util.InputMismatchException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,7 +30,10 @@ public class Transportation {
     }
 
     public Transportation(String plateNo) {
-        this();
+        weight_capacity = 0;
+        net_weight = 0.0;
+        vehicle_status = "Available";
+        vehicle_license = new Date();
         this.plateNo = plateNo;
     }
 
