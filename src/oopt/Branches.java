@@ -1,4 +1,4 @@
-package oopt;
+
 import java.util.InputMismatchException;
 import java.text.ParseException;
 import java.util.Date;
@@ -47,6 +47,15 @@ public class Branches {
         this.post_code = post_code;
         this.dateCreated = dateCreated;
     }
+    
+    public Branches(String branchID){
+        this.branchID = branchID;
+        this.distance = 0;
+        this.address = "";
+        this.state = "";
+        this.post_code = 0;
+        this.dateCreated = new Date();
+    }
 
     public void generateID(String lastId) {
         branchID = String.format("B%05d", Integer.parseInt(lastId.substring(1, 6)) + 1);
@@ -74,6 +83,10 @@ public class Branches {
 
     public Date getDateCreated() {
         return dateCreated;
+    }
+    
+    public void setBranchID(String branchID) {
+        this.branchID = branchID;
     }
 
     public void setDateCreated(Date dateCreated) {
