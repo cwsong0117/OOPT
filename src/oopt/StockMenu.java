@@ -41,39 +41,47 @@ public class StockMenu {
             System.out.println("\n====================================");
             System.out.print("Your Option : ");
             int option = scanner.nextInt();
-            System.out.print("\n");
+            System.out.println("\n=====================================");
             
             switch(option) {
 
                 case 1:
                     System.out.print("Add Stock Option Selected...\n");
+                    System.out.println("=====================================\n");
                     addStockMenu();
                     break;
                 case 2:
                     System.out.println("Update Stock Option Selected...\n");
+                    System.out.println("=====================================\n");
                     updateStockMenu();
                     break;
                 case 3:
                     System.out.print("Display Stock Option Selected...\n");
+                    System.out.println("=====================================\n");
                     displayStockMenu();
                     break;
                 case 4:
                     System.out.print("Remove Stock Level Option Selected...\n");
+                    System.out.println("=====================================\n");
                     removeStockMenu();
                     break;
                 case 5:
                     System.out.print("Search Stock Level Option Selected...\n");
+                    System.out.println("=====================================\n");
                     searchStockMenu();
                     break;
                 case 6:
                     System.out.print("Stock Level Checking...\n");
+                    System.out.println("=====================================\n");
                     stockBalanceAlert();
                 case 7:
                     System.out.print("Exiting...\n\n");
+                    System.out.println("=====================================\n");
                     running = false;
                     break;
                 default:
                     System.out.print("Invalid Option...\n");
+                    System.out.println("=====================================\n");
                     break;
             }
             return;
@@ -81,18 +89,22 @@ public class StockMenu {
         scanner.close();
     }
     
+    public static void displayChoice() {
+        System.out.println("1. Food");
+        System.out.println("2. Beverage");
+        System.out.println("3. Iegredient");
+        System.out.println("4. Exit");
+        System.out.println("==================");
+        System.out.print("Option > ");
+    }
+    
     public static void addStockMenu() {
-        
+        displayChoice();
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         int option;
         
         while(running) {
-            System.out.println("1. Food");
-            System.out.println("2. Beverage");
-            System.out.println("3. Iegredient");
-            System.out.println("4. Exit");
-            System.out.print("Option > ");
             option = scanner.nextInt();
             System.out.print("\n");
 
@@ -130,11 +142,7 @@ public class StockMenu {
         Display d = new Display();
         
         while(running) {
-            System.out.println("1. Food");
-            System.out.println("2. Beverage");
-            System.out.println("3. Iegredient");
-            System.out.println("4. Exit");
-            System.out.print("Option > ");
+            displayChoice();
             int option = scanner.nextInt();
             System.out.print("\n");
 
@@ -165,11 +173,7 @@ public class StockMenu {
         StockRemove r = new StockRemove();
         
         while(running) {
-            System.out.println("1. Food");
-            System.out.println("2. Beverage");
-            System.out.println("3. Iegredient");
-            System.out.println("4. Exit");
-            System.out.print("Option > ");
+            displayChoice();
             int option = scanner.nextInt();
             System.out.print("\n");
 
@@ -200,11 +204,7 @@ public class StockMenu {
         StockSearch s = new StockSearch();
         
         while(running) {
-            System.out.println("1. Food");
-            System.out.println("2. Beverage");
-            System.out.println("3. Iegredient");
-            System.out.println("4. Exit");
-            System.out.print("Option > ");
+            displayChoice();
             int option = scanner.nextInt();
             System.out.print("\n");
 
@@ -242,11 +242,7 @@ public class StockMenu {
         StockUpdate u = new StockUpdate();
         
         while(running) {
-            System.out.println("1. Food");
-            System.out.println("2. Beverage");
-            System.out.println("3. Iegredient");
-            System.out.println("4. Exit");
-            System.out.print("Option > ");
+            displayChoice();
             int option = scanner.nextInt();
             System.out.print("\n");
 
@@ -277,11 +273,7 @@ public class StockMenu {
         StockAlert a = new StockAlert();
         
         while(running) {
-            System.out.println("1. Food");
-            System.out.println("2. Beverage");
-            System.out.println("3. Iegredient");
-            System.out.println("4. Exit");
-            System.out.print("Option > ");
+            displayChoice();
             int option = scanner.nextInt();
             System.out.print("\n");
 
