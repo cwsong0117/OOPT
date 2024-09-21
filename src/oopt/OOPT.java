@@ -4,6 +4,7 @@
  */
 package oopt;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -27,7 +28,7 @@ public class OOPT {
         actionShipment shipment = new actionShipment();
         
         Boolean running = true;
-        while(running) {
+        while (running) {
             System.out.println("\033[36m .----------------.  .----------------.  .-----------------. .----------------.  .----------------.  .----------------. " + RESET);
             System.out.println("\033[35m| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |" + RESET);
             System.out.println("\033[36m| |     ______   | || |     _____    | || | ____  _____  | || |     ______   | || |      __      | || |     _____    | |" + RESET);
@@ -43,7 +44,7 @@ public class OOPT {
             System.out.println("\033[34;35mCincai Warehouse Management System" + RESET);
             System.out.println("===================================\n\n");
             System.out.println("1. Stock Management");//add stock, update stock, remove stock, view stock level, search stock
-            System.out.println("2. Purchcase Order Management");//Create new order, Update order status(Processing, Shipped, Delivered, etc.), Cancel Order, view order history
+            System.out.println("2. Purchase Order Management");//Create new order, Update order status(Processing, Shipped, Delivered, etc.), Cancel Order, view order history
             System.out.println("3. Supplier Management");//Add new supplier, update supplier information, remove supplier, view supplier list
             System.out.println("4. Shipment Management");
             System.out.println("5. Transportation Management");
@@ -51,38 +52,49 @@ public class OOPT {
             System.out.println("7. LOG OUT");//Quit the whole program
             System.out.println("\n\n===================================");
             System.out.print("Your Option > ");
-            int option = scanner.nextInt();
-
-            switch(option) {
-                case 1:
-                    System.out.println("\nStock Management\n");
-                    StockMenu.stockMenu();
-                    break;
-                case 2:
-                    System.out.println("\nPurchcase Order Management\n");
-                    po.PurchaseOrderMenu();
-                    break;
-                case 3:
-                    supplier.SupplierMenu();
-                    break;
-                case 4:
-                    shipment.shipmentMenu();
-                    break;
-                case 5:
-                    transportation.menu();    
-                    break;
-                case 6:
-                    branch.menu();    
-                    break;
-                case 7:
-                    System.out.println("You're quit...");
-                    running = false;
-                    break;
-                default:
-                    System.out.println("Invalid Option...");
-                    return;
+            
+            try {
+                int option = scanner.nextInt();  // Read user's input
+                
+                switch (option) {
+                    case 1:
+                        System.out.println("\nStock Management\n");
+                        StockMenu.stockMenu();  // Assuming StockMenu class exists
+                        break;
+                    case 2:
+                        System.out.println("\nPurchase Order Management\n");
+                        po.PurchaseOrderMenu();  // Assuming po class exists
+                        break;
+                    case 3:
+                        System.out.println("\nSupplier Management\n");
+                        supplier.SupplierMenu();  // Assuming supplier class exists
+                        break;
+                    case 4:
+                        System.out.println("\nShipment Management\n");
+                        shipment.shipmentMenu();  // Assuming shipment class exists
+                        break;
+                    case 5:
+                        System.out.println("\nTransportation Management\n");
+                        transportation.menu();  // Assuming transportation class exists
+                        break;
+                    case 6:
+                        System.out.println("\nBranch Management\n");
+                        branch.menu();  // Assuming branch class exists
+                        break;
+                    case 7:
+                        System.out.println("Logging out... Goodbye!");
+                        running = false;
+                        break;
+                    default:
+                        System.out.println("\033[0;31mInvalid Option. Please enter a number between 1 and 7." + RESET);
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("\033[0;31mInvalid input! Please enter a number." + RESET);
+                scanner.next();  // Clear the invalid input
             }
         }
+        scanner.close();
     }
     
 }
