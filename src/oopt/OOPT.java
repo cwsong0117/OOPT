@@ -17,6 +17,7 @@ public class OOPT {
      * @param args the command line arguments
      */
     public static final String RESET = "\u001B[0m";
+
     public static void functionMenu() {
 
         Scanner scanner = new Scanner(System.in);
@@ -26,7 +27,7 @@ public class OOPT {
         actionTransportation transportation = new actionTransportation();
         actionBranches branch = new actionBranches();
         actionShipment shipment = new actionShipment();
-        
+
         Boolean running = true;
         while (running) {
             System.out.println("\033[36m .----------------.  .----------------.  .-----------------. .----------------.  .----------------.  .----------------. " + RESET);
@@ -52,46 +53,41 @@ public class OOPT {
             System.out.println("7. LOG OUT");//Quit the whole program
             System.out.println("\n\n===================================");
             System.out.print("Your Option > ");
-            
-            try {
-                int option = scanner.nextInt();  // Read user's input
-                
-                switch (option) {
-                    case 1:
-                        StockMenu.stockMenu();  // Assuming StockMenu class exists
-                        break;
-                    case 2:
-                        po.PurchaseOrderMenu();  // Assuming po class exists
-                        break;
-                    case 3:
-                        supplier.SupplierMenu();  // Assuming supplier class exists
-                        break;
-                    case 4:
-                        System.out.println("\nShipment Management\n");
-                        shipment.shipmentMenu();  // Assuming shipment class exists
-                        break;
-                    case 5:
-                        System.out.println("\nTransportation Management\n");
-                        transportation.menu();  // Assuming transportation class exists
-                        break;
-                    case 6:
-                        System.out.println("\nBranch Management\n");
-                        branch.menu();  // Assuming branch class exists
-                        break;
-                    case 7:
-                        System.out.println("Logging out... Goodbye!");
-                        running = false;
-                        break;
-                    default:
-                        System.out.println("\033[0;31mInvalid Option. Please enter a number between 1 and 7." + RESET);
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("\033[0;31mInvalid input! Please enter a number." + RESET);
-                scanner.next();  // Clear the invalid input
+
+            int option = scanner.nextInt();  // Read user's input
+
+            switch (option) {
+                case 1:
+                    StockMenu.stockMenu();  // Assuming StockMenu class exists
+                    break;
+                case 2:
+                    po.PurchaseOrderMenu();  // Assuming po class exists
+                    break;
+                case 3:
+                    supplier.SupplierMenu();  // Assuming supplier class exists
+                    break;
+                case 4:
+                    System.out.println("\nShipment Management\n");
+                    shipment.shipmentMenu();  // Assuming shipment class exists
+                    break;
+                case 5:
+                    System.out.println("\nTransportation Management\n");
+                    transportation.menu();  // Assuming transportation class exists
+                    break;
+                case 6:
+                    System.out.println("\nBranch Management\n");
+                    branch.menu();  // Assuming branch class exists
+                    break;
+                case 7:
+                    System.out.println("Logging out... Goodbye!");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("\033[0;31mInvalid Option. Please enter a number between 1 and 7." + RESET);
+                    break;
             }
         }
         scanner.close();
     }
-    
+
 }
