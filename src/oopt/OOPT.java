@@ -58,15 +58,12 @@ public class OOPT {
                 
                 switch (option) {
                     case 1:
-                        System.out.println("\nStock Management\n");
                         StockMenu.stockMenu();  // Assuming StockMenu class exists
                         break;
                     case 2:
-                        System.out.println("\nPurchase Order Management\n");
                         po.PurchaseOrderMenu();  // Assuming po class exists
                         break;
                     case 3:
-                        System.out.println("\nSupplier Management\n");
                         supplier.SupplierMenu();  // Assuming supplier class exists
                         break;
                     case 4:
