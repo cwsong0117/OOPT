@@ -12,15 +12,14 @@ import java.util.Scanner;
  * @author User
  */
 public class StockMenu {
-
     public static final String RESET = "\u001B[0m";
-
     public static void stockMenu() {
-
+    
         Boolean running = true;
         Scanner scanner = new Scanner(System.in);
-
-        while (running) {
+        
+        while(running) {
+            System.out.println("\n");
             System.out.println("\033[34m  ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ " + RESET);
             System.out.println("\033[1;34m |______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|" + RESET);
             System.out.println("\033[94;35m | |      / ____| |           | |           |  \\/  |                                                 | |       | |" + RESET);
@@ -47,7 +46,7 @@ public class StockMenu {
                 int option = scanner.nextInt();  // Read input
                 System.out.println("\n=====================================");
 
-                switch (option) {
+                switch(option) {
                     case 1:
                         System.out.print("Add Stock Option Selected...\n");
                         System.out.println("=====================================\n");
@@ -92,10 +91,11 @@ public class StockMenu {
                 System.out.println("Invalid input! Please enter a valid option number.");
                 scanner.next();  // Consume the invalid token to avoid infinite loop
             }
+            return;
         }
         scanner.close();
     }
-
+    
     public static void displayChoice() {
         System.out.println("\n\n==================");
         System.out.println("1. Food");
@@ -105,224 +105,203 @@ public class StockMenu {
         System.out.println("==================");
         System.out.print("Option > ");
     }
-
+    
     public static void addStockMenu() {
         displayChoice();
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         int option;
+        
+        while(running) {
+            option = scanner.nextInt();
+            System.out.print("\n");
 
-        while (running) {
-            try {
-                option = scanner.nextInt();
-                System.out.print("\n");
+            switch(option) {
+                case 1:
+                    System.out.println("Food Category Selected...");
+                    StockAddFood.foodIn(option);
+                    break;
+                case 2:
+                    System.out.println("Beverage Category Selected...");
+                    StockAddBeverage.beverageIn(option);
+                    break;
+                case 3:
+                    System.out.println("Ingredient Category Selected...");
+                    StockAddIngredient.ingredientIn(option);
+                    break;
+                case 4:
+                    System.out.println("\033[0;31mExiting..." + RESET);
+                    running = false;
+                    break;
+                default:
+                    System.out.println("\033[0;31mInvalid Option..." + RESET);
+                    break;
 
-                switch (option) {
-                    case 1:
-                        System.out.println("Food Category Selected...");
-                        StockAddFood.foodIn(option);
-                        break;
-                    case 2:
-                        System.out.println("Beverage Category Selected...");
-                        StockAddBeverage.beverageIn(option);
-                        break;
-                    case 3:
-                        System.out.println("Ingredient Category Selected...");
-                        StockAddIngredient.ingredientIn(option);
-                        break;
-                    case 4:
-                        System.out.println("\033[0;31mExiting..." + RESET);
-                        running = false;
-                        break;
-                    default:
-                        System.out.println("\033[0;31mInvalid Option..." + RESET);
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("\033[0;31mInvalid input. Please enter a valid option.\033[0m");
-                scanner.next(); // Clear the invalid input
             }
+            stockMenu();;
         }
         scanner.close();
     }
-
+    
     public static void displayStockMenu() {
-
+        
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         Display d = new Display();
-
-        while (running) {
+        
+        while(running) {
             displayChoice();
-            try {
-                int option = scanner.nextInt();
-                System.out.print("\n");
+            int option = scanner.nextInt();
+            System.out.print("\n");
 
-                switch (option) {
-                    case 1:
-                    case 2:
-                    case 3:
-                        d.displayStock(option);
-                        break;
-                    case 4:
-                        System.out.println("\033[0;31mExiting..." + RESET);
-                        running = false;
-                        break;
-                    default:
-                        System.out.println("\033[0;31mInvalid Option..." + RESET);
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("\033[0;31mInvalid input. Please enter a valid option.\033[0m");
-                scanner.next(); // Clear the invalid input
+            switch(option) {
+                case 1:
+                case 2:
+                case 3:
+                    d.displayStock(option);
+                    break;
+                case 4:
+                    System.out.println("\033[0;31mExiting..." + RESET);
+                    running = false;
+                    break;
+                default:
+                    System.out.println("\033[0;31mInvalid Option..." + RESET);
+                    break;
+
             }
+            stockMenu();;
         }
         scanner.close();
     }
-
+    
     public static void removeStockMenu() {
-
+        
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         StockRemove r = new StockRemove();
-
-        while (running) {
+        
+        while(running) {
             displayChoice();
-            try {
-                int option = scanner.nextInt();
-                System.out.print("\n");
+            int option = scanner.nextInt();
+            System.out.print("\n");
 
-                switch (option) {
-                    case 1:
-                    case 2:
-                    case 3:
-                        r.removeStock(option);
-                        break;
-                    case 4:
-                        System.out.println("\033[0;31mExiting..." + RESET);
-                        running = false;
-                        break;
-                    default:
-                        System.out.println("\033[0;31mInvalid Option..." + RESET);
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("\033[0;31mInvalid input. Please enter a valid option.\033[0m");
-                scanner.next(); // Clear the invalid input
+            switch(option) {
+                case 1:
+                case 2:
+                case 3:
+                    r.removeStock(option);
+                    break;
+                case 4:
+                    System.out.println("\033[0;31mExiting..." + RESET);
+                    running = false;
+                    break;
+                default:
+                    System.out.println("\033[0;31mInvalid Option..." + RESET);
+                    break;
+
             }
+            stockMenu();;
         }
         scanner.close();
     }
-
+    
     public static void searchStockMenu() {
-
+        
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         StockSearch s = new StockSearch();
-
-        while (running) {
+        
+        while(running) {
             displayChoice();
-
             int option = scanner.nextInt();
             System.out.print("\n");
-            try {
-                switch (option) {
-                    case 1:
-                        System.out.println("Food Category Selected...");
-                        s.searchMenu(option);
-                        break;
-                    case 2:
-                        System.out.println("Beverage Category Selected...");
-                        s.searchMenu(option);
-                        break;
-                    case 3:
-                        System.out.println("Ingredient Category Selected...");
-                        s.searchMenu(option);
-                        break;
-                    case 4:
-                        System.out.println("\033[0;31mExiting..." + RESET);
-                        running = false;
-                        break;
-                    default:
-                        System.out.println("\033[0;31mInvalid Option..." + RESET);
-                        break;
 
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("\033[0;31mInvalid input. Please enter a valid option.\033[0m");
-                scanner.next(); // Clear the invalid input
+            switch(option) {
+                case 1:
+                    System.out.println("Food Category Selected...");
+                    s.searchMenu(option);
+                    break;
+                case 2:
+                    System.out.println("Beverage Category Selected...");
+                    s.searchMenu(option);
+                    break;
+                case 3:
+                    System.out.println("Ingredient Category Selected...");
+                    s.searchMenu(option);
+                    break;
+                case 4:
+                    System.out.println("\033[0;31mExiting..." + RESET);
+                    running = false;
+                    break;
+                default:
+                    System.out.println("\033[0;31mInvalid Option..." + RESET);
+                    break;
+
             }
+            stockMenu();;
         }
         scanner.close();
     }
-
+    
     public static void updateStockMenu() {
-
+        
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         StockUpdate u = new StockUpdate();
-
-        while (running) {
+        
+        while(running) {
             displayChoice();
-            try {
-                int option = scanner.nextInt();
-                System.out.print("\n");
+            int option = scanner.nextInt();
+            System.out.print("\n");
 
-                switch (option) {
-                    case 1:
-                    case 2:
-                    case 3:
-                        u.updateStock(option);
-                        break;
-                    case 4:
-                        System.out.println("\033[0;31mExiting..." + RESET);
-                        running = false;
-                        break;
-                    default:
-                        System.out.println("\033[0;31mInvalid Option..." + RESET);
-                        break;
+            switch(option) {
+                case 1:
+                case 2:
+                case 3:
+                    u.updateStock(option);
+                    break;
+                case 4:
+                    System.out.println("\033[0;31mExiting..." + RESET);
+                    running = false;
+                    break;
+                default:
+                    System.out.println("\033[0;31mInvalid Option..." + RESET);
+                    break;
 
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("\033[0;31mInvalid input. Please enter a valid option.\033[0m");
-                scanner.next(); // Clear the invalid input
             }
+            stockMenu();
         }
         scanner.close();
     }
-
+    
     public static void stockBalanceAlert() {
-
+        
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         StockAlert a = new StockAlert();
-
-        while (running) {
+        
+        while(running) {
             displayChoice();
-            try {
-                int option = scanner.nextInt();
-                System.out.print("\n");
+            int option = scanner.nextInt();
+            System.out.print("\n");
 
-                switch (option) {
-                    case 1:
-                    case 2:
-                    case 3:
-                        a.displayLowStock(option);
-                        break;
-                    case 4:
-                        System.out.println("\033[0;31mExiting..." + RESET);
-                        running = false;
-                        break;
-                    default:
-                        System.out.println("\033[0;31mInvalid Option..." + RESET);
-                        break;
+            switch(option) {
+                case 1:
+                case 2:
+                case 3:
+                    a.displayLowStock(option);
+                    break;
+                case 4:
+                    System.out.println("\033[0;31mExiting..." + RESET);
+                    running = false;
+                    break;
+                default:
+                    System.out.println("\033[0;31mInvalid Option..." + RESET);
+                    break;
 
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("\033[0;31mInvalid input. Please enter a valid option.\033[0m");
-                scanner.next(); // Clear the invalid input
             }
-            scanner.close();
+            stockMenu();
         }
+        scanner.close();
     }
 }

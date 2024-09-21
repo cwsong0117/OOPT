@@ -21,19 +21,19 @@ public class Display {
     }
 
     public static void displayBeverageTitle() {
-        System.out.println("============================================================================================================");
+        System.out.println("========================================================================================================");
         System.out.printf("%-9s %-25s %-9s %-9s %-16s %-11s %-10s %-15s\n",
                 "ID", "Name", "Quantity", "Price", "Supplier",
                 "Alcohol Content", "Carbonated", "Volume");
-        System.out.println("============================================================================================================");
+        System.out.println("========================================================================================================");
     }
 
     public static void displayIngredientTitle() {
-        System.out.println("============================================================================================================");
+        System.out.println("========================================================================================================");
         System.out.printf("%-9s %-25s %-9s %-9s %-16s %-11s %-10s %-15s\n",
                 "ID", "Name", "Quantity", "Price", "Supplier",
                 "Ingredient Type", "Gluten", "Calory");
-        System.out.println("============================================================================================================");
+        System.out.println("========================================================================================================");
     }
 
     //the purpose of create those method is to ensure the reusability in other method
@@ -51,6 +51,7 @@ public class Display {
                 System.out.println(f.toString());
             }
             System.out.print("\n\n");
+            System.out.println("Press any key to continue...");
             scanner.nextLine();
             stockMenu.stockMenu();
         } else if (n == 2) {
@@ -61,6 +62,7 @@ public class Display {
                 System.out.println(b.toString());
             }
             System.out.print("\n\n");
+            System.out.println("Press any key to continue...");
             scanner.nextLine();
             stockMenu.stockMenu();
         } else if (n == 3) {
@@ -71,6 +73,7 @@ public class Display {
                 System.out.println(i.toString());
             }
             System.out.print("\n\n");
+            System.out.println("Press any key to continue...");
             scanner.nextLine();
             stockMenu.stockMenu();
         }

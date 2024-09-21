@@ -15,6 +15,7 @@ import java.util.Scanner;
  * @author User
  */
 public class StockRemove {
+    public static final String RESET = "\u001B[0m";
     public static void removeStock(int n) {
     
         Scanner scanner = new Scanner(System.in);
@@ -22,107 +23,109 @@ public class StockRemove {
         boolean found = false;
         String ID;
         
-        switch(n) {
-            case 1:
-                StockAddFood[] foods = file.readFood();
-                System.out.print("Please enter the Stock ID that need to deleted > ");
-                ID = scanner.nextLine();
-                //A list to hold the remaining foods after deletion
-                List<StockAddFood> remainFoods = new ArrayList<>(Arrays.asList(foods)); 
+        try {
+            switch (n) {
+                case 1:
+                    StockAddFood[] foods = file.readFood();
+                    System.out.print("Please enter the Stock ID that needs to be deleted > ");
+                    ID = scanner.nextLine();
 
-                Iterator<StockAddFood> FoodIterator = remainFoods.iterator();
-                while(FoodIterator.hasNext()) {
-                    StockAddFood f = FoodIterator.next();
-                    if(f.getStockID().equalsIgnoreCase(ID)) {
-                        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                                      "ID", "Name", "Quantity", "Price", "Supplier", 
-                                      "Expiry Date", "Arrival Date", "Location", 
-                                      "Organic", "Allergens", "Storage Temp");
-                        System.out.println(f.toString() + "\n");
-                        System.out.print("Confirm to delete('y' = yes) > ");
-                        String confirm = scanner.nextLine();
-                        if(confirm.equalsIgnoreCase("y")) {
-                            FoodIterator.remove();//remove the item from list safely
-                            System.out.println("\nFood Item Deleted Successful...\n");
-                            found = true;
+                    // A list to hold the remaining foods after deletion
+                    List<StockAddFood> remainFoods = new ArrayList<>(Arrays.asList(foods));
+
+                    Iterator<StockAddFood> FoodIterator = remainFoods.iterator();
+                    while (FoodIterator.hasNext()) {
+                        StockAddFood f = FoodIterator.next();
+                        if (f.getStockID().equalsIgnoreCase(ID)) {
+                            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n",
+                                    "ID", "Name", "Quantity", "Price", "Supplier",
+                                    "Expiry Date", "Arrival Date", "Location",
+                                    "Organic", "Allergens", "Storage Temp");
+                            System.out.println(f.toString() + "\n");
+                            System.out.print("Confirm to delete ('y' = yes) > ");
+                            String confirm = scanner.nextLine();
+                            if (confirm.equalsIgnoreCase("y")) {
+                                FoodIterator.remove(); // Remove the item from the list safely
+                                System.out.println("\nFood Item Deleted Successfully...\n");
+                                found = true;
+                            }
+                            file.writeFood(remainFoods.toArray(new StockAddFood[0]));
                         }
-                        file.writeFood(remainFoods.toArray(new StockAddFood[0]));
                     }
-                }
-                if(!found) {
-                        System.out.println("No Such ID in file.\n");
-                }
-                StockMenu.stockMenu();
-                break;
-                
-            case 2:
-                StockAddBeverage[] beverages = file.readBeverage();
-                System.out.print("Please enter the Stock ID that need to deleted > ");
-                ID = scanner.nextLine();
-
-                //A list to hold the remaining foods after deletion
-                List<StockAddBeverage> remainBeverages = new ArrayList<>(Arrays.asList(beverages)); 
-
-                Iterator<StockAddBeverage> BeverageIterator = remainBeverages.iterator();
-                while(BeverageIterator.hasNext()) {
-                    StockAddBeverage b = BeverageIterator.next();
-                    if(b.getStockID().equalsIgnoreCase(ID)) {
-                        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                                      "ID", "Name", "Quantity", "Price", "Supplier", 
-                                      "Expiry Date", "Arrival Date", "Location", 
-                                      "Organic", "Allergens", "Storage Temp");
-                        System.out.println(b.toString() + "\n");
-                        System.out.print("Confirm to delete('y' = yes) > ");
-                        String confirm = scanner.nextLine();
-                        if(confirm.equalsIgnoreCase("y")) {
-                            BeverageIterator.remove();//remove the item from list safely
-                            System.out.println("\nBeverage Item Deleted Successful...\n");
-                            found = true;
-                        }
-                        file.writeBeverage(remainBeverages.toArray(new StockAddBeverage[0]));
+                    if (!found) {
+                        System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
                     }
-                }
-                if(!found) {
-                    System.out.println("No Such ID in file.\n");
-                }
-                StockMenu.stockMenu();
-                break;
-                
-            case 3:
-                StockMenu s = new StockMenu();
-                StockAddIngredient[] ingredients = file.readIngredient();
+                    StockMenu.stockMenu();
+                    break;
 
-                System.out.print("Please enter the Stock ID that need to deleted > ");
-                ID = scanner.nextLine();
+                case 2:
+                    StockAddBeverage[] beverages = file.readBeverage();
+                    System.out.print("Please enter the Stock ID that needs to be deleted > ");
+                    ID = scanner.nextLine();
 
-                //A list to hold the remaining foods after deletion
-                List<StockAddIngredient> remainIngredients = new ArrayList<>(Arrays.asList(ingredients)); 
+                    // A list to hold the remaining beverages after deletion
+                    List<StockAddBeverage> remainBeverages = new ArrayList<>(Arrays.asList(beverages));
 
-                Iterator<StockAddIngredient> IngredientIterator = remainIngredients.iterator();
-                while(IngredientIterator.hasNext()) {
-                    StockAddIngredient i = IngredientIterator.next();
-                    if(i.getStockID().equalsIgnoreCase(ID)) {
-                        System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n", 
-                                      "ID", "Name", "Quantity", "Price", "Supplier", 
-                                      "Expiry Date", "Arrival Date", "Location", 
-                                      "Organic", "Allergens", "Storage Temp");
-                        System.out.println(i.toString() + "\n");
-                        System.out.print("Confirm to delete('y' = yes) > ");
-                        String confirm = scanner.nextLine();
-                        if(confirm.equalsIgnoreCase("y")) {
-                            IngredientIterator.remove();//remove the item from list safely
-                            System.out.println("\nIngredient Item Deleted Successful...\n");
-                            found = true;
+                    Iterator<StockAddBeverage> BeverageIterator = remainBeverages.iterator();
+                    while (BeverageIterator.hasNext()) {
+                        StockAddBeverage b = BeverageIterator.next();
+                        if (b.getStockID().equalsIgnoreCase(ID)) {
+                            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n",
+                                    "ID", "Name", "Quantity", "Price", "Supplier",
+                                    "Expiry Date", "Arrival Date", "Location",
+                                    "Organic", "Allergens", "Storage Temp");
+                            System.out.println(b.toString() + "\n");
+                            System.out.print("Confirm to delete ('y' = yes) > ");
+                            String confirm = scanner.nextLine();
+                            if (confirm.equalsIgnoreCase("y")) {
+                                BeverageIterator.remove(); // Remove the item from the list safely
+                                System.out.println("\nBeverage Item Deleted Successfully...\n");
+                                found = true;
+                            }
+                            file.writeBeverage(remainBeverages.toArray(new StockAddBeverage[0]));
                         }
-                        file.writeIngredient(remainIngredients.toArray(new StockAddIngredient[0]));
-                    }   
-                }
-                if(!found) {
-                    System.out.println("No Such ID in file.\n");
-                }
-               StockMenu.stockMenu();
-                break;
+                    }
+                    if (!found) {
+                        System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
+                    }
+                    StockMenu.stockMenu();
+                    break;
+
+                case 3:
+                    StockAddIngredient[] ingredients = file.readIngredient();
+                    System.out.print("Please enter the Stock ID that needs to be deleted > ");
+                    ID = scanner.nextLine();
+
+                    // A list to hold the remaining ingredients after deletion
+                    List<StockAddIngredient> remainIngredients = new ArrayList<>(Arrays.asList(ingredients));
+
+                    Iterator<StockAddIngredient> IngredientIterator = remainIngredients.iterator();
+                    while (IngredientIterator.hasNext()) {
+                        StockAddIngredient i = IngredientIterator.next();
+                        if (i.getStockID().equalsIgnoreCase(ID)) {
+                            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n",
+                                    "ID", "Name", "Quantity", "Price", "Supplier",
+                                    "Expiry Date", "Arrival Date", "Location",
+                                    "Organic", "Allergens", "Storage Temp");
+                            System.out.println(i.toString() + "\n");
+                            System.out.print("Confirm to delete ('y' = yes) > ");
+                            String confirm = scanner.nextLine();
+                            if (confirm.equalsIgnoreCase("y")) {
+                                IngredientIterator.remove(); // Remove the item from the list safely
+                                System.out.println("\nIngredient Item Deleted Successfully...\n");
+                                found = true;
+                            }
+                            file.writeIngredient(remainIngredients.toArray(new StockAddIngredient[0]));
+                        }
+                    }
+                    if (!found) {
+                        System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
+                    }
+                    StockMenu.stockMenu();
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("\033[0;31mAn error occurred: " + e.getMessage() + "\n" + RESET);
         }
     }
 }
-
