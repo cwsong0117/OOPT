@@ -105,7 +105,6 @@ public class StockSearch {
             System.out.println("No Such ID in file.\n");
         }
         operationAfterSearch();
-        
         return id;
     }
     
@@ -216,6 +215,7 @@ public class StockSearch {
         
         System.out.println("\n\n1. Update Stock Details");
         System.out.println("2. Exit");
+        System.out.println("==============================");
         System.out.print("Option > ");
         int option = scanner.nextInt();
         
