@@ -21,6 +21,10 @@ public class OOPT {
         StockMenu stockMenu = new StockMenu();
         PurchaseOrderMain po = new PurchaseOrderMain();
         SupplierMain supplier = new SupplierMain();
+        actionTransportation transportation = new actionTransportation();
+        actionBranches branch = new actionBranches();
+        actionShipment shipment = new actionShipment();
+        
         Boolean running = true;
         while(running) {
             System.out.println("Cincai Warehouse Management System");
@@ -47,13 +51,13 @@ public class OOPT {
                     supplier.SupplierMenu();
                     break;
                 case 4:
-                    actionShipment.shipmentMenu();
+                    shipment.shipmentMenu();
                     break;
                 case 5:
-                    actionTransportation.menu();    
+                    transportation.menu();    
                     break;
                 case 6:
-                    actionBranches.menu();    
+                    branch.menu();    
                     break;
                 case 7:
                     System.out.println("You're quit...");
