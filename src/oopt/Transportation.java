@@ -183,9 +183,15 @@ public class Transportation {
 
 class actionTransportation {
 
-    private String fileAddress = "Transportation.txt";
+    private final String fileAddress = "Transportation.txt";
     private ArrayList<Transportation> transportation = new ArrayList<Transportation>();
     public SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
+    public final String RED = "\u001B[31m";
+    public final String CYAN = "\u001B[36m";
+    public final String BLUE = "\u001B[34m";
+    public final String PURPLE = "\u001B[35m";
+    public final String GREEN = "\u001B[33m";
+    public final String RESET = "\u001B[0m";
 
     public void menu() {
         int option;
@@ -194,13 +200,20 @@ class actionTransportation {
         readFile();
         do {
             try {
+                System.out.println(BLUE + "+==================================+" + RESET);
+                System.out.println(BLUE + "|                                  |" + RESET);
+                System.out.println(BLUE + "|       " + GREEN + "Transportation Menu" + BLUE + "        |" + RESET);
+                System.out.println(BLUE + "|                                  |" + RESET);
+                System.out.println(BLUE + "+==================================+" + RESET);
+
                 System.out.println("\n1. Add New Transportation");
                 System.out.println("2. Update Transportation Information");
                 System.out.println("3. Remove Transportation");
                 System.out.println("4. List Out All Transportation");
                 System.out.println("5. Exit");
-                System.out.print("Enter your choose:");
+                System.out.print(PURPLE+"Enter your choose:"+ RESET);
                 option = scanner.nextInt();
+                System.out.println("\n\n");
 
                 switch (option) {
                     case 1:
@@ -219,12 +232,12 @@ class actionTransportation {
                         exit = false;
                         break;
                     default:
-                        System.out.println("Please enter 1-4!!");
+                        System.out.println("\nPlease enter 1-4!!");
                         break;
 
                 }
             } catch (InputMismatchException ex) {
-                System.out.println("Please enter a number 1-4");
+                System.out.println(RED+"\nPlease enter a number 1-4"+RESET);
                 scanner.nextLine();
             }
 
@@ -265,9 +278,9 @@ class actionTransportation {
             }
             read.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Error opening file");
+            System.out.println(RED+"Error opening file"+RESET);
         } catch (ParseException ex) {
-            System.out.println("Data in file is error");
+            System.out.println(RED+"Data in file is error"+RESET);
         }
 
     }
@@ -282,7 +295,7 @@ class actionTransportation {
         System.out.println("");
         do {
             continueInput = false;
-            System.out.print("Enter Number Plate: ");
+            System.out.print(PURPLE+"Enter Number Plate: "+ RESET);
             plateNo = scanner.nextLine();
             plateNo = plateNo.replace(" ", "");
             plateNo = plateNo.toUpperCase();
@@ -302,7 +315,7 @@ class actionTransportation {
 
         do {
             continueInput = true;
-            System.out.print("Enter Weight Capacity(in ton): ");
+            System.out.print(PURPLE+"Enter Weight Capacity(in ton): "+ RESET);
             try {
 
                 int weight_capacity = scanner.nextInt();
@@ -310,7 +323,7 @@ class actionTransportation {
                 continueInput = false;
                 transportation.get(transportation.size() - 1).setWeight_capacity(weight_capacity);
             } catch (InputMismatchException ex) {
-                System.out.println("Please enter integer number!!");
+                System.out.println(RED+"\nPlease enter integer number!!"+RESET);
                 scanner.nextLine();
             }
         } while (continueInput);
@@ -318,14 +331,14 @@ class actionTransportation {
         do {
             continueInput = true;
             try {
-                System.out.print("Enter Net Weight of vehicle(in ton): ");
+                System.out.print(PURPLE+"Enter Net Weight of vehicle(in ton): "+ RESET);
                 double net_weight = scanner.nextDouble();
                 scanner.nextLine();
                 continueInput = false;
                 transportation.get(transportation.size() - 1).setNet_weight(net_weight);
 
             } catch (InputMismatchException ex) {
-                System.out.println("Please enter number/float number!!");
+                System.out.println(RED + "\nPlease enter number/float number!!"+RESET);
                 scanner.nextLine();
             }
         } while (continueInput);
@@ -334,13 +347,13 @@ class actionTransportation {
             continueInput = true;
             try {
 
-                System.out.print("Enter vehicle license expired date(DD/MM/YYYY): ");
+                System.out.print(PURPLE+"Enter vehicle license expired date(DD/MM/YYYY): "+ RESET);
                 String date = scanner.nextLine();
                 Date vehicle_license = dateForm.parse(date);
                 transportation.get(transportation.size() - 1).setVehicle_license(vehicle_license);
                 continueInput = false;
             } catch (ParseException e) {
-                System.out.println("Please enter follow the format(DD/MM/YYYY)");
+                System.out.println(RED + "\nPlease enter follow the format(DD/MM/YYYY)"+ RESET);
             }
         } while (continueInput);
 
@@ -355,14 +368,14 @@ class actionTransportation {
             }
             write.close();
         } catch (IOException e) {
-            System.out.println("Error opening file!!");
+            System.out.println(RED + "Error opening file!!" + RESET);
         }
     }
 
     public void updateTransportation() {
         dateForm.setLenient(false);
         if (transportation.isEmpty()) {
-            System.out.println("Without any transportation record!!");
+            System.out.println(RED+"Without any transportation record!!"+RESET);
         } else {
             Scanner scanner = new Scanner(System.in);
             int index = 0;
@@ -377,7 +390,7 @@ class actionTransportation {
                     System.out.println("1. Fuel Price");
                     System.out.println("2. Transportation Information");
                     System.out.println("3. Exit");
-                    System.out.print("Enter your option:");
+                    System.out.print(PURPLE+"Enter your option:"+ RESET);
                     option = scanner.nextInt();
                     scanner.nextLine();
 
@@ -388,19 +401,19 @@ class actionTransportation {
                                 continueInput = true;
                                 try {
                                     System.out.printf("Previous fuel price: RM%.2f\n", Transportation.getFuelCost());
-                                    System.out.print("Enter Current fuel price(in RM/litre): ");
+                                    System.out.print(PURPLE+"Enter Current fuel price(in RM/litre): "+ RESET);
                                     double price = scanner.nextDouble();
                                     continueInput = false;
                                     Transportation.setFuelCost(price);
                                 } catch (InputMismatchException e) {
-                                    System.out.println("\nYour Input is invalid!!");
+                                    System.out.println(RED+"\nYour Input is invalid!!"+RESET);
                                     scanner.nextLine();
                                 }
                             } while (continueInput);
                             break;
                         case 2:
                             do {
-                                System.out.print("Enter the plate No.(XXX to exit):");
+                                System.out.print(PURPLE+"Enter the plate No.(XXX to exit):"+ RESET);
                                 plateNo = scanner.nextLine();
                                 plateNo = plateNo.replace(" ", "");
                                 plateNo = plateNo.toUpperCase();
@@ -424,7 +437,7 @@ class actionTransportation {
                                             System.out.println("4. Vehicle Status");
                                             System.out.println("5. Expired Date of vehicle license");
                                             System.out.println("6. End to update information");
-                                            System.out.print("Enter your option: ");
+                                            System.out.print(PURPLE+"Enter your option: "+ RESET);
                                             option = scanner.nextInt();
                                             scanner.nextLine();
 
@@ -437,7 +450,7 @@ class actionTransportation {
                                                         continueInput = false;
                                                         transportation.get(index).setPlateNo(currentPlate);
                                                         System.out.println("Previous Plate No.: " + transportation.get(index).getPlateNo());
-                                                        System.out.print("Enter new Plate No.: ");
+                                                        System.out.print(PURPLE+"Enter new Plate No.: "+ RESET);
                                                         plate = scanner.nextLine();
                                                         plate = plate.replace(" ", "");
                                                         plate = plate.toUpperCase();
@@ -465,14 +478,14 @@ class actionTransportation {
                                                         try {
                                                             int weight_capacity;
                                                             System.out.println("Previous Weight Capacity: " + transportation.get(index).getWeight_capacity() + "(tonnes)");
-                                                            System.out.print("Enter Weight Capacity(in ton): ");
+                                                            System.out.print(PURPLE+"Enter Weight Capacity(in ton): "+ RESET);
                                                             weight_capacity = scanner.nextInt();
                                                             transportation.get(index).setWeight_capacity(weight_capacity);
                                                             continueInput = false;
                                                             System.out.println("The Information was updated.\n");
                                                         } catch (InputMismatchException e) {
                                                             scanner.nextLine();
-                                                            System.out.println("\nInput invalid!!Please try again");
+                                                            System.out.println(RED+"\nInput invalid!!Please try again"+RESET);
                                                         }
                                                     } while (continueInput);
                                                     break;
@@ -483,14 +496,14 @@ class actionTransportation {
                                                         try {
                                                             double net_weight;
                                                             System.out.println("Previous Net Weight: " + transportation.get(index).getNet_weight() + "(tonnes)");
-                                                            System.out.print("Enter Net Weight(in ton): ");
+                                                            System.out.print(PURPLE+"Enter Net Weight(in ton): "+ RESET);
                                                             net_weight = scanner.nextDouble();
                                                             transportation.get(index).setNet_weight(net_weight);
                                                             continueInput = false;
                                                             System.out.println("The Information was updated.\n");
                                                         } catch (InputMismatchException e) {
                                                             scanner.nextLine();
-                                                            System.out.println("Input invalid!!Please try again");
+                                                            System.out.println(RED+"Input invalid!!Please try again"+RESET);
                                                         }
                                                     } while (continueInput);
                                                     break;
@@ -506,7 +519,7 @@ class actionTransportation {
                                                                 System.out.println((i + 1) + " " + status[i]);
                                                             }
 
-                                                            System.out.print("Select Current Status: ");
+                                                            System.out.print(PURPLE+"Select Current Status: "+ RESET);
                                                             vehicle_status = scanner.nextInt();
 
                                                             if (vehicle_status > status.length || vehicle_status < 0) {
@@ -517,7 +530,7 @@ class actionTransportation {
                                                             }
                                                         } catch (InputMismatchException e) {
                                                             scanner.nextLine();
-                                                            System.out.println("Input invalid!!Please try again");
+                                                            System.out.println(RED+"Input invalid!!Please try again"+RESET);
                                                         }
                                                     } while (continueInput);
                                                     break;
@@ -528,7 +541,7 @@ class actionTransportation {
                                                         try {
                                                             Date date;
                                                             System.out.println("Vehicle Licence status: " + transportation.get(index).license_status());
-                                                            System.out.print("Enter vehicle license expired date(DD/MM/YYYY): ");
+                                                            System.out.print(PURPLE+"Enter vehicle license expired date(DD/MM/YYYY): "+ RESET);
                                                             String license = scanner.nextLine();
                                                             date = dateForm.parse(license);
                                                             transportation.get(index).setVehicle_license(date);
@@ -536,7 +549,7 @@ class actionTransportation {
                                                             continueInput = false;
                                                             System.out.println("The Information was updated.\n");
                                                         } catch (ParseException e) {
-                                                            System.out.println("\nPlease follow this format(DD/MM/YYYY)");
+                                                            System.out.println(RED+"\nPlease follow this format(DD/MM/YYYY)"+RESET);
                                                         }
                                                     } while (continueInput);
                                                     break;
@@ -550,7 +563,7 @@ class actionTransportation {
                                             }
 
                                         } catch (InputMismatchException e) {
-                                            System.out.println("\nPlease enter 1-6! Please try again");
+                                            System.out.println(RED+"\nPlease enter 1-6! Please try again"+RESET);
                                             scanner.nextLine();
                                         }
                                     } while (exit);
@@ -567,7 +580,7 @@ class actionTransportation {
                     }
 
                 } catch (InputMismatchException e) {
-                    System.out.println("\nInvalid input!!Please enter 1-3! Please try again.");
+                    System.out.println(RED+"\nInvalid input!!Please enter 1-3! Please try again."+RESET);
                     scanner.nextLine();
                 }
             } while (option
@@ -589,7 +602,7 @@ class actionTransportation {
             do {
                 exit = false;
                 found = false;
-                System.out.print("Enter Plate No. want to remove(XXX to exit): ");
+                System.out.print(PURPLE+"Enter Plate No. want to remove(XXX to exit): "+ RESET);
                 plateNo = scanner.nextLine();
                 plateNo = plateNo.replace(" ", "");
                 plateNo = plateNo.toUpperCase();
@@ -616,14 +629,14 @@ class actionTransportation {
         Scanner scanner = new Scanner(System.in);
         //plateNo + "|" + weight_capacity + "|" + net_weight + "|" + vehicle_status + "|" + dateForm.format(vehicle_license) + "|"
         System.out.println(" ________________________________________________________________________________________________");
-        System.out.printf("| %-9s| %-24s| %-19s| %-18s| %-17s|\n", "Plate No", "Weight Capacity(tonnes)", "Net Weight(tonnes)", "Vehicle Status", "Vehicle License");
+        System.out.printf("| %-9s| %-24s| %-19s| %-18s| %-17s|\n", "Plate No", "Weight Capacity(tonnes)", "Net Weight(tonnes)", "Vehicle Status", "Vehicle License" );
         System.out.println("|__________|_________________________|____________________|___________________|__________________|");
         for (Transportation tr : transportation) {
             tr.displayFormat();
             System.out.printf("| %-9s| %-24s| %-19s| %-18s| %-17s|\n", " ", " ", " ", " ", " ");
         }
-        System.out.println("|__________|_________________________|____________________|___________________|__________________|");
-        System.out.print("Enter to exit");
+        System.out.println("|__________|_________________________|____________________|___________________|__________________|"+RESET);
+        System.out.print(PURPLE+"Enter to exit"+ RESET);
         scanner.nextLine();
     }
 
@@ -653,8 +666,8 @@ class actionTransportation {
                     }
 
                     if (transport.getPlateNo().isEmpty()) {
-                        System.out.println("\nPlease try again plate No. not found!!");
-                        System.out.print("Enter transportation plate No.:");
+                        System.out.println(RED+"\nPlease try again plate No. not found!!"+RESET);
+                        System.out.print(PURPLE+"Enter transportation plate No.: "+ RESET);
                         plateNo = scanner.nextLine();
                         plateNo = plateNo.toUpperCase().replace(" ", "");
                     }
@@ -663,15 +676,15 @@ class actionTransportation {
         }
         return transport.getPlateNo();
     }
-    
-    public boolean findTransportation(String plateNo){
+
+    public boolean findTransportation(String plateNo) {
         readFile();
-        for(Transportation tr: transportation){
-            if(tr.getPlateNo().equals(plateNo)){
+        for (Transportation tr : transportation) {
+            if (tr.getPlateNo().equals(plateNo)) {
                 return true;
             }
         }
         return false;
     }
-    
+
 }
