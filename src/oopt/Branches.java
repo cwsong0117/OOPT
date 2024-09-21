@@ -1,4 +1,4 @@
-package oopt;
+
 import java.util.InputMismatchException;
 import java.text.ParseException;
 import java.util.Date;
@@ -176,11 +176,11 @@ public class Branches {
 
 class actionBranches {
 
-    public static SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
-    private static String fileAddress = "Branches.txt";
-    private static ArrayList<Branches> branches = new ArrayList<Branches>();
+    public SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
+    private String fileAddress = "Branches.txt";
+    private ArrayList<Branches> branches = new ArrayList<Branches>();
 
-    public static void menu() {
+    public void menu() {
         int option;
         boolean exit;
         Scanner scanner = new Scanner(System.in);
@@ -228,7 +228,7 @@ class actionBranches {
         writeFile();
     }
 
-    public static void writeFile() {
+    public void writeFile() {
         try {
             FileWriter write = new FileWriter(fileAddress);
             for (Branches b : branches) {
@@ -241,7 +241,7 @@ class actionBranches {
 
     }
 
-    public static void readFile() {
+    public void readFile() {
         try {
             File file = new File(fileAddress);
             Scanner read = new Scanner(file);
@@ -273,7 +273,7 @@ class actionBranches {
         }
     }
 
-    public static void addBranch() {
+    public void addBranch() {
         Scanner scanner = new Scanner(System.in);
         boolean continueInput; //use for try and catch
         branches.add(new Branches());
@@ -372,7 +372,7 @@ class actionBranches {
         System.out.println("\nBranch ID: " + branches.get(index).getBranchID() + " is added!!");
     }
 
-    public static void modifyBranch() {
+    public void modifyBranch() {
         dateForm.setLenient(false);
         if (branches.isEmpty()) {
             System.out.println("Without any branch record!");
@@ -559,7 +559,7 @@ class actionBranches {
         }
     }
 
-    public static void removeBranch() {
+    public void removeBranch() {
         if (branches.isEmpty()) {
             System.out.println("\nWithout any branches record!!\n");
         } else {
@@ -595,7 +595,7 @@ class actionBranches {
         }
     }
 
-    public static void searchBranch() {
+    public void searchBranch() {
         if (branches.isEmpty()) {
             System.out.println("\nWithout any branches record!!\n");
         } else {
@@ -801,7 +801,7 @@ class actionBranches {
         }
     }
 
-    public static void displayBranch(ArrayList<Branches> display) {
+    public void displayBranch(ArrayList<Branches> display) {
         //String branchID, double distance, String address, String state, int post_code, Date dateCreated
         Scanner scanner = new Scanner(System.in);
         System.out.println("=========================================================================================");
@@ -814,7 +814,7 @@ class actionBranches {
         scanner.nextLine();
     }
 
-    public static String passBranches() {
+    public String passBranches() {
         Scanner scanner = new Scanner(System.in);
         readFile();
         int count = 0;
@@ -851,7 +851,7 @@ class actionBranches {
         return temp.getBranchID();
     }
     
-    public static boolean findBranches(String branchId){
+    public boolean findBranches(String branchId){
         readFile();
         for(Branches br: branches){
             if(br.getBranchID().equals(branchId)){
@@ -861,7 +861,7 @@ class actionBranches {
         return false;
     }
     
-    public static double getBranchesDistance(String branchId){
+    public double getBranchesDistance(String branchId){
         readFile();
         for(Branches br: branches){
             if(br.getBranchID().equals(branchId)){
