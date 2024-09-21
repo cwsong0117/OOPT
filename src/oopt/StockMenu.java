@@ -17,7 +17,19 @@ public class StockMenu {
         Scanner scanner = new Scanner(System.in);
         
         while(running) {
+            System.out.println("  ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ");
+            System.out.println(" |______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|");
+            System.out.println(" | |      / ____| |           | |           |  \\/  |                                                 | |       | |");
+            System.out.println(" | |     | (___ | |_ ___   ___| | __        | \\  / | __ _ _ __   __ _  __ _  ___ _ __ ___   ___ _ __ | |_      | |");
+            System.out.println(" | |      \\___ \\| __/ _ \\ / __| |/ /        | |\\/| |/ _` | '_ \\ / _` |/ _` |/ _ \\ '_ ` _ \\ / _ \\ '_ \\| __|     | |");
+            System.out.println(" | |      ____) | || (_) | (__|   <         | |  | | (_| | | | | (_| | (_| |  __/ | | | | |  __/ | | | |_      | |");
+            System.out.println(" | |     |_____/ \\__\\___/ \\___|_|\\_\\        |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_| |_| |_|\\___|_| |_|\\__|     | |");
+            System.out.println(" | |                                                                   __/ |                                   | |");
+            System.out.println(" |_|____ ______ ______ ______ ______ ______ ______ ______ ______ _____|___/___ ______ ______ ______ ______ ____|_|");
+            System.out.println(" |______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|");
+            System.out.println("\n");
             System.out.println("Enter '-1' to back to this menu.");
+            System.out.println("====================================\n");
             System.out.println("1: ADD NEW Stock");
             System.out.println("2. UPDATE Stock Level");
             System.out.println("3. DISPLAY Stock");
@@ -25,6 +37,7 @@ public class StockMenu {
             System.out.println("5. SEARCH Stock");
             System.out.println("6. LOW-LEVEL Stock Check");
             System.out.println("7. EXIT");
+            System.out.println("\n====================================");
             System.out.print("Your Option : ");
             int option = scanner.nextInt();
             System.out.print("\n");
