@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Shipment {
+public class Shipment implements Manage{
 
     public static SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
     public static SimpleDateFormat timeForm = new SimpleDateFormat("HHmm");
@@ -108,7 +108,7 @@ public class Shipment {
         }
     }
 
-    public void displayForm() {
+    public void display() {
 
         System.out.printf("%-15s %-14s %-14s %-15s %-18s %-10s %-10s %-13d\n",
                 shipmentId,
@@ -921,7 +921,7 @@ class actionShipment {
         for (Shipment s : shipment) {
             System.out.println("\n====================================================================================================================");
 
-            s.displayForm();
+            s.display();
         }
         System.out.println("\n====================================================================================================================");
 

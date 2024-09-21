@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Transportation {
+public class Transportation implements Manage{
 
     SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
     private String plateNo;
@@ -163,7 +163,7 @@ public class Transportation {
         }
     }
 
-    public void displayFormat() {
+    public void display() {
         System.out.printf("| %-9s| %-,24d| %-,19.2f| %-18s| %-17s|\n", plateNo, weight_capacity, net_weight, vehicle_status, dateForm.format(vehicle_license));
         System.out.printf("| %-9s| %-24s| %-19s| %-18s| %-17s|\n", " ", " ", " ", " ", license_status());
     }
@@ -619,7 +619,7 @@ class actionTransportation {
         System.out.printf("| %-9s| %-24s| %-19s| %-18s| %-17s|\n", "Plate No", "Weight Capacity(tonnes)", "Net Weight(tonnes)", "Vehicle Status", "Vehicle License");
         System.out.println("|__________|_________________________|____________________|___________________|__________________|");
         for (Transportation tr : transportation) {
-            tr.displayFormat();
+            tr.display();
             System.out.printf("| %-9s| %-24s| %-19s| %-18s| %-17s|\n", " ", " ", " ", " ", " ");
         }
         System.out.println("|__________|_________________________|____________________|___________________|__________________|");
