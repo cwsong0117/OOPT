@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Transportation implements Manage{
+public class Transportation {
 
     SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
     private String plateNo;
@@ -18,7 +18,7 @@ public class Transportation implements Manage{
     private double net_weight;
     private String vehicle_status;
     private Date vehicle_license;
-    public static double fuel_cost; //in RM
+    private static double fuel_cost; //in RM
 
     //default
     public Transportation() {
@@ -163,7 +163,7 @@ public class Transportation implements Manage{
         }
     }
 
-    public void display() {
+    public void displayFormat() {
         System.out.printf("| %-9s| %-,24d| %-,19.2f| %-18s| %-17s|\n", plateNo, weight_capacity, net_weight, vehicle_status, dateForm.format(vehicle_license));
         System.out.printf("| %-9s| %-24s| %-19s| %-18s| %-17s|\n", " ", " ", " ", " ", license_status());
     }
@@ -183,11 +183,11 @@ public class Transportation implements Manage{
 
 class actionTransportation {
 
-    private static String fileAddress = "Transportation.txt";
-    private static ArrayList<Transportation> transportation = new ArrayList<Transportation>();
-    public static SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
+    private String fileAddress = "Transportation.txt";
+    private ArrayList<Transportation> transportation = new ArrayList<Transportation>();
+    public SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
 
-    public static void menu() {
+    public void menu() {
         int option;
         boolean exit = true;
         Scanner scanner = new Scanner(System.in);
@@ -232,7 +232,7 @@ class actionTransportation {
         writeFile();
     }
 
-    public static void readFile() {
+    public void readFile() {
 
         try {
             File file = new File(fileAddress);
@@ -272,7 +272,7 @@ class actionTransportation {
 
     }
 
-    public static void addTransportation() {
+    public void addTransportation() {
         dateForm.setLenient(false);
         Scanner scanner = new Scanner(System.in);
         transportation.add(new Transportation());
@@ -346,7 +346,7 @@ class actionTransportation {
 
     }
 
-    public static void writeFile() {
+    public void writeFile() {
         try {
             FileWriter write = new FileWriter(fileAddress);
             write.write(String.format("%.2f\n", Transportation.getFuelCost()));
@@ -359,7 +359,7 @@ class actionTransportation {
         }
     }
 
-    public static void updateTransportation() {
+    public void updateTransportation() {
         dateForm.setLenient(false);
         if (transportation.isEmpty()) {
             System.out.println("Without any transportation record!!");
@@ -576,7 +576,7 @@ class actionTransportation {
 
     }
 
-    public static void removeTransportation() {
+    public void removeTransportation() {
         if (transportation.isEmpty()) {
             System.out.println("\nWithout any transportation record!!\n");
         } else {
@@ -612,14 +612,14 @@ class actionTransportation {
         }
     }
 
-    public static void displayAll() {
+    public void displayAll() {
         Scanner scanner = new Scanner(System.in);
         //plateNo + "|" + weight_capacity + "|" + net_weight + "|" + vehicle_status + "|" + dateForm.format(vehicle_license) + "|"
         System.out.println(" ________________________________________________________________________________________________");
         System.out.printf("| %-9s| %-24s| %-19s| %-18s| %-17s|\n", "Plate No", "Weight Capacity(tonnes)", "Net Weight(tonnes)", "Vehicle Status", "Vehicle License");
         System.out.println("|__________|_________________________|____________________|___________________|__________________|");
         for (Transportation tr : transportation) {
-            tr.display();
+            tr.displayFormat();
             System.out.printf("| %-9s| %-24s| %-19s| %-18s| %-17s|\n", " ", " ", " ", " ", " ");
         }
         System.out.println("|__________|_________________________|____________________|___________________|__________________|");
@@ -627,7 +627,7 @@ class actionTransportation {
         scanner.nextLine();
     }
 
-    public static String passTransportation(String plateNo) {
+    public String passTransportation(String plateNo) {
         Scanner scanner = new Scanner(System.in);
         readFile();
         Transportation transport = new Transportation();
@@ -664,7 +664,7 @@ class actionTransportation {
         return transport.getPlateNo();
     }
     
-    public static boolean findTransportation(String plateNo){
+    public boolean findTransportation(String plateNo){
         readFile();
         for(Transportation tr: transportation){
             if(tr.getPlateNo().equals(plateNo)){
