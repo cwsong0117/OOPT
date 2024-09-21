@@ -10,91 +10,89 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class StockAddBeverage extends Stock {
-
-    private double alcoholContent;
-    private String isCarbonated;
-    private int volume;
-
-    public StockAddBeverage() {
+public class StockFood extends Stock{
+    
+    private String isOrganic;
+    private String allergens;
+    private double storageTemperature;
+    
+    public StockFood() {
         super();
-        this.alcoholContent = alcoholContent;
-        this.isCarbonated = isCarbonated;
-        this.volume = volume;
-    }
-
-    public StockAddBeverage(String stockID, String name, int quantity, double price,
-            String supplier, double alcoholContent,
-            String isCarbonated, int volume) {
-        super(stockID, name, quantity, price, supplier);
-        this.alcoholContent = alcoholContent;
-        this.isCarbonated = isCarbonated;
-        this.volume = volume;
-    }
-
-    public double getAlcoholContent() {
-        return alcoholContent;
-    }
-
-    public String getIsCarbonated() {
-        return isCarbonated;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setAlcoholContent(double alcoholContent) {
-        this.alcoholContent = alcoholContent;
-    }
-
-    public void setIsCarbonated(String isCarbonated) {
-        this.isCarbonated = isCarbonated;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s %-15s %-10s %-15d",
-                super.toString(), // Calls the toString() from Stock
-                alcoholContent, isCarbonated, volume);
+        this.isOrganic = "";
+        this.allergens = "";
+        this.storageTemperature = 0.0;
     }
     
-    public static void beverageIn(int num) {
+    public StockFood(String stockID, String name, int quantity, double price, 
+            String supplier, String isOrganic,
+            String allergens, double storageTemperature) {
+        super(stockID, name, quantity, price, supplier);
+        this.isOrganic = isOrganic;
+        this.allergens = allergens;
+        this.storageTemperature = storageTemperature;
+    }
+    
+    public String getIsOrganic() {
+        return isOrganic;
+    }
+    
+    public String getAllergens() {
+        return allergens;
+    }
+    
+    public double getStorageTemperature() {
+        return storageTemperature;
+    }
+    
+    public void setIsOrganic(String isOrganic) {
+        this.isOrganic = isOrganic;
+    }
+    
+    public void setAllergens(String allergens) {
+        this.allergens = allergens;
+    }
+    
+    public void setStorageTemperature(double storageTemperature) {
+        this.storageTemperature = storageTemperature;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%s %-11s %-10s %-15.2f",
+                super.toString(), // Calls the toString() from Stock
+                isOrganic, allergens, storageTemperature);
+    }
+    
+    public static void foodIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         
         while(running) {
-            
+                        
             Stock stock = stockIn(num);
             StockFile file = new StockFile();
                 
-            System.out.print("Alcohol Content(%) : ");
-            double alcoholContent = scanner.nextDouble();
-            
-            scanner.nextLine();
-            
-            System.out.print("Carbonated?(yes/no) : ");
-            String isCarbonated = scanner.nextLine().toLowerCase();
-            while (!isCarbonated.equals("yes") && !isCarbonated.equals("no")) {
+            System.out.print("Organic?(yes/no) : ");
+            String isOrganic = scanner.nextLine().toLowerCase();
+            while (!isOrganic.equals("yes") && !isOrganic.equals("no")) {
                 System.out.print("Invalid input. Please enter 'yes' or 'no': ");
-                isCarbonated = scanner.nextLine().toLowerCase();
+                isOrganic = scanner.nextLine().toLowerCase();
             }
             
-            System.out.print("Volume : ");
-            int volume = scanner.nextInt();
+            System.out.print("Allergens : ");
+            String allergens = scanner.nextLine();
+            
+            System.out.print("Storage Temperature : ");
+            double storageTemperature = scanner.nextDouble();
             
             scanner.nextLine();
             
-            StockAddBeverage beverage = new StockAddBeverage(stock.getStockID(), stock.getName(), stock.getQuantity(),
+            StockFood food = new StockFood(stock.getStockID(), stock.getName(), stock.getQuantity(),
                                 stock.getPrice(), stock.getSupplier(),
-                                alcoholContent, isCarbonated, volume);
+                                isOrganic, allergens, storageTemperature);
             
-            file.appendBeverage(beverage);
+            file.appendFood(food);
             
             System.out.print("\n");
             System.out.println("You can press any key to stop.");
@@ -109,17 +107,18 @@ public class StockAddBeverage extends Stock {
         Display.displayStock(num);
     }
     
-    public static StockAddBeverage stockIn(int num) {
+    public static StockFood stockIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
 
-        String stockID = StockIDGenerator.generateBeverageID();
+        String stockID = StockIDGenerator.generateFoodID();
         System.out.print("Stock ID : " + stockID + "\n");
         
         String name;
         do{
             System.out.print("Name : ");
             name = scanner.nextLine();
+            
             if(name.equals("-1")) {
                 System.out.println("Existing...\n");
                 StockMenu.stockMenu();
@@ -132,7 +131,7 @@ public class StockAddBeverage extends Stock {
                 System.out.println("Name cannot be empty. Please enter a name.");
             }
         }while(!Validation.isValidName(name, num));
-        
+
         int quantity = 0;
         do{
             System.out.print("Quantity : ");
@@ -141,7 +140,7 @@ public class StockAddBeverage extends Stock {
                 System.out.println("Existing...\n");
                 StockMenu.stockMenu();
             }
-            else if(quantity <= 0) {
+            if(quantity <= 0) {
                 System.out.println("The price cannot be zero or negative. Please enter a price");
             }
         }while(quantity <= 0);
@@ -190,7 +189,7 @@ public class StockAddBeverage extends Stock {
             }
         }while(!Validation.isNotNullOrEmpty(supplier) || !Validation.checkSupplier(supplier));
         
-        return new StockAddBeverage(stockID, name, quantity, price, supplier, 0.0, "no", 0);
+        return new StockFood(stockID, name, quantity, price, supplier, "no", "", 0.0);
         
     }
 }

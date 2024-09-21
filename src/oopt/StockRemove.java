@@ -26,16 +26,16 @@ public class StockRemove {
         try {
             switch (n) {
                 case 1:
-                    StockAddFood[] foods = file.readFood();
+                    StockFood[] foods = file.readFood();
                     System.out.print("Please enter the Stock ID that needs to be deleted > ");
                     ID = scanner.nextLine();
 
                     // A list to hold the remaining foods after deletion
-                    List<StockAddFood> remainFoods = new ArrayList<>(Arrays.asList(foods));
+                    List<StockFood> remainFoods = new ArrayList<>(Arrays.asList(foods));
 
-                    Iterator<StockAddFood> FoodIterator = remainFoods.iterator();
+                    Iterator<StockFood> FoodIterator = remainFoods.iterator();
                     while (FoodIterator.hasNext()) {
-                        StockAddFood f = FoodIterator.next();
+                        StockFood f = FoodIterator.next();
                         if (f.getStockID().equalsIgnoreCase(ID)) {
                             System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n",
                                     "ID", "Name", "Quantity", "Price", "Supplier",
@@ -49,7 +49,7 @@ public class StockRemove {
                                 System.out.println("\nFood Item Deleted Successfully...\n");
                                 found = true;
                             }
-                            file.writeFood(remainFoods.toArray(new StockAddFood[0]));
+                            file.writeFood(remainFoods.toArray(new StockFood[0]));
                         }
                     }
                     if (!found) {
@@ -59,16 +59,16 @@ public class StockRemove {
                     break;
 
                 case 2:
-                    StockAddBeverage[] beverages = file.readBeverage();
+                    StockBeverage[] beverages = file.readBeverage();
                     System.out.print("Please enter the Stock ID that needs to be deleted > ");
                     ID = scanner.nextLine();
 
                     // A list to hold the remaining beverages after deletion
-                    List<StockAddBeverage> remainBeverages = new ArrayList<>(Arrays.asList(beverages));
+                    List<StockBeverage> remainBeverages = new ArrayList<>(Arrays.asList(beverages));
 
-                    Iterator<StockAddBeverage> BeverageIterator = remainBeverages.iterator();
+                    Iterator<StockBeverage> BeverageIterator = remainBeverages.iterator();
                     while (BeverageIterator.hasNext()) {
-                        StockAddBeverage b = BeverageIterator.next();
+                        StockBeverage b = BeverageIterator.next();
                         if (b.getStockID().equalsIgnoreCase(ID)) {
                             System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n",
                                     "ID", "Name", "Quantity", "Price", "Supplier",
@@ -82,7 +82,7 @@ public class StockRemove {
                                 System.out.println("\nBeverage Item Deleted Successfully...\n");
                                 found = true;
                             }
-                            file.writeBeverage(remainBeverages.toArray(new StockAddBeverage[0]));
+                            file.writeBeverage(remainBeverages.toArray(new StockBeverage[0]));
                         }
                     }
                     if (!found) {
@@ -92,16 +92,16 @@ public class StockRemove {
                     break;
 
                 case 3:
-                    StockAddIngredient[] ingredients = file.readIngredient();
+                    StockIngredient[] ingredients = file.readIngredient();
                     System.out.print("Please enter the Stock ID that needs to be deleted > ");
                     ID = scanner.nextLine();
 
                     // A list to hold the remaining ingredients after deletion
-                    List<StockAddIngredient> remainIngredients = new ArrayList<>(Arrays.asList(ingredients));
+                    List<StockIngredient> remainIngredients = new ArrayList<>(Arrays.asList(ingredients));
 
-                    Iterator<StockAddIngredient> IngredientIterator = remainIngredients.iterator();
+                    Iterator<StockIngredient> IngredientIterator = remainIngredients.iterator();
                     while (IngredientIterator.hasNext()) {
-                        StockAddIngredient i = IngredientIterator.next();
+                        StockIngredient i = IngredientIterator.next();
                         if (i.getStockID().equalsIgnoreCase(ID)) {
                             System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n",
                                     "ID", "Name", "Quantity", "Price", "Supplier",
@@ -115,7 +115,7 @@ public class StockRemove {
                                 System.out.println("\nIngredient Item Deleted Successfully...\n");
                                 found = true;
                             }
-                            file.writeIngredient(remainIngredients.toArray(new StockAddIngredient[0]));
+                            file.writeIngredient(remainIngredients.toArray(new StockIngredient[0]));
                         }
                     }
                     if (!found) {

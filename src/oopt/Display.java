@@ -44,10 +44,10 @@ public class Display {
         StockMenu stockMenu = new StockMenu();
 
         if (n == 1) {
-            StockAddFood[] foods = file.readFood();
+            StockFood[] foods = file.readFood();
             displayFoodTitle();
 
-            for (StockAddFood f : foods) {
+            for (StockFood f : foods) {
                 System.out.println(f.toString());
             }
             System.out.print("\n\n");
@@ -55,10 +55,10 @@ public class Display {
             scanner.nextLine();
             stockMenu.stockMenu();
         } else if (n == 2) {
-            StockAddBeverage[] beverages = file.readBeverage();
+            StockBeverage[] beverages = file.readBeverage();
             displayBeverageTitle();
 
-            for (StockAddBeverage b : beverages) {
+            for (StockBeverage b : beverages) {
                 System.out.println(b.toString());
             }
             System.out.print("\n\n");
@@ -66,10 +66,10 @@ public class Display {
             scanner.nextLine();
             stockMenu.stockMenu();
         } else if (n == 3) {
-            StockAddIngredient[] ingredients = file.readIngredient();
+            StockIngredient[] ingredients = file.readIngredient();
             displayIngredientTitle();
 
-            for (StockAddIngredient i : ingredients) {
+            for (StockIngredient i : ingredients) {
                 System.out.println(i.toString());
             }
             System.out.print("\n\n");
@@ -80,13 +80,13 @@ public class Display {
     }
 
     public static void listFood() {
-        StockAddFood[] foodList = StockFile.readFood();
+        StockFood[] foodList = StockFile.readFood();
         int count = 0;
         System.out.println("Food List:");
         System.out.printf(" ===================================================\n");
         System.out.printf("| %-4s | %-8s | %-20s | %-8s |\n", "No.", "Stock ID", "Food Name", "Quantity");
         System.out.printf(" ===================================================\n");
-        for (StockAddFood food : foodList) {
+        for (StockFood food : foodList) {
             count++;
             System.out.printf("| %-4d | %-8s | %-20s | %-8d |\n", count, food.getStockID(), food.getName(), food.getQuantity());
         }
@@ -94,13 +94,13 @@ public class Display {
     }
 
     public static void listBeverage() {
-        StockAddBeverage[] beverageList = StockFile.readBeverage();
+        StockBeverage[] beverageList = StockFile.readBeverage();
         int count = 0;
         System.out.println("Beverage List:");
         System.out.printf(" ===================================================\n");
         System.out.printf("| %-4s | %-8s | %-20s | %-8s |\n", "No.", "Stock ID", "Food Name", "Quantity");
         System.out.printf(" ===================================================\n");
-        for (StockAddBeverage b : beverageList) {
+        for (StockBeverage b : beverageList) {
             count++;
             System.out.printf("| %-4d | %-8s | %-20s | %-8d |\n", count, b.getStockID(), b.getName(), b.getQuantity());
         }
@@ -108,13 +108,13 @@ public class Display {
     }
 
     public static void listIngredient() {
-        StockAddIngredient[] ingredientList = StockFile.readIngredient();
+        StockIngredient[] ingredientList = StockFile.readIngredient();
         int count = 0;
         System.out.println("Ingredient List:");
         System.out.printf(" ===================================================\n");
         System.out.printf("| %-4s | %-8s | %-20s | %-8s |\n", "No.", "Stock ID", "Food Name", "Quantity");
         System.out.printf(" ===================================================\n");
-        for (StockAddIngredient i : ingredientList) {
+        for (StockIngredient i : ingredientList) {
             count++;
             System.out.printf("| %-4d | %-8s | %-20s | %-8d |\n", count, i.getStockID(), i.getName(), i.getQuantity());
         }

@@ -24,42 +24,42 @@ public class StockAlert {
         
         if(n == 1) {
         //food low balance display
-            List<StockAddFood> lowStockItems = getFoodBalance(lowBalance);
+            List<StockFood> lowStockItems = getFoodBalance(lowBalance);
             
             if(lowStockItems.isEmpty()) {
                 System.out.println("No items with low stock...\n");
             }else {
                 System.out.println("Items with stock less than " + lowBalance + " : \n");
                 Display.displayFoodTitle();
-                for(StockAddFood f : lowStockItems) {
+                for(StockFood f : lowStockItems) {
                     System.out.println(f.toString());
                 }
             }
         }
         else if(n == 2) {
         //beverage low balance display
-            List<StockAddBeverage> lowStockItems = getBeverageBalance(lowBalance);
+            List<StockBeverage> lowStockItems = getBeverageBalance(lowBalance);
 
                 if(lowStockItems.isEmpty()) {
                     System.out.println("No items with low stock...\n");
                 }else {
                     System.out.println("Items with stock less than " + lowBalance + " : \n");
                     Display.displayFoodTitle();
-                    for(StockAddBeverage b : lowStockItems) {
+                    for(StockBeverage b : lowStockItems) {
                         System.out.println(b.toString());
                     }
                 }
             }
         else {
         //ingredient low balance display
-            List<StockAddIngredient> lowStockItems = getIngredientBalance(lowBalance);
+            List<StockIngredient> lowStockItems = getIngredientBalance(lowBalance);
             
             if(lowStockItems.isEmpty()) {
                 System.out.println("No items with low stock...\n");
             }else {
                 System.out.println("Items with stock less than " + lowBalance + " : \n");
                 Display.displayFoodTitle();
-                for(StockAddIngredient i : lowStockItems) {
+                for(StockIngredient i : lowStockItems) {
                     System.out.println(i.toString());
                 }
             }
@@ -68,11 +68,11 @@ public class StockAlert {
         s.stockMenu();
     }
     
-    private static List<StockAddFood> getFoodBalance(int quantity) {
-        List<StockAddFood> lowStockItems = new ArrayList<>();
-        StockAddFood[] Foods = StockFile.readFood();
+    private static List<StockFood> getFoodBalance(int quantity) {
+        List<StockFood> lowStockItems = new ArrayList<>();
+        StockFood[] Foods = StockFile.readFood();
 
-        for(StockAddFood f : Foods) {
+        for(StockFood f : Foods) {
             if(f.getQuantity() <= quantity) {
                 lowStockItems.add(f);
             }
@@ -80,11 +80,11 @@ public class StockAlert {
         return lowStockItems;
     }
     
-    private static List<StockAddBeverage> getBeverageBalance(int quantity) {
-        List<StockAddBeverage> lowStockItems = new ArrayList<>();
-        StockAddBeverage[] Beverages = StockFile.readBeverage();
+    private static List<StockBeverage> getBeverageBalance(int quantity) {
+        List<StockBeverage> lowStockItems = new ArrayList<>();
+        StockBeverage[] Beverages = StockFile.readBeverage();
 
-        for(StockAddBeverage b : Beverages) {
+        for(StockBeverage b : Beverages) {
             if(b.getQuantity() <= quantity) {
                 lowStockItems.add(b);
             }
@@ -92,11 +92,11 @@ public class StockAlert {
         return lowStockItems;
     }
     
-    private static List<StockAddIngredient> getIngredientBalance(int quantity) {
-        List<StockAddIngredient> lowStockItems = new ArrayList<>();
-        StockAddIngredient[] Ingredients = StockFile.readIngredient();
+    private static List<StockIngredient> getIngredientBalance(int quantity) {
+        List<StockIngredient> lowStockItems = new ArrayList<>();
+        StockIngredient[] Ingredients = StockFile.readIngredient();
 
-        for(StockAddIngredient i : Ingredients) {
+        for(StockIngredient i : Ingredients) {
             if(i.getQuantity() <= quantity) {
                 lowStockItems.add(i);
             }

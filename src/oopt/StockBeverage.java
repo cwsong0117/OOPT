@@ -10,89 +10,91 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class StockAddIngredient extends Stock{
-    
-    private String ingredientType;
-    private String gluten;
-    private int calory;
-    
-    public StockAddIngredient() {
+public class StockBeverage extends Stock {
+
+    private double alcoholContent;
+    private String isCarbonated;
+    private int volume;
+
+    public StockBeverage() {
         super();
-        this.ingredientType = ingredientType;
-        this.gluten = gluten;
-        this.calory = calory;
+        this.alcoholContent = alcoholContent;
+        this.isCarbonated = isCarbonated;
+        this.volume = volume;
     }
-    
-    public StockAddIngredient(String stockID, String name, int quantity, double price, 
-            String supplier, String ingredientType,
-            String gluten, int calory) {
+
+    public StockBeverage(String stockID, String name, int quantity, double price,
+            String supplier, double alcoholContent,
+            String isCarbonated, int volume) {
         super(stockID, name, quantity, price, supplier);
-        this.ingredientType = ingredientType;
-        this.gluten = gluten;
-        this.calory = calory;
+        this.alcoholContent = alcoholContent;
+        this.isCarbonated = isCarbonated;
+        this.volume = volume;
     }
-    
-    public String getIngredientType() {
-        return ingredientType;
+
+    public double getAlcoholContent() {
+        return alcoholContent;
     }
-    
-    public String getGluten() {
-        return gluten;
+
+    public String getIsCarbonated() {
+        return isCarbonated;
     }
-    
-    public int getCalory() {
-        return calory;
+
+    public int getVolume() {
+        return volume;
     }
-    
-    public void setIngredientType(String ingredientType) {
-        this.ingredientType = ingredientType;
+
+    public void setAlcoholContent(double alcoholContent) {
+        this.alcoholContent = alcoholContent;
     }
-    
-    public void setGluten(String gluten) {
-        this.gluten = gluten;
+
+    public void setIsCarbonated(String isCarbonated) {
+        this.isCarbonated = isCarbonated;
     }
-    
-    public void setCalory(int calory) {
-        this.calory = calory;
+
+    public void setVolume(int volume) {
+        this.volume = volume;
     }
-    
+
     @Override
     public String toString() {
         return String.format("%s %-15s %-10s %-15d",
                 super.toString(), // Calls the toString() from Stock
-                ingredientType, gluten, calory);
+                alcoholContent, isCarbonated, volume);
     }
     
-    public static void ingredientIn(int num) {
+    public static void beverageIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         
         while(running) {
-                        
+            
             Stock stock = stockIn(num);
             StockFile file = new StockFile();
                 
-            System.out.print("Ingredient Type : ");
-            String ingredientType = scanner.nextLine();
-            
-            System.out.print("Gluten?(yes/no) : ");
-            String gluten = scanner.nextLine().toLowerCase();
-            while (!gluten.equals("yes") && !gluten.equals("no")) {
-                System.out.print("Invalid input. Please enter 'yes' or 'no': ");
-                gluten = scanner.nextLine().toLowerCase();
-            }
-            
-            System.out.print("Calory : ");
-            int calory = scanner.nextInt();
+            System.out.print("Alcohol Content(%) : ");
+            double alcoholContent = scanner.nextDouble();
             
             scanner.nextLine();
             
-            StockAddIngredient ingredient = new StockAddIngredient(stock.getStockID(), stock.getName(), stock.getQuantity(),
-                                stock.getPrice(), stock.getSupplier(),
-                                ingredientType, gluten, calory);
+            System.out.print("Carbonated?(yes/no) : ");
+            String isCarbonated = scanner.nextLine().toLowerCase();
+            while (!isCarbonated.equals("yes") && !isCarbonated.equals("no")) {
+                System.out.print("Invalid input. Please enter 'yes' or 'no': ");
+                isCarbonated = scanner.nextLine().toLowerCase();
+            }
             
-            file.appendIngredient(ingredient);
+            System.out.print("Volume : ");
+            int volume = scanner.nextInt();
+            
+            scanner.nextLine();
+            
+            StockBeverage beverage = new StockBeverage(stock.getStockID(), stock.getName(), stock.getQuantity(),
+                                stock.getPrice(), stock.getSupplier(),
+                                alcoholContent, isCarbonated, volume);
+            
+            file.appendBeverage(beverage);
             
             System.out.print("\n");
             System.out.println("You can press any key to stop.");
@@ -107,11 +109,11 @@ public class StockAddIngredient extends Stock{
         Display.displayStock(num);
     }
     
-    public static StockAddIngredient stockIn(int num) {
+    public static StockBeverage stockIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
 
-        String stockID = StockIDGenerator.generateIngredientID();
+        String stockID = StockIDGenerator.generateBeverageID();
         System.out.print("Stock ID : " + stockID + "\n");
         
         String name;
@@ -130,7 +132,7 @@ public class StockAddIngredient extends Stock{
                 System.out.println("Name cannot be empty. Please enter a name.");
             }
         }while(!Validation.isValidName(name, num));
-
+        
         int quantity = 0;
         do{
             System.out.print("Quantity : ");
@@ -188,7 +190,7 @@ public class StockAddIngredient extends Stock{
             }
         }while(!Validation.isNotNullOrEmpty(supplier) || !Validation.checkSupplier(supplier));
         
-        return new StockAddIngredient(stockID, name, quantity, price, supplier, "", "no", 0);
+        return new StockBeverage(stockID, name, quantity, price, supplier, 0.0, "no", 0);
         
     }
 }

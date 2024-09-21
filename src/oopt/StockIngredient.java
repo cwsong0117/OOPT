@@ -10,60 +10,60 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class StockAddFood extends Stock{
+public class StockIngredient extends Stock{
     
-    private String isOrganic;
-    private String allergens;
-    private double storageTemperature;
+    private String ingredientType;
+    private String gluten;
+    private int calory;
     
-    public StockAddFood() {
+    public StockIngredient() {
         super();
-        this.isOrganic = "";
-        this.allergens = "";
-        this.storageTemperature = 0.0;
+        this.ingredientType = ingredientType;
+        this.gluten = gluten;
+        this.calory = calory;
     }
     
-    public StockAddFood(String stockID, String name, int quantity, double price, 
-            String supplier, String isOrganic,
-            String allergens, double storageTemperature) {
+    public StockIngredient(String stockID, String name, int quantity, double price, 
+            String supplier, String ingredientType,
+            String gluten, int calory) {
         super(stockID, name, quantity, price, supplier);
-        this.isOrganic = isOrganic;
-        this.allergens = allergens;
-        this.storageTemperature = storageTemperature;
+        this.ingredientType = ingredientType;
+        this.gluten = gluten;
+        this.calory = calory;
     }
     
-    public String getIsOrganic() {
-        return isOrganic;
+    public String getIngredientType() {
+        return ingredientType;
     }
     
-    public String getAllergens() {
-        return allergens;
+    public String getGluten() {
+        return gluten;
     }
     
-    public double getStorageTemperature() {
-        return storageTemperature;
+    public int getCalory() {
+        return calory;
     }
     
-    public void setIsOrganic(String isOrganic) {
-        this.isOrganic = isOrganic;
+    public void setIngredientType(String ingredientType) {
+        this.ingredientType = ingredientType;
     }
     
-    public void setAllergens(String allergens) {
-        this.allergens = allergens;
+    public void setGluten(String gluten) {
+        this.gluten = gluten;
     }
     
-    public void setStorageTemperature(double storageTemperature) {
-        this.storageTemperature = storageTemperature;
+    public void setCalory(int calory) {
+        this.calory = calory;
     }
     
     @Override
     public String toString() {
-        return String.format("%s %-11s %-10s %-15.2f",
+        return String.format("%s %-15s %-10s %-15d",
                 super.toString(), // Calls the toString() from Stock
-                isOrganic, allergens, storageTemperature);
+                ingredientType, gluten, calory);
     }
     
-    public static void foodIn(int num) {
+    public static void ingredientIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
@@ -73,26 +73,26 @@ public class StockAddFood extends Stock{
             Stock stock = stockIn(num);
             StockFile file = new StockFile();
                 
-            System.out.print("Organic?(yes/no) : ");
-            String isOrganic = scanner.nextLine().toLowerCase();
-            while (!isOrganic.equals("yes") && !isOrganic.equals("no")) {
+            System.out.print("Ingredient Type : ");
+            String ingredientType = scanner.nextLine();
+            
+            System.out.print("Gluten?(yes/no) : ");
+            String gluten = scanner.nextLine().toLowerCase();
+            while (!gluten.equals("yes") && !gluten.equals("no")) {
                 System.out.print("Invalid input. Please enter 'yes' or 'no': ");
-                isOrganic = scanner.nextLine().toLowerCase();
+                gluten = scanner.nextLine().toLowerCase();
             }
             
-            System.out.print("Allergens : ");
-            String allergens = scanner.nextLine();
-            
-            System.out.print("Storage Temperature : ");
-            double storageTemperature = scanner.nextDouble();
+            System.out.print("Calory : ");
+            int calory = scanner.nextInt();
             
             scanner.nextLine();
             
-            StockAddFood food = new StockAddFood(stock.getStockID(), stock.getName(), stock.getQuantity(),
+            StockIngredient ingredient = new StockIngredient(stock.getStockID(), stock.getName(), stock.getQuantity(),
                                 stock.getPrice(), stock.getSupplier(),
-                                isOrganic, allergens, storageTemperature);
+                                ingredientType, gluten, calory);
             
-            file.appendFood(food);
+            file.appendIngredient(ingredient);
             
             System.out.print("\n");
             System.out.println("You can press any key to stop.");
@@ -107,18 +107,17 @@ public class StockAddFood extends Stock{
         Display.displayStock(num);
     }
     
-    public static StockAddFood stockIn(int num) {
+    public static StockIngredient stockIn(int num) {
     
         Scanner scanner = new Scanner(System.in);
 
-        String stockID = StockIDGenerator.generateFoodID();
+        String stockID = StockIDGenerator.generateIngredientID();
         System.out.print("Stock ID : " + stockID + "\n");
         
         String name;
         do{
             System.out.print("Name : ");
             name = scanner.nextLine();
-            
             if(name.equals("-1")) {
                 System.out.println("Existing...\n");
                 StockMenu.stockMenu();
@@ -140,7 +139,7 @@ public class StockAddFood extends Stock{
                 System.out.println("Existing...\n");
                 StockMenu.stockMenu();
             }
-            if(quantity <= 0) {
+            else if(quantity <= 0) {
                 System.out.println("The price cannot be zero or negative. Please enter a price");
             }
         }while(quantity <= 0);
@@ -189,7 +188,7 @@ public class StockAddFood extends Stock{
             }
         }while(!Validation.isNotNullOrEmpty(supplier) || !Validation.checkSupplier(supplier));
         
-        return new StockAddFood(stockID, name, quantity, price, supplier, "no", "", 0.0);
+        return new StockIngredient(stockID, name, quantity, price, supplier, "", "no", 0);
         
     }
 }

@@ -38,24 +38,24 @@ public class Validation {
     
     public static boolean isValidName(String name, int n) {
         if(n == 1) {
-            StockAddFood[] foods = StockFile.readFood();
-            for(StockAddFood f : foods) {
+            StockFood[] foods = StockFile.readFood();
+            for(StockFood f : foods) {
                 if(f.getName().equalsIgnoreCase(name)) {
                     return false;
                 }
             }
         }
         else if(n == 2) {
-            StockAddBeverage[] beverages = StockFile.readBeverage();
-            for(StockAddBeverage b : beverages) {
+            StockBeverage[] beverages = StockFile.readBeverage();
+            for(StockBeverage b : beverages) {
                 if(b.getName().equalsIgnoreCase(name)) {
                     return false;
                 }
             }
         }
         else if(n == 3) {
-            StockAddIngredient[] ingredients = StockFile.readIngredient();
-            for(StockAddIngredient i : ingredients) {
+            StockIngredient[] ingredients = StockFile.readIngredient();
+            for(StockIngredient i : ingredients) {
                 if(i.getName().equalsIgnoreCase(name)) {
                     return false;
                 }
