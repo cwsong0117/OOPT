@@ -190,13 +190,23 @@ class actionShipment {
     public SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
     public SimpleDateFormat timeForm = new SimpleDateFormat("HHmm");
     private String fileAddress = "Shipment.txt";
+    public final String RED = "\u001B[31m";
+    public final String CYAN = "\u001B[36m";
+    public final String BLUE = "\u001B[34m";
+    public final String PURPLE = "\u001B[35m";
+    public final String GREEN = "\u001B[33m";
+    public final String RESET = "\u001B[0m";
 
     public void shipmentMenu() {
         Scanner scanner = new Scanner(System.in);
         readFile();
         boolean exit = false;
         while (!exit) {
-            System.out.println("\nShipment Menu:");
+                System.out.println(BLUE + "\n+==================================+" + RESET);
+                System.out.println(BLUE + "|                                  |" + RESET);
+                System.out.println(BLUE + "|          " + GREEN + "Shipment Menu" + BLUE + "           |" + RESET);
+                System.out.println(BLUE + "|                                  |" + RESET);
+                System.out.println(BLUE + "+==================================+" + RESET);
             System.out.println("1. Add New Shipment");
             System.out.println("2. Modify Shipment Information");
             System.out.println("3. Delete Cancelled Shipment Record");
@@ -204,7 +214,7 @@ class actionShipment {
             System.out.println("5. Shipment Report");
             System.out.println("6. Exit");
             try {
-                System.out.print("Enter your option: ");
+                System.out.print(PURPLE+"Enter your option: "+RESET);
                 int option = scanner.nextInt();
                 scanner.nextLine();
 
@@ -230,11 +240,11 @@ class actionShipment {
                         exit = true;
                         break;
                     default:
-                        System.out.println("\nInvalid input!!Please try again.");
+                        System.out.println(RED+"\nInvalid input!!Please try again."+RESET);
                         break;
                 }
             } catch (InputMismatchException ex) {
-                System.out.println("\nInvalid input!!Please try again!!");
+                System.out.println(RED+"\nInvalid input!!Please try again!!"+RESET);
                 scanner.nextLine();
             }
         }
@@ -292,7 +302,7 @@ class actionShipment {
             }
             write.close();
         } catch (IOException e) {
-            System.out.println("\nError opening file!!");
+            System.out.println(RED+"\nError opening file!!"+RESET);
         }
     }
 
@@ -321,7 +331,7 @@ class actionShipment {
 
         //get transportation
         if (!empty) {
-            System.out.print("Enter transportation plate No.: ");
+            System.out.print(PURPLE+"Enter transportation plate No.: "+RESET);
             String plateNo = scanner.nextLine();
             plateNo = transportation.passTransportation(plateNo);
             shipment.get(index).setTransportation(new Transportation(plateNo));
@@ -329,37 +339,37 @@ class actionShipment {
                 do {
                     continueInput = true;
                     try {
-                        System.out.print("Enter Departure date(dd/mm/yyyy): ");
+                        System.out.print(PURPLE+"Enter Departure date(dd/mm/yyyy): "+RESET);
                         String date = scanner.nextLine();
                         Date departureDate = dateForm.parse(date);
                         shipment.get(index).setDepartureDate(departureDate);
                         continueInput = false;
                         if (!shipment.get(index).validateDate()) {
-                            System.out.println("\nDeparture date cannot at today and before.");
+                            System.out.println(RED+"\nDeparture date cannot at today and before."+RESET);
                             continueInput = true;
                         }
                         for (int i = 0; i < shipment.size() - 1; i++) {
                             if (shipment.get(index).equals(shipment.get(i))) {
                                 continueInput = true;
-                                System.out.println("\nOne transportation only can have one shipment at the same date");
+                                System.out.println(RED+"\nOne transportation only can have one shipment at the same date"+RED);
                             }
                         }
 
                     } catch (ParseException ex) {
-                        System.out.println("\nInvalid format!Please follow (dd/mm/yyyy) format.");
+                        System.out.println(RED+"\nInvalid format!Please follow (dd/mm/yyyy) format."+RESET);
                     }
                 } while (continueInput);
 
                 do {
                     continueInput = true;
                     try {
-                        System.out.print("Enter Departure time in HHMM format(example: 2315): ");
+                        System.out.print(PURPLE+"Enter Departure time in HHMM format(example: 2315): "+RESET);
                         String time = scanner.nextLine();
                         Date departureTime = timeForm.parse(time);
                         shipment.get(index).setDepartureTime(departureTime);
                         continueInput = false;
                     } catch (ParseException ex) {
-                        System.out.println("\nInvalid format!Please follow HHMM format(example: 2315).");
+                        System.out.println(RED+"\nInvalid format!Please follow HHMM format(example: 2315)."+RESET);
                     }
                 } while (continueInput);
 
@@ -373,7 +383,7 @@ class actionShipment {
                     boolean error;
                     Display.listFood();
                     do {
-                        System.out.print("Enter food ID(XXX to stop): ");
+                        System.out.print(PURPLE+"Enter food ID(XXX to stop): "+RESET);
                         String foodId = scanner.nextLine();
                         foodId = foodId.replace(" ", "").toUpperCase();
 
@@ -382,13 +392,13 @@ class actionShipment {
                             do {
                                 continueInput = true;
                                 try {
-                                    System.out.print("Enter quantity: ");
+                                    System.out.print(PURPLE+"Enter quantity: "+RESET);
                                     qty[count] = scanner.nextInt();
                                     scanner.nextLine();
                                     count++;
                                     continueInput = false;
                                 } catch (InputMismatchException ex) {
-                                    System.out.println("\nInvalid input!!Please try again.");
+                                    System.out.println(RED+"\nInvalid input!!Please try again."+RESET);
                                     scanner.nextLine();
                                 }
                             } while (continueInput);
@@ -408,7 +418,7 @@ class actionShipment {
                     boolean error;
                     Display.listBeverage();
                     do {
-                        System.out.print("Enter beverage ID(XXX to stop): ");
+                        System.out.print(PURPLE+"Enter beverage ID(XXX to stop): "+RESET);
                         String beverageId = scanner.nextLine();
                         beverageId = beverageId.replace(" ", "").toUpperCase();
 
@@ -417,13 +427,13 @@ class actionShipment {
                             do {
                                 continueInput = true;
                                 try {
-                                    System.out.print("Enter quantity: ");
+                                    System.out.print(PURPLE+"Enter quantity: "+RESET);
                                     qty[count] = scanner.nextInt();
                                     scanner.nextLine();
                                     count++;
                                     continueInput = false;
                                 } catch (InputMismatchException ex) {
-                                    System.out.println("\nInvalid input!!Please try again.");
+                                    System.out.println(RED+"\nInvalid input!!Please try again."+RESET);
                                     scanner.nextLine();
                                 }
                             } while (continueInput);
@@ -443,7 +453,7 @@ class actionShipment {
                     boolean error;
                     Display.listIngredient();
                     do {
-                        System.out.print("Enter ingredient ID(XXX to stop): ");
+                        System.out.print(PURPLE+"Enter ingredient ID(XXX to stop): "+RESET);
                         String ingredientId = scanner.nextLine();
                         ingredientId = ingredientId.replace(" ", "").toUpperCase();
 
@@ -453,13 +463,13 @@ class actionShipment {
                                 continueInput = true;
                                 try {
 
-                                    System.out.print("Enter quantity: ");
+                                    System.out.print(PURPLE+"Enter quantity: "+RESET);
                                     qty[count] = scanner.nextInt();
                                     scanner.nextLine();
                                     count++;
                                     continueInput = false;
                                 } catch (InputMismatchException ex) {
-                                    System.out.println("\nInvalid input!!Please try again.");
+                                    System.out.println(RED+"\nInvalid input!!Please try again."+RESET);
                                     scanner.nextLine();
                                 }
                             } while (continueInput);
@@ -497,7 +507,7 @@ class actionShipment {
             boolean found = false, continueInput, exit = false;
 
             do {
-                System.out.print("Enter Shipment ID to modify(SPXXXXX): ");
+                System.out.print(PURPLE+"Enter Shipment ID to modify(SPXXXXX): "+RESET);
                 String id = scanner.nextLine();
                 id = id.replace(" ", "").toUpperCase();
                 for (int i = 0; i < shipment.size(); i++) {
@@ -507,7 +517,7 @@ class actionShipment {
                     }
                 }
                 if (!found) {
-                    System.out.println("\nShipment ID can not found!!Please try again.");
+                    System.out.println(RED+"\nShipment ID can not found!!Please try again."+RESET);
                 }
 
             } while (!found);
@@ -524,7 +534,7 @@ class actionShipment {
                 do {
                     continueInput = true;
                     try {
-                        System.out.print("Enter your option: ");
+                        System.out.print(PURPLE+"Enter your option: "+RESET);
                         int option = scanner.nextInt();
                         scanner.nextLine();
                         switch (option) {
@@ -533,26 +543,26 @@ class actionShipment {
                                     continueInput = true;
                                     try {
                                         System.out.println("Previous Date: " + dateForm.format(temp.getDepartureDate()));
-                                        System.out.print("Enter Departure date(dd/mm/yyyy): ");
+                                        System.out.print(PURPLE+"Enter Departure date(dd/mm/yyyy): "+RESET);
                                         String date = scanner.nextLine();
                                         Date departureDate = dateForm.parse(date);
                                         shipment.get(index).setDepartureDate(departureDate);
                                         continueInput = false;
                                         if (!shipment.get(index).validateDate()) {
-                                            System.out.println("\nDeparture date cannot at today and before.");
+                                            System.out.println(RED+"\nDeparture date cannot at today and before."+RESET);
                                             continueInput = true;
                                         }
                                         for (int i = 0; i < shipment.size() - 1; i++) {
                                             if (shipment.get(index).equals(shipment.get(i))) {
                                                 if (index != i) {
                                                     continueInput = true;
-                                                    System.out.println("\nOne transportation only can have one shipment at the same date");
+                                                    System.out.println(RED+"\nOne transportation only can have one shipment at the same date"+RESET);
                                                 }
                                             }
                                         }
 
                                     } catch (ParseException ex) {
-                                        System.out.println("\nInvalid format!Please follow (dd/mm/yyyy) format.");
+                                        System.out.println("RED\nInvalid format!Please follow (dd/mm/yyyy) format."+RESET);
                                     }
                                 } while (continueInput);
 
@@ -560,13 +570,13 @@ class actionShipment {
                                     continueInput = true;
                                     try {
                                         System.out.println("Previous Time: " + timeForm.format(temp.getDepartureTime()));
-                                        System.out.print("Enter Departure time in HHMM format(example: 2315): ");
+                                        System.out.print(PURPLE+"Enter Departure time in HHMM format(example: 2315): "+RESET);
                                         String time = scanner.nextLine();
                                         Date departureTime = timeForm.parse(time);
                                         shipment.get(index).setDepartureTime(departureTime);
                                         continueInput = false;
                                     } catch (ParseException ex) {
-                                        System.out.println("\nInvalid format!Please follow HHMM format(example: 2315).");
+                                        System.out.println(RED+"\nInvalid format!Please follow HHMM format(example: 2315)."+RESET);
                                     }
                                 } while (continueInput);
                                 break;
@@ -574,7 +584,7 @@ class actionShipment {
                                 do {
                                     continueInput = false;
                                     System.out.println("Previous Plate No.: " + temp.getTransportation().getPlateNo());
-                                    System.out.print("Enter transportation plate No.: ");
+                                    System.out.print(PURPLE+"Enter transportation plate No.: "+RESET);
                                     String plateNo = scanner.nextLine();
                                     plateNo = transportation.passTransportation(plateNo);
                                     shipment.get(index).setTransportation(new Transportation(plateNo));
@@ -582,7 +592,7 @@ class actionShipment {
                                         if (shipment.get(index).equals(shipment.get(i))) {
                                             if (index != i) {
                                                 continueInput = true;
-                                                System.out.println("\nOne transportation only can have one shipment at the same date");
+                                                System.out.println(RED+"\nOne transportation only can have one shipment at the same date"+RESET);
                                             }
                                         }
                                     }
@@ -600,7 +610,7 @@ class actionShipment {
                                     boolean error;
                                     Display.listFood();
                                     do {
-                                        System.out.print("Enter food ID(XXX to stop): ");
+                                        System.out.print(PURPLE+"Enter food ID(XXX to stop): "+RESET);
                                         String foodId = scanner.nextLine();
                                         foodId = foodId.replace(" ", "").toUpperCase();
 
@@ -609,13 +619,13 @@ class actionShipment {
                                             do {
                                                 continueInput = true;
                                                 try {
-                                                    System.out.print("Enter quantity: ");
+                                                    System.out.print(PURPLE+"Enter quantity: "+RESET);
                                                     qty[count] = scanner.nextInt();
                                                     scanner.nextLine();
                                                     count++;
                                                     continueInput = false;
                                                 } catch (InputMismatchException ex) {
-                                                    System.out.println("\nInvalid input!!Please try again.");
+                                                    System.out.println(RED+"\nInvalid input!!Please try again."+RESET);
                                                     scanner.nextLine();
                                                 }
                                             } while (continueInput);
@@ -635,7 +645,7 @@ class actionShipment {
                                     boolean error;
                                     Display.listBeverage();
                                     do {
-                                        System.out.print("Enter beverage ID(XXX to stop): ");
+                                        System.out.print(PURPLE+"Enter beverage ID(XXX to stop): "+RESET);
                                         String beverageId = scanner.nextLine();
                                         beverageId = beverageId.replace(" ", "").toUpperCase();
 
@@ -644,13 +654,13 @@ class actionShipment {
                                             do {
                                                 continueInput = true;
                                                 try {
-                                                    System.out.print("Enter quantity: ");
+                                                    System.out.print(PURPLE+"Enter quantity: "+RESET);
                                                     qty[count] = scanner.nextInt();
                                                     scanner.nextLine();
                                                     count++;
                                                     continueInput = false;
                                                 } catch (InputMismatchException ex) {
-                                                    System.out.println("\nInvalid input!!Please try again.");
+                                                    System.out.println(RED+"\nInvalid input!!Please try again."+RESET);
                                                     scanner.nextLine();
                                                 }
                                             } while (continueInput);
@@ -670,7 +680,7 @@ class actionShipment {
                                     boolean error;
                                     Display.listIngredient();
                                     do {
-                                        System.out.print("Enter ingredient ID(XXX to stop): ");
+                                        System.out.print(PURPLE+"Enter ingredient ID(XXX to stop): "+RESET);
                                         String ingredientId = scanner.nextLine();
                                         ingredientId = ingredientId.replace(" ", "").toUpperCase();
 
@@ -679,13 +689,13 @@ class actionShipment {
                                             do {
                                                 continueInput = true;
                                                 try {
-                                                    System.out.print("Enter quantity: ");
+                                                    System.out.print(PURPLE+"Enter quantity: "+RESET);
                                                     qty[count] = scanner.nextInt();
                                                     scanner.nextLine();
                                                     count++;
                                                     continueInput = false;
                                                 } catch (InputMismatchException ex) {
-                                                    System.out.println("\nInvalid input!!Please try again.");
+                                                    System.out.println(RED+"\nInvalid input!!Please try again."+RESET);
                                                     scanner.nextLine();
                                                 }
                                             } while (continueInput);
@@ -715,16 +725,16 @@ class actionShipment {
                                 continueInput = false;
                                 break;
                             default:
-                                System.out.println("\nInvalid input!Please try again.");
+                                System.out.println(RED+"\nInvalid input!Please try again."+RESET);
                                 break;
                         }
                     } catch (InputMismatchException ex) {
-                        System.out.println("\nInvalid input!!Please try again.");
+                        System.out.println(RED+"\nInvalid input!!Please try again."+RESET);
                     }
                 } while (continueInput);
             } while (!exit);
         } else {
-            System.out.println("\nWithout any shipment can modify!!");
+            System.out.println(RED+"\nWithout any shipment can modify!!"+RESET);
         }
     }
 
@@ -733,7 +743,7 @@ class actionShipment {
         boolean continueInput, exit = false, found;
 
         if (shipment.isEmpty()) {
-            System.out.println("\nWithout any shipment.");
+            System.out.println(RED+"\nWithout any shipment."+RESET);
         } else {
             do {
                 boolean have = false;
@@ -751,14 +761,14 @@ class actionShipment {
                         continueInput = true;
 
                         try {
-                            System.out.print("Enter your option:");
+                            System.out.print(PURPLE+"Enter your option:"+RESET);
                             int option = scanner.nextInt();
                             scanner.nextLine();
 
                             switch (option) {
                                 case 1:
                                     found = false;
-                                    System.out.print("Enter Shipment ID:");
+                                    System.out.print(PURPLE+"Enter Shipment ID:"+RESET);
                                     String id = scanner.nextLine();
                                     id = id.toUpperCase().replace(" ", "");
                                     for (int i = 0; i < shipment.size(); i++) {
@@ -770,7 +780,7 @@ class actionShipment {
                                         }
                                     }
                                     if (!found) {
-                                        System.out.println("\n" + id + " not found or status not in \"Cancelled\"");
+                                        System.out.println(RED+"\n" + id + " not found or status not in \"Cancelled\""+RESET);
                                     }
                                     break;
                                 case 2:
@@ -785,26 +795,26 @@ class actionShipment {
 
                                     }
                                     if (!found) {
-                                        System.out.println("\nWithout any shipment status in \"Cancelled\" status!");
+                                        System.out.println(RED+"\nWithout any shipment status in \"Cancelled\" status!"+RESET);
                                     }
                                     break;
                                 case 3:
                                     exit = true;
                                     break;
                                 default:
-                                    System.out.println("\nInvalid option!!Please try again.");
+                                    System.out.println(RED+"\nInvalid option!!Please try again."+RESET);
                                     break;
 
                             }
                             continueInput = false;
                         } catch (InputMismatchException ex) {
-                            System.out.println("\nInvalid input!!Please try again.");
+                            System.out.println(RED+"\nInvalid input!!Please try again."+RESET);
                             scanner.nextLine();
                         }
                     } while (continueInput);
                 } else {
                     exit = true;
-                    System.out.println("\nWithout any shipment have been cancelled.");
+                    System.out.println(RED+"\nWithout any shipment have been cancelled."+RESET);
                 }
             } while (!exit);
 
@@ -824,7 +834,7 @@ class actionShipment {
             continueInput = true;
 
             try {
-                System.out.print("Enter your option:");
+                System.out.print(PURPLE+"Enter your option:"+RESET);
                 int option = scanner.nextInt();
                 scanner.nextLine();
 
@@ -834,7 +844,7 @@ class actionShipment {
                         int index = 0;
                         boolean found = false;
 
-                        System.out.print("Enter Shipment ID:");
+                        System.out.print(PURPLE+"Enter Shipment ID:"+RESET);
                         String id = scanner.nextLine();
                         id = id.toUpperCase().replace(" ", "");
                         for (int i = 0; i < shipment.size(); i++) {
@@ -856,24 +866,24 @@ class actionShipment {
                             do {
                                 continueInput = true;
                                 try {
-                                    System.out.print("Enter your option: ");
+                                    System.out.print(PURPLE+"Enter your option: "+RESET);
                                     int select = scanner.nextInt();
                                     scanner.nextLine();
                                     if (select <= status.length && select > 0) {
                                         shipment.get(index).setStatus(status[select - 1]);
                                         continueInput = false;
                                     } else {
-                                        System.out.println("\nInvalid input!Please try again.");
+                                        System.out.println(RED+"\nInvalid input!Please try again."+RESET);
                                     }
                                 } catch (InputMismatchException ex) {
-                                    System.out.println("\nInvalid input!!Please try again.");
+                                    System.out.println(RED+"\nInvalid input!!Please try again."+RESET);
                                     scanner.nextLine();
                                 }
                             } while (continueInput);
                         } else if (!found) {
-                            System.out.println("\nShipment ID not found!");
+                            System.out.println(RED+"\nShipment ID not found!"+RESET);
                         } else {
-                            System.out.println("\nShipment can not be cancalled!");
+                            System.out.println(RED+"\nShipment can not be cancalled!"+RESET);
                         }
                         continueInput = true;
                         break;
@@ -906,16 +916,16 @@ class actionShipment {
                         break;
                     case 3:
                         continueInput = false;
-                        System.out.println("\nExited!");
+                        System.out.println(RED+"\nExited!"+RESET);
                         break;
                     default:
                         continueInput = true;
-                        System.out.println("\nInvalid Input!!");
+                        System.out.println(RED+"\nInvalid Input!!"+RESET);
                         break;
                 }
 
             } catch (InputMismatchException ex) {
-                System.out.println("Invalid input!!Please try again.");
+                System.out.println(RED+"Invalid input!!Please try again."+RESET);
             }
         } while (continueInput);
     }
@@ -932,7 +942,7 @@ class actionShipment {
         }
         System.out.println("\n====================================================================================================================");
 
-        System.out.println("Enter to exit");
+        System.out.print(PURPLE+"Enter to exit"+RESET);
         new Scanner(System.in).nextLine();
 
     }
