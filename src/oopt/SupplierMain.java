@@ -13,10 +13,21 @@ import java.util.Scanner;
  */
 public class SupplierMain {
 
+    public static final String BLUE = "\u001B[34m";
+    public static final String RESET = "\u001B[0m";
+    public static final String PURPLE = "\u001B[35m";
+
     public static void SupplierMenu() {
         boolean valid = false;
         int choice = 0;
-        System.out.println("\n\t\t******Welcome to Supplier Module******");
+
+        System.out.println(PURPLE + "\t\t ____  _   _ ____  ____  _     ___ _____ ____  " + RESET);
+        System.out.println(PURPLE + "\t\t/ ___|| | | |  _ \\|  _ \\| |   |_ _| ____|  _ \\ " + RESET);
+        System.out.println(PURPLE + "\t\t\\___ \\| | | | |_) | |_) | |    | ||  _| | |_) |" + RESET);
+        System.out.println(PURPLE + "\t\t ___) | |_| |  __/|  __/| |___ | || |___|  _ < " + RESET);
+        System.out.println(PURPLE + "\t\t|____/ \\___/|_|   |_|   |_____|___|_____|_| \\_\\" + RESET);
+
+        System.out.println(BLUE + "\n\t\t******Welcome to Supplier Module******" + RESET);
         System.out.println("\t\t\t1.Display supplier");
         System.out.println("\t\t\t2.Add supplier");
         System.out.println("\t\t\t3.Modify supplier");
@@ -61,9 +72,8 @@ public class SupplierMain {
                     SupplierItemsMain.SupplierItemsMenu();
                     break;
                 default:
-                    System.exit(0);
+                    return;
             }
-
         }
     }
 }

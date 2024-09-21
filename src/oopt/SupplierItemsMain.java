@@ -12,18 +12,22 @@ import java.util.Scanner;
  * @author User
  */
 public class SupplierItemsMain {
-    public static void SupplierItemsMenu(){
+
+    public static final String BLUE = "\u001B[34m";
+    public static final String RESET = "\u001B[0m";
+
+    public static void SupplierItemsMenu() {
         boolean valid = false;
         int choice = 0;
-        System.out.println("\n\t\t******Welcome to Supplier's Items Module******");
+        System.out.println(BLUE + "\n\t\t******Welcome to Supplier's Items Module******" + RESET);
         System.out.println("\t\t\t1.Display supplier's items");
         System.out.println("\t\t\t2.Add supplier's item(s)");
         System.out.println("\t\t\t3.Remove supplier's item(s)");
         System.out.println("\t\t\tAny number to go back to Supplier Module");
-        
-        do{
-        System.out.print("Choice: ");
-        
+
+        do {
+            System.out.print("Choice: ");
+
             Scanner input = new Scanner(System.in);
             try {
                 choice = input.nextInt();
@@ -38,7 +42,7 @@ public class SupplierItemsMain {
                 }
             }
         } while (!valid);
-      
+
         if (valid) {
             switch (choice) {
                 case 1:
@@ -55,6 +59,6 @@ public class SupplierItemsMain {
                     SupplierMain.SupplierMenu();
             }
 
-    }
+        }
     }
 }

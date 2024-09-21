@@ -29,22 +29,22 @@ public class PurchaseOrder {
     private double totalPrice;
     private Date orderDate;
     private String paymentMethod;
-    
-//constructor
-   public PurchaseOrder(String supplier, ArrayList<String> productOrder, ArrayList<Double> quantities, 
-           ArrayList<Double> pricePerUnit, String paymentMethod) {
-    this.POid = generateNextPOId();
-    this.supplier = supplier;
-    this.productOrder = productOrder;
-    this.quantities = quantities;
-    this.pricePerUnit = pricePerUnit;
-    this.paymentMethod = paymentMethod;
-    this.totalPrice = countTotal(quantities, pricePerUnit);  // Calculate total price
-    this.orderDate = new Date();
-}
 
-   public PurchaseOrder(String POid, String supplier, ArrayList<String> productOrder, ArrayList<Double> quantities, 
-           ArrayList<Double> pricePerUnit, double totalPrice, Date orderDate, String paymentMethod) {
+//constructor
+    public PurchaseOrder(String supplier, ArrayList<String> productOrder, ArrayList<Double> quantities,
+            ArrayList<Double> pricePerUnit, String paymentMethod) {
+        this.POid = generateNextPOId();
+        this.supplier = supplier;
+        this.productOrder = productOrder;
+        this.quantities = quantities;
+        this.pricePerUnit = pricePerUnit;
+        this.paymentMethod = paymentMethod;
+        this.totalPrice = countTotal(quantities, pricePerUnit);  // Calculate total price
+        this.orderDate = new Date();
+    }
+
+    public PurchaseOrder(String POid, String supplier, ArrayList<String> productOrder, ArrayList<Double> quantities,
+            ArrayList<Double> pricePerUnit, double totalPrice, Date orderDate, String paymentMethod) {
         this.POid = POid;
         this.supplier = supplier;
         this.productOrder = productOrder;
@@ -58,51 +58,49 @@ public class PurchaseOrder {
     public String getPaymentMethod() {
         return paymentMethod;
     }
-    
-    public PurchaseOrder(){
+
+    public PurchaseOrder() {
         orderDate = new Date();
         this.POid = generateNextPOId();
     }
-    
+
     private static int lastPOnum = 0;
     private static final String PO_PREFIX = "PO-";
-    
-private static String generateNextPOId() {
-    String highestPOId = null;
 
-    try (BufferedReader br = new BufferedReader(new FileReader("PurchaseOrder.txt"))) {
-        String line;
+    private static String generateNextPOId() {
+        String highestPOId = null;
 
-        // Read through the file to find the highest PO ID
-        while ((line = br.readLine()) != null) {
-            String currentPOId = line.split("/")[0]; // Extract PO ID from each line
-            if (highestPOId == null || currentPOId.compareTo(highestPOId) > 0) {
-                highestPOId = currentPOId;
+        try (BufferedReader br = new BufferedReader(new FileReader("PurchaseOrder.txt"))) {
+            String line;
+
+            // Read through the file to find the highest PO ID
+            while ((line = br.readLine()) != null) {
+                String currentPOId = line.split("/")[0]; // Extract PO ID from each line
+                if (highestPOId == null || currentPOId.compareTo(highestPOId) > 0) {
+                    highestPOId = currentPOId;
+                }
             }
+
+            // If there's an existing PO ID, parse and increment it
+            if (highestPOId != null) {
+                lastPOnum = Integer.parseInt(highestPOId.substring(3)); // Extract the numeric part
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        // If there's an existing PO ID, parse and increment it
-        if (highestPOId != null) {
-            lastPOnum = Integer.parseInt(highestPOId.substring(3)); // Extract the numeric part
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
+        lastPOnum++;  // Increment the last PO number
+        return PO_PREFIX + String.format("%05d", lastPOnum);  // Format as PO-00001, PO-00002, etc.
     }
-
-    lastPOnum++;  // Increment the last PO number
-    return PO_PREFIX + String.format("%05d", lastPOnum);  // Format as PO-00001, PO-00002, etc.
-}
-     
 
     public double countTotal(ArrayList<Double> quantities, ArrayList<Double> pricePerUnit) {
-    double total = 0.0;
-    for (int i = 0; i < quantities.size(); i++) {
-        total += quantities.get(i) * pricePerUnit.get(i);
+        double total = 0.0;
+        for (int i = 0; i < quantities.size(); i++) {
+            total += quantities.get(i) * pricePerUnit.get(i);
+        }
+        return total;
     }
-    return total;
-}
 
-     
     public void addProduct(String productOrd, double quantity, double price) {
         // Java will automatically convert (autobox) the primitive double to Double
         productOrder.add(productOrd);
@@ -174,99 +172,103 @@ private static String generateNextPOId() {
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
-    
-   
+
+    public static final String RED = "\u001B[31m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String RESET = "\u001B[0m";
+
     public static ArrayList<PurchaseOrder> readPurchaseOrdersFromFile() {
-    ArrayList<PurchaseOrder> purchaseOrders = new ArrayList<>();
-    String filePath = "PurchaseOrder.txt";
-    
-    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-        String line;
+        ArrayList<PurchaseOrder> purchaseOrders = new ArrayList<>();
+        String filePath = "PurchaseOrder.txt";
 
-        while ((line = br.readLine()) != null) {
-            String[] data = line.split("/");
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
 
-            // Check if the data array has enough elements
-            if (data.length >= 8) {  // Minimum expected fields (POid, SupplierID, at least 1 product, quantity, price, total price, order date, payment method)
-                String POid = data[0];
-                String supplierID = data[1];
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split("/");
 
-                ArrayList<String> productOrder = new ArrayList<>();
-                ArrayList<Double> quantities = new ArrayList<>();
-                ArrayList<Double> pricePerUnit = new ArrayList<>();
+                // Check if the data array has enough elements
+                if (data.length >= 8) {  // Minimum expected fields (POid, SupplierID, at least 1 product, quantity, price, total price, order date, payment method)
+                    String POid = data[0];
+                    String supplierID = data[1];
 
-                // Parse product, quantity, and price data
-                int i = 2; // Start from index 2 (products start here)
-                while (i < data.length - 3) {  // Stop before the last 3 fields (TotalPrice, OrderDate, and PaymentMethod)
-                    String product = data[i];
-                    double quantity = Double.parseDouble(data[++i]);
-                    double price = Double.parseDouble(data[++i]);
+                    ArrayList<String> productOrder = new ArrayList<>();
+                    ArrayList<Double> quantities = new ArrayList<>();
+                    ArrayList<Double> pricePerUnit = new ArrayList<>();
 
-                    productOrder.add(product);
-                    quantities.add(quantity);
-                    pricePerUnit.add(price);
+                    // Parse product, quantity, and price data
+                    int i = 2; // Start from index 2 (products start here)
+                    while (i < data.length - 3) {  // Stop before the last 3 fields (TotalPrice, OrderDate, and PaymentMethod)
+                        String product = data[i];
+                        double quantity = Double.parseDouble(data[++i]);
+                        double price = Double.parseDouble(data[++i]);
 
-                    i++;  // Move to the next product
-                }
+                        productOrder.add(product);
+                        quantities.add(quantity);
+                        pricePerUnit.add(price);
 
-                // Extract total price, order date, and payment method
-                double totalPrice = Double.parseDouble(data[data.length - 3]);
-                SimpleDateFormat sdf = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
-                Date orderDate = sdf.parse(data[data.length - 2]);
-                String paymentMethod = data[data.length - 1];
-
-                // Create and add the PurchaseOrder object to the list
-                PurchaseOrder purchaseOrder = new PurchaseOrder(POid, supplierID, productOrder, quantities, pricePerUnit, totalPrice, orderDate, paymentMethod);
-                purchaseOrders.add(purchaseOrder);
-            }
-        }
-    } catch (IOException | ParseException e) {
-        e.printStackTrace();
-    }
-
-    return purchaseOrders;
-}
-    
-    public static void displayAllpo(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("\n\n");
-                System.out.println("***********All Purchases***********\n");
-                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                ArrayList<PurchaseOrder> purchaseOrders = readPurchaseOrdersFromFile();
-                for (PurchaseOrder po : purchaseOrders) {
-                    System.out.println("Purchase Order ID: " + po.getPOid());
-                    System.out.println("Supplier ID: " + po.getSupplier());  
-                   System.out.printf("%-20s %-10s %-10s %-10s\n", "Items", "Quantity", "Unit Cost", "Total Paid");
-                    
-                    // Print products, quantities, and prices
-                    ArrayList<String> products = po.getProducts();
-                    ArrayList<Double> quantities = po.getQuantities();
-                    ArrayList<Double> pricePerUnit = po.getPricePerUnit();
-
-                    for (int i = 0; i < products.size(); i++) {
-                        System.out.printf("%-20s %-10.2f x %-10.2f %-10.2f%n\n", products.get(i), 
-                                quantities.get(i), pricePerUnit.get(i), quantities.get(i)*pricePerUnit.get(i));
+                        i++;  // Move to the next product
                     }
-                    
-                    System.out.printf("%40s   %-15.2f\n", "Net Total: ", po.getTotalPrice());
-                    String formattedDate = sdf.format(po.getOrderDate());
-                    System.out.printf("%30s\n", formattedDate);
-                    System.out.printf("%20s : %s\n", "Payment Method",po.getPaymentMethod());
-                    System.out.println("------------------------------------------------------");  // Print an empty line for better readability between orders
+
+                    // Extract total price, order date, and payment method
+                    double totalPrice = Double.parseDouble(data[data.length - 3]);
+                    SimpleDateFormat sdf = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
+                    Date orderDate = sdf.parse(data[data.length - 2]);
+                    String paymentMethod = data[data.length - 1];
+
+                    // Create and add the PurchaseOrder object to the list
+                    PurchaseOrder purchaseOrder = new PurchaseOrder(POid, supplierID, productOrder, quantities, pricePerUnit, totalPrice, orderDate, paymentMethod);
+                    purchaseOrders.add(purchaseOrder);
                 }
-                
-                System.out.print("\n\t\tPress Enter to continue...\n\n");
-                        scan.nextLine();  // Wait for the user to press Enter
-                        PurchaseOrderMain.PurchaseOrderMenu();
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        return purchaseOrders;
     }
 
-   
+    public static void displayAllpo() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\n");
+        System.out.println("***********All Purchases***********\n");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        ArrayList<PurchaseOrder> purchaseOrders = readPurchaseOrdersFromFile();
+        for (PurchaseOrder po : purchaseOrders) {
+            System.out.println("Purchase Order ID: " + po.getPOid());
+            System.out.println("Supplier ID: " + po.getSupplier());
+            System.out.printf("%-20s %-10s %-10s %-10s\n", "Items", "Quantity", "Unit Cost", "Total Paid");
+
+            // Print products, quantities, and prices
+            ArrayList<String> products = po.getProducts();
+            ArrayList<Double> quantities = po.getQuantities();
+            ArrayList<Double> pricePerUnit = po.getPricePerUnit();
+
+            for (int i = 0; i < products.size(); i++) {
+                System.out.printf("%-20s %-10.2f x %-10.2f %-10.2f%n\n", products.get(i),
+                        quantities.get(i), pricePerUnit.get(i), quantities.get(i) * pricePerUnit.get(i));
+            }
+
+            System.out.printf("%40s   %-15.2f\n", "Net Total: ", po.getTotalPrice());
+            String formattedDate = sdf.format(po.getOrderDate());
+            System.out.printf("%30s\n", formattedDate);
+            System.out.printf("%20s : %s\n", "Payment Method", po.getPaymentMethod());
+            System.out.println("------------------------------------------------------");  // Print an empty line for better readability between orders
+        }
+        System.out.println("");
+        System.out.print(CYAN + "\t\tPress Enter to continue...\n\n" + RESET);
+        scan.nextLine();  // Wait for the user to press Enter
+        PurchaseOrderMain.PurchaseOrderMenu();
+    }
+
     public static void addPurchaseOrderMenu() {
         System.out.println("Category:");
         System.out.println("1. Ingredients");
         System.out.println("2. Food");
         System.out.println("3. Beverages");
-        
+
         boolean validInput = false;
         Scanner input = new Scanner(System.in);
         int choice = 0;
@@ -276,7 +278,7 @@ private static String generateNextPOId() {
 
             if (userInput.equalsIgnoreCase("XXX")) {
                 // Exit the method and return to the main menu
-                System.out.println("Exiting to the main menu...");
+                System.out.println(CYAN + "Exiting to the main menu..." + RESET);
                 PurchaseOrderMain.PurchaseOrderMenu();  // Redirect to the main menu
                 return;  // Exit the current method
             }
@@ -288,36 +290,36 @@ private static String generateNextPOId() {
                 if (choice >= 1 && choice <= 3) {
                     validInput = true;  // Valid input, break the loop
                 } else {
-                    System.out.println("INVALID CHOICE! Please enter a number between 1 and 3.");
+                    System.out.println(RED + "INVALID CHOICE! Please enter a number between 1 and 3." + RESET);
                 }
             } catch (NumberFormatException e) {
                 // Handle non-numeric input
-                System.out.println("INVALID INPUT! Please enter a numeric value.");
+                System.out.println(RED + "INVALID INPUT! Please enter a numeric value." + RESET);
             }
         } while (!validInput);
 
         String chooseSupplier;
-        boolean supplierHasStock = false;
+        boolean supplierHasItems = false;
 
         ArrayList<Supplier> suppliers = Supplier.readTextFile();
         ArrayList<SupplierItems> items = SupplierItems.readItemsTextFile(suppliers);
-        
+
         switch (choice) {
             case 1:
                 for (Supplier j : suppliers) {
                     if (j.getID().charAt(0) == 'I') {
-                        supplierHasStock = false;
+                        supplierHasItems = false;
 
                         // Check if this supplier has any stocks
                         for (SupplierItems i : items) {
                             if (j.getID().equalsIgnoreCase(i.getSupplier().getID())) {
-                                supplierHasStock = true;
+                                supplierHasItems = true;
                                 break;  // Stop checking further stocks for this supplier
                             }
                         }
 
                         // Print supplier details only if they have stocks
-                        if (supplierHasStock) {
+                        if (supplierHasItems) {
                             System.out.println("\n\t\tSupplier ID: " + j.getID());
                             System.out.println("\t\tSupplier Name: " + j.getSupplierName());
                             System.out.println("\t\tCategory: " + j.getCategory());
@@ -331,18 +333,18 @@ private static String generateNextPOId() {
                 // Display Food suppliers
                 for (Supplier j : suppliers) {
                     if (j.getID().charAt(0) == 'F') {
-                        supplierHasStock = false;
+                        supplierHasItems = false;
 
                         // Check if this supplier has any stocks
                         for (SupplierItems i : items) {
                             if (j.getID().equalsIgnoreCase(i.getSupplier().getID())) {
-                                supplierHasStock = true;
+                                supplierHasItems = true;
                                 break;  // Stop checking further stocks for this supplier
                             }
                         }
 
                         // Print supplier details only if they have stocks
-                        if (supplierHasStock) {
+                        if (supplierHasItems) {
                             System.out.println("\n\t\tSupplier ID: " + j.getID());
                             System.out.println("\t\tSupplier Name: " + j.getSupplierName());
                             System.out.println("\t\tCategory: " + j.getCategory());
@@ -356,18 +358,18 @@ private static String generateNextPOId() {
                 // Display Beverages suppliers
                 for (Supplier j : suppliers) {
                     if (j.getID().charAt(0) == 'B') {
-                        supplierHasStock = false;
+                        supplierHasItems = false;
 
                         // Check if this supplier has any stocks
                         for (SupplierItems i : items) {
                             if (j.getID().equalsIgnoreCase(i.getSupplier().getID())) {
-                                supplierHasStock = true;
+                                supplierHasItems = true;
                                 break;  // Stop checking further stocks for this supplier
                             }
                         }
 
                         // Print supplier details only if they have stocks
-                        if (supplierHasStock) {
+                        if (supplierHasItems) {
                             System.out.println("\n\t\tSupplier ID: " + j.getID());
                             System.out.println("\t\tSupplier Name: " + j.getSupplierName());
                             System.out.println("\t\tCategory: " + j.getCategory());
@@ -375,7 +377,7 @@ private static String generateNextPOId() {
                         }
                     }
                 }
-                break;         
+                break;
         }
 
         boolean validSupplier = false;
@@ -386,21 +388,21 @@ private static String generateNextPOId() {
             chooseSupplier = chooseSupplier.trim();
             String relevantSupp = "A000";
             boolean valid = false;
-            for(Supplier j : suppliers){
-            for (SupplierItems i : items ) {
-                if (i.getSupplier().getID().equalsIgnoreCase(chooseSupplier)) {
-                    if(i.getSupplier().getID().equalsIgnoreCase(j.getID())){
-                    validSupplier = true;
-                    valid = true;
-                    relevantSupp = i.getSupplier().getID();
+            for (Supplier j : suppliers) {
+                for (SupplierItems i : items) {
+                    if (i.getSupplier().getID().equalsIgnoreCase(chooseSupplier)) {
+                        if (i.getSupplier().getID().equalsIgnoreCase(j.getID())) {
+                            validSupplier = true;
+                            valid = true;
+                            relevantSupp = i.getSupplier().getID();
+                        }
+                    }
                 }
-                }
-            }
             }
 
             if (valid) {
                 System.out.println("\n***********************************");
-                System.out.printf("%-10s %-15s %-10s\n", "ID" , "Item(s)", "Price");
+                System.out.printf("%-10s %-15s %-10s\n", "ID", "Item(s)", "Price");
                 System.out.println("***********************************");
                 for (SupplierItems i : items) {
                     if (i.getSupplier().getID().equalsIgnoreCase(chooseSupplier)) {
@@ -410,165 +412,165 @@ private static String generateNextPOId() {
                 // Call addPurchaseOrder method and pass the relevant category
                 addPurchaseOrder(relevantSupp);
             } else {
-                System.out.println("INVALID SUPPLIER ID!");
+                System.out.println(RED + "INVALID SUPPLIER ID!" + RESET);
                 System.out.print("Any key to try again or 'XXX' to cancel current order and quit: ");
                 String choose = input.nextLine();
                 if (choose.equalsIgnoreCase("XXX")) {
-                    System.out.println("\t\t**Left make Purchase Order's tab**");
+                    System.out.println(CYAN + "\t\t**Left make Purchase Order's tab**" + RESET);
                     PurchaseOrderMain.PurchaseOrderMenu();
                     return;
                 }
             }
-        }while (!validSupplier);
-            
-       }
+        } while (!validSupplier);
+
+    }
 
     public static void addPurchaseOrder(String relevant) {
-     ArrayList<Supplier> suppliers = Supplier.readTextFile();
-     ArrayList<SupplierItems> items = SupplierItems.readItemsTextFile(suppliers);
+        ArrayList<Supplier> suppliers = Supplier.readTextFile();
+        ArrayList<SupplierItems> items = SupplierItems.readItemsTextFile(suppliers);
 
-   Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
-    boolean found = false;  // Start with false, indicating item not found
-    String continueAdd = "no";
-    String supId = null;
+        boolean found = false;  // Start with false, indicating item not found
+        String continueAdd = "no";
+        String supId = null;
 
-    ArrayList<String> productOrder = new ArrayList<>();
-    ArrayList<Double> quantities = new ArrayList<>();
-    ArrayList<Double> pricePerUnit = new ArrayList<>();
+        ArrayList<String> productOrder = new ArrayList<>();
+        ArrayList<Double> quantities = new ArrayList<>();
+        ArrayList<Double> pricePerUnit = new ArrayList<>();
 
-    do {
-        System.out.println("\t\t**Select your items to purchase**");
-        System.out.print("Item's ID: ");
-        String itemId = scan.nextLine().toUpperCase().trim();   
+        do {
+            System.out.println("\t\t**Select your items to purchase**");
+            System.out.print("Item's ID: ");
+            String itemId = scan.nextLine().toUpperCase().trim();
 
-        boolean itemFound = false;
+            boolean itemFound = false;
 
-        for (SupplierItems i : items) {
-            if (i.getStockID().equals(itemId) && i.getSupplier().getID().equals(relevant)) {
-                itemFound = true;
-                found = true;
-                supId = i.getSupplier().getID();  // Update the supplier ID
-                double itemQuantity = 0.0;
-                boolean correctQuantity = false;
+            for (SupplierItems i : items) {
+                if (i.getStockID().equals(itemId) && i.getSupplier().getID().equals(relevant)) {
+                    itemFound = true;
+                    found = true;
+                    supId = i.getSupplier().getID();  // Update the supplier ID
+                    double itemQuantity = 0.0;
+                    boolean correctQuantity = false;
 
-                do {
-                    System.out.printf("You selected %s\n", i.getName());
-                    System.out.print("Quantity: ");
+                    do {
+                        System.out.printf("You selected %s\n", i.getName());
+                        System.out.print("Quantity: ");
 
-                    try {
-                        itemQuantity = scan.nextDouble();
-                        scan.nextLine();  // Consume newline
-                        
-                        if (itemQuantity <= 0) {
-                            System.out.println("Quantity must be at least 1");
+                        try {
+                            itemQuantity = scan.nextDouble();
+                            scan.nextLine();  // Consume newline
+
+                            if (itemQuantity <= 0) {
+                                System.out.println(RED + "Quantity must be at least 1" + RESET);
+                                System.out.print("(Enter to try again/XXX to leave): ");
+                                continueAdd = scan.nextLine();
+                                if (continueAdd.equalsIgnoreCase("XXX")) {
+                                    System.out.println(CYAN + "\t\t**Left make Purchase Order's tab**" + RESET);
+                                    PurchaseOrderMain.PurchaseOrderMenu();
+                                    return;
+                                }
+                            } else {
+                                correctQuantity = true;
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println(RED + "INVALID INPUT! Please enter a numeric value." + RESET);
+                            scan.nextLine();  // Consume the invalid input
                             System.out.print("(Enter to try again/XXX to leave): ");
                             continueAdd = scan.nextLine();
                             if (continueAdd.equalsIgnoreCase("XXX")) {
-                                System.out.println("\t\t**Left make Purchase Order's tab**");
+                                System.out.println(CYAN + "\t\t**Left make Purchase Order's tab**" + RESET);
                                 PurchaseOrderMain.PurchaseOrderMenu();
                                 return;
                             }
-                        } else {
-                            correctQuantity = true;
                         }
-                    } catch (InputMismatchException e) {
-                        System.out.println("INVALID INPUT! Please enter a numeric value.");
-                        scan.nextLine();  // Consume the invalid input
-                        System.out.print("(Enter to try again/XXX to leave): ");
-                        continueAdd = scan.nextLine();
-                        if (continueAdd.equalsIgnoreCase("XXX")) {
-                            System.out.println("\t\t**Left make Purchase Order's tab**");
-                            PurchaseOrderMain.PurchaseOrderMenu();
-                            return;
-                        }
+                    } while (!correctQuantity);
+
+                    // Add data to the lists
+                    productOrder.add(i.getName());
+                    quantities.add(itemQuantity);
+                    pricePerUnit.add(i.getPrice());
+
+                    System.out.println("Add more items?");
+                    System.out.print("Yes/Any key to stop: ");
+                    continueAdd = scan.nextLine();
+                    break;  // Exit the loop after processing the current item
+                }
+            }
+
+            if (!itemFound) {
+                System.out.println(RED + "No such item found..." + RESET);
+                boolean validInput = false;
+                do {
+                    System.out.print("(Yes to try again/XXX to leave): ");
+                    continueAdd = scan.nextLine().trim();  // Trim any extra spaces
+
+                    if (continueAdd.equalsIgnoreCase("yes")) {
+                        validInput = true;  // Break the loop and continue adding items
+                    } else if (continueAdd.equalsIgnoreCase("XXX")) {
+                        System.out.println(CYAN + "\t\t**Left make Purchase Order's tab**" + RESET);
+                        PurchaseOrderMain.PurchaseOrderMenu();
+                        return;  // Exit the method and return to the main menu
+                    } else {
+                        System.out.println(RED + "INVALID INPUT! Please type 'Yes' to try again or 'XXX' to leave." + RESET);
                     }
-                } while (!correctQuantity);
-                
-                // Add data to the lists
-                productOrder.add(i.getName());
-                quantities.add(itemQuantity);
-                pricePerUnit.add(i.getPrice());
-                
-                System.out.println("Add more items?");
-                System.out.print("Yes/Any key to stop: ");
-                continueAdd = scan.nextLine();
-                break;  // Exit the loop after processing the current item
+                } while (!validInput);  // Keep looping until a valid input is provided
             }
-        }
 
-        if (!itemFound) {
-            System.out.println("No such item found...");
-            boolean validInput = false;
+        } while (continueAdd.equalsIgnoreCase("yes"));
+
+        // Proceed to payment method selection if items were added
+        if (found) {
+            // Prompt for payment method
+            String payMethod = "none";
+            boolean validChoice = false;
+
+            final String STAFF_PASSWORD = "staff123";
+
             do {
-                System.out.print("(Yes to try again/XXX to leave): ");
-                continueAdd = scan.nextLine().trim();  // Trim any extra spaces
+                System.out.println("\n\t\tSelect a payment method:");
+                System.out.println("\t\t1. Online Banking");
+                System.out.println("\t\t2. E-wallet\n");
+                System.out.print("\t\tSelect number: ");
 
-                if (continueAdd.equalsIgnoreCase("yes")) {
-                    validInput = true;  // Break the loop and continue adding items
-                } else if (continueAdd.equalsIgnoreCase("XXX")) {
-                    System.out.println("\t\t**Left make Purchase Order's tab**");
-                    PurchaseOrderMain.PurchaseOrderMenu();
-                    return;  // Exit the method and return to the main menu
-                } else {
-                    System.out.println("INVALID INPUT! Please type 'Yes' to try again or 'XXX' to leave.");
+                try {
+                    int pMethodChoice = scan.nextInt();
+                    scan.nextLine();  // Consume newline
+
+                    switch (pMethodChoice) {
+                        case 1:
+                            payMethod = "Online Banking";
+                            validChoice = true;
+
+                            break;
+                        case 2:
+                            payMethod = "E-wallet";
+                            validChoice = true;
+
+                            break;
+                        default:
+                            System.out.println(RED + "INVALID CHOICE! Please select either 1 or 2." + RESET);
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println(RED + "INVALID INPUT! Please enter a numeric value." + RESET);
+                    scan.nextLine();  // Consume the invalid input
                 }
-            } while (!validInput);  // Keep looping until a valid input is provided
-        }
 
-    } while (continueAdd.equalsIgnoreCase("yes"));
-
-    // Proceed to payment method selection if items were added
-    if (found) {
-        // Prompt for payment method
-        String payMethod = "none";
-        boolean validChoice = false;
-        
-        final String STAFF_PASSWORD = "staff123"; 
-
-        do {
-            System.out.println("\n\t\tSelect a payment method:");
-            System.out.println("\t\t1. Online Banking");
-            System.out.println("\t\t2. E-wallet\n");
-            System.out.print("\t\tSelect number: ");
-
-            try {
-                int pMethodChoice = scan.nextInt();
-                scan.nextLine();  // Consume newline
-
-                switch (pMethodChoice) {
-                    case 1:
-                        payMethod = "Online Banking";
-                        validChoice = true;
-                      
-                        break;
-                    case 2:
-                        payMethod = "E-wallet";
-                        validChoice = true;
-                      
-                        break;
-                    default:
-                        System.out.println("INVALID CHOICE! Please select either 1 or 2.");
+                if (!validChoice) {
+                    System.out.print("Any key to try again or type 'XXX' to quit and cancel the purchase order: ");
+                    String choose = scan.nextLine();
+                    if (choose.equalsIgnoreCase("XXX")) {
+                        System.out.println(CYAN + "\t\t**Left make Purchase Order's tab**" + RESET);
+                        PurchaseOrderMain.PurchaseOrderMenu();
+                        return;
+                    }
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("INVALID INPUT! Please enter a numeric value.");
-                scan.nextLine();  // Consume the invalid input
-            }
+            } while (!validChoice);
 
-            if (!validChoice) {
-                System.out.print("Any key to try again or type 'XXX' to quit and cancel the purchase order: ");
-                String choose = scan.nextLine();
-                if (choose.equalsIgnoreCase("XXX")) {
-                    System.out.println("\t\t**Left make Purchase Order's tab**");
-                    PurchaseOrderMain.PurchaseOrderMenu();
-                    return;
-                }
-            }
-        } while (!validChoice);
-        
             boolean passwordValid = false;
             int attempts = 3;
-            
+
             System.out.println("Your Order:");
             System.out.println("---------------------------------------------------");
             PurchaseOrder po = new PurchaseOrder(supId, productOrder, quantities, pricePerUnit, payMethod);
@@ -580,20 +582,20 @@ private static String generateNextPOId() {
                 String enteredPassword = scan.nextLine();
 
                 if (enteredPassword.equalsIgnoreCase("XXX")) {
-                    System.out.println("\t\t**Left make Purchase Order's tab**");
+                    System.out.println(CYAN + "\t\t**Left make Purchase Order's tab**" + RESET);
                     PurchaseOrderMain.PurchaseOrderMenu();
                     return;
                 } else if (enteredPassword.equals(STAFF_PASSWORD)) {
                     passwordValid = true;
-                    System.out.println("\t*****Purchase order added successfully.*****\n\n");
+                    System.out.println(GREEN + "\t*****Purchase order added successfully.*****\n\n" + RESET);
                     System.out.print("Press Enter to continue...\n\n");
                     scan.nextLine();  // Wait for the user to press Enter
                 } else {
                     attempts--;
                     if (attempts > 0) {
-                        System.out.println("INCORRECT PASSWORD! You have " + attempts + " attempt(s) left.");
+                        System.out.println(RED + "INCORRECT PASSWORD! You have " + attempts + " attempt(s) left." + RESET);
                     } else {
-                        System.out.println("Too many failed attempts. Returning to menu...");
+                        System.out.println(CYAN + "Too many failed attempts. Returning to menu..." + RESET);
                         PurchaseOrderMain.PurchaseOrderMenu();
                         return;
                     }
@@ -620,7 +622,7 @@ private static String generateNextPOId() {
 
         PurchaseOrderMain.PurchaseOrderMenu();
     }
-    
+
     public String toFormattedString() {
         // Format date and time
         SimpleDateFormat sdf = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
@@ -629,17 +631,17 @@ private static String generateNextPOId() {
         // Build the string
         StringBuilder sb = new StringBuilder();
         sb.append(POid).append("/")
-          .append(supplier);
+                .append(supplier);
 
         for (int i = 0; i < productOrder.size(); i++) {
             sb.append("/").append(productOrder.get(i))
-              .append("/").append(quantities.get(i))
-              .append("/").append(pricePerUnit.get(i));
+                    .append("/").append(quantities.get(i))
+                    .append("/").append(pricePerUnit.get(i));
         }
-        
+
         sb.append("/").append(totalPrice)
-          .append("/").append(formattedDate)
-          .append("/").append(paymentMethod);
+                .append("/").append(formattedDate)
+                .append("/").append(paymentMethod);
 
         return sb.toString();
     }
@@ -668,12 +670,12 @@ private static String generateNextPOId() {
 
                     if (confirm.equalsIgnoreCase("Y")) {
                         purchaseOrders.remove(po);
-                        System.out.println("\nPurchase Order: " + po.getPOid() + " cancelled successfully.");
+                        System.out.println(GREEN + "\nPurchase Order: " + po.getPOid() + " cancelled successfully." + RESET);
                         System.out.println("PO Cancellation message sent to supplier. Wait for refund");
                         break;
                     } else {
-                        System.out.println("Cancelation aborted.");
-                        System.out.print("\n\t\tPress Enter to continue...\n\n");
+                        System.out.println(CYAN + "Cancelation aborted." + RESET);
+                        System.out.print(CYAN + "\n\t\tPress Enter to continue...\n\n" + RESET);
                         scan.nextLine();  // Wait for the user to press Enter
                         PurchaseOrderMain.PurchaseOrderMenu();
                     }
@@ -681,12 +683,12 @@ private static String generateNextPOId() {
             }
 
             if (!found) {
-                System.out.println("\n**Purchase Order ID not found.....");
+                System.out.println(RED + "\n**Purchase Order ID not found....." + RESET);
                 System.out.println("Any key to try again or Type 'XXX' to quit and the purchase order will be cancel");
                 System.out.print("X or Any key:");
                 String choose = scan.nextLine();
                 if (choose.equalsIgnoreCase("XXX")) {
-                    System.out.println("\t\t**Left Cancel Purchase Order's tab**");
+                    System.out.println(CYAN + "\t\t**Left Cancel Purchase Order's tab**" + RESET);
                     PurchaseOrderMain.PurchaseOrderMenu();
                     return;
                 }
@@ -694,8 +696,8 @@ private static String generateNextPOId() {
                 // Write the updated list back to the file
                 writePurchaseOrdersToFile(purchaseOrders, "PurchaseOrder.txt");
                 System.out.print("\n\t\tPress Enter to continue...\n\n");
-                        scan.nextLine();  // Wait for the user to press Enter
-                        PurchaseOrderMain.PurchaseOrderMenu();
+                scan.nextLine();  // Wait for the user to press Enter
+                PurchaseOrderMain.PurchaseOrderMenu();
             }
         } while (!POexist);
     }
@@ -724,8 +726,7 @@ private static String generateNextPOId() {
         }
 
         // Return the formatted string
-        
-        return String.format("Purchase Order ID: %s" + "\nSupplier: %s" + "\nItems:\n" + "%s" + "\nNet Total: %.2f\n"+ 
-                 "\nOrder Date: %s" + "\n\t\tPaid by %s", POid, supplier, productsInfo.toString(), totalPrice, formattedDate, paymentMethod);
+        return String.format("Purchase Order ID: %s" + "\nSupplier: %s" + "\nItems:\n" + "%s" + "\nNet Total: %.2f\n"
+                + "\nOrder Date: %s" + "\n\t\tPaid by %s", POid, supplier, productsInfo.toString(), totalPrice, formattedDate, paymentMethod);
     }
 }

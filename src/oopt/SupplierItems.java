@@ -65,6 +65,12 @@ public class SupplierItems {
         this.supplier = supplier;
     }
 
+    public static final String RED = "\u001B[31m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String RESET = "\u001B[0m";
+
     private static Supplier findSupplierByID(ArrayList<Supplier> suppliersList, String supplierID) {
         for (Supplier supplier : suppliersList) {
             if (supplier.getID().equals(supplierID)) {
@@ -105,7 +111,7 @@ public class SupplierItems {
 
             System.out.println(); // Blank line between suppliers
         }
-        System.out.println("\n\t\tPress enter to continue......");
+        System.out.println(CYAN + "\n\t\tPress enter to continue......" + RESET);
         input.nextLine();
         SupplierItemsMain.SupplierItemsMenu();
     }
@@ -145,7 +151,7 @@ public class SupplierItems {
         // Step 1: Select a valid supplier
         do {
             System.out.print("\n\t\tSupplier ID: ");
-            String searchId = input.nextLine();
+            String searchId = input.nextLine().trim();
 
             for (Supplier supplier : suppliers) {
                 if (searchId.equalsIgnoreCase(supplier.getID())) {
@@ -181,10 +187,11 @@ public class SupplierItems {
             }
 
             if (!validSup) {
-                System.out.println("INVALID SUPPLIER! Enter to try again or XXX to leave");
+                System.out.println(RED + "INVALID SUPPLIER! Enter to try again or XXX to leave" + RESET);
+                System.out.print("try again? : ");
                 String option = input.nextLine();
                 if (option.equalsIgnoreCase("XXX")) {
-                    SupplierMain.SupplierMenu();
+                    SupplierItemsMain.SupplierItemsMenu();
                     return;
                 }
             }
@@ -201,7 +208,7 @@ public class SupplierItems {
                 if (!itemName.isBlank() && !itemName.isEmpty()) {
                     validName = true;
                 } else {
-                    System.out.println("The name CANNOT be EMPTY or SPACES!");
+                    System.out.println(RED + "The name CANNOT be EMPTY or SPACES!" + RESET);
                     System.out.print("Enter to try again or XXX to leave: ");
                     String option = input.nextLine();
                     if (option.equalsIgnoreCase("XXX")) {
@@ -220,10 +227,10 @@ public class SupplierItems {
                     if (itemPrice > 0) {
                         validPrice = true;
                     } else {
-                        System.out.println("Price must be greater than 0.");
+                        System.out.println(RED + "Price must be greater than 0." + RESET);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input! Please enter a numeric value for price.");
+                    System.out.println(RED + "INVALID INPUT! Please enter a numeric value for price." + RESET);
                 }
             } while (!validPrice);
 
@@ -257,12 +264,12 @@ public class SupplierItems {
             for (SupplierItems item : newItems) {
                 appendItemToFile(item);
             }
-            System.out.println("\n\t*****Supplier's Item(s) added successfully*****");
+            System.out.println(GREEN + "\n\t*****Supplier's Item(s) added successfully*****" + RESET);
         } else {
-            System.out.println("\n\tOperation cancelled. No items were added.");
+            System.out.println(CYAN + "\n\tOperation cancelled. No items were added." + RESET);
         }
 
-        System.out.print("Press Enter to continue...\n\n");
+        System.out.println(CYAN + "\n\t\tPress enter to continue......" + RESET);
         input.nextLine(); // Wait for the user to press Enter
         SupplierItemsMain.SupplierItemsMenu();
     }
@@ -299,7 +306,7 @@ public class SupplierItems {
 
             supplierHasStock = false;
 
-            // Check if this supplier has any stocks
+            // Check if this supplier has any items
             for (SupplierItems i : itemsList) {
                 if (j.getID().equalsIgnoreCase(i.getSupplier().getID())) {
                     supplierHasStock = true;
@@ -314,7 +321,7 @@ public class SupplierItems {
             }
         }
 
-        // Step 1: Select a valid supplier by ID that has stock
+        // Step 1: Select a valid supplier by ID that has item(s)
         do {
             System.out.print("\n\t\tEnter the Supplier ID: ");
             String supplierId = scanner.nextLine().trim();
@@ -348,7 +355,7 @@ public class SupplierItems {
             }
 
             if (!validSup) {
-                System.out.println("INVALID SUPPLIER ID or Supplier has no item(s) yet! Enter to try again or XXX to exit.");
+                System.out.println(RED + "INVALID SUPPLIER ID or Supplier has no item(s) yet! Enter to try again or XXX to exit." + RESET);
                 String option = scanner.nextLine();
                 if (option.equalsIgnoreCase("XXX")) {
                     SupplierItemsMain.SupplierItemsMenu();// Exit the method if user chooses to cancel
@@ -382,7 +389,7 @@ public class SupplierItems {
 
             if (itemToRemove == null) {
                 moreItemsToRemove = false;
-                System.out.println("INVALID item ID. No item found with the given ID.");
+                System.out.println(RED + "INVALID item ID. No item found with the given ID." + RESET);
 
             } else {
                 System.out.printf("\nAre you sure you want to remove %s (%s)\n", itemToRemove.getName(), itemToRemove.getStockID());
@@ -393,9 +400,9 @@ public class SupplierItems {
                     // Step 2.3: Remove the selected item from the list
                     itemsList.remove(itemToRemove);
 
-                    System.out.println("\n***Item " + itemToRemove.getName() + " removed successfully.***");
+                    System.out.println(GREEN + "\n***Item " + itemToRemove.getName() + " removed successfully.***" + RESET);
                 } else {
-                    System.out.println("\n\tRemove cancelled....");
+                    System.out.println(CYAN + "\n\tRemove cancelled...." + RESET);
 
                 }
             }

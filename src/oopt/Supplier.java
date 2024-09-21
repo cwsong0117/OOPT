@@ -19,14 +19,17 @@ import java.util.regex.Pattern;
  * @author User
  */
 public class Supplier {
+
     private String supplierName;
     private String supplierID;
     private String contact;
     private String email;
     private String category;
 
-    
-    public Supplier(){};
+    public Supplier() {
+    }
+
+    ;
 
     public Supplier(String supplierName, String supplierID, String contact, String email, String category) {
         this.supplierName = supplierName;
@@ -76,33 +79,35 @@ public class Supplier {
     public void setCategory(String category) {
         this.category = category;
     }
-    
-    
-    
 
-   public static String generateNextSupplierId(char type) {
-    ArrayList<Supplier> suppliers = readTextFile(); // Read existing suppliers from the file
-    String lastId = null;
-    
-    // Find the last used supplier ID for the specified type
-    for (Supplier s : suppliers) {
-        if (s.getID().charAt(0) == type) {
-            lastId = s.getID();
+    public static final String RED = "\u001B[31m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String RESET = "\u001B[0m";
+
+    public static String generateNextSupplierId(char type) {
+        ArrayList<Supplier> suppliers = readTextFile(); // Read existing suppliers from the file
+        String lastId = null;
+
+        // Find the last used supplier ID for the specified type
+        for (Supplier s : suppliers) {
+            if (s.getID().charAt(0) == type) {
+                lastId = s.getID();
+            }
         }
-    }
-    
-    // If no supplier was found, start with the first ID for that type
-    if (lastId == null) {
-        return type + "001"; // Start with F001, I001, or B001
-    }
-    
-    // Extract the numeric part of the last ID and increment it
-    int lastNumber = Integer.parseInt(lastId.substring(1));
-    String newId = String.format("%s%03d", type, lastNumber + 1);
-    
-    return newId;
-}
 
+        // If no supplier was found, start with the first ID for that type
+        if (lastId == null) {
+            return type + "001"; // Start with F001, I001, or B001
+        }
+
+        // Extract the numeric part of the last ID and increment it
+        int lastNumber = Integer.parseInt(lastId.substring(1));
+        String newId = String.format("%s%03d", type, lastNumber + 1);
+
+        return newId;
+    }
 
     public static ArrayList<Supplier> readTextFile() {
         ArrayList<Supplier> supply = new ArrayList<>();
@@ -165,7 +170,8 @@ public class Supplier {
                         s.getEmail(), s.getCategory());
             }
         }
-        System.out.print("\n\t\tPress Enter to continue...\n\n");
+        System.out.println("");
+        System.out.println(CYAN + "\t\tPress Enter to continue...\n\n" + RESET);
         scan.nextLine();
         SupplierMain.SupplierMenu();
     }
@@ -199,12 +205,12 @@ public class Supplier {
                         type = 'B';  // Beverages
                         break;
                     default:
-                        System.out.println("INVALID CHOICE! Please select 1, 2, or 3.");
+                        System.out.println(RED + "INVALID CHOICE! Please select 1, 2, or 3." + RESET);
                         validChoice = false;
                 }
             } catch (InputMismatchException e) {
                 validChoice = false;
-                System.out.println("\nINVALID INPUT! Please enter a numeric value.");
+                System.out.println(RED + "\nINVALID INPUT! Please enter a numeric value." + RESET);
                 scan.nextLine();  // Consume invalid input
                 System.out.print("(Any key to try again/XXX to leave): ");
                 String option = scan.nextLine();
@@ -224,8 +230,8 @@ public class Supplier {
         do {
             System.out.print("Enter Supplier Name: ");
             name = scan.nextLine();
-            
-            if(name.equalsIgnoreCase("XXX")){
+
+            if (name.equalsIgnoreCase("XXX")) {
                 SupplierMain.SupplierMenu();  // Exit and return to the main menu
                 return;
             }
@@ -233,14 +239,14 @@ public class Supplier {
             if (!name.isBlank() && !name.isEmpty()) {
                 validName = true;
             } else {
-                System.out.println("\nPls enter the company name of the supplier, cannot be empty");
+                System.out.println(RED + "\nPls enter the company name of the supplier, cannot be empty" + RESET);
                 System.out.println("\t\t(XXX) during input to stop and cancel the process");
                 System.out.println("Enter to continue.....");
                 scan.nextLine();
             }
 
         } while (!validName);
-        
+
 //contact number
         String contact = "";
         boolean validContact = false;
@@ -261,14 +267,14 @@ public class Supplier {
             if (matcher.matches()) {
                 validContact = true;
             } else {
-                System.out.println("\nINVALID contact number format. Please enter a valid number (e.g., 012-3456789 or 03-12345678).");
+                System.out.println(RED + "\nINVALID contact number format. Please enter a valid number (e.g., 012-3456789 or 03-12345678)." + RESET);
                 System.out.println("\t\t(XXX) during input to stop and cancel the process");
                 System.out.println("Enter to continue.....");
                 scan.nextLine();
             }
         } while (!validContact);
 
-         // Validate email
+        // Validate email
         String email = "";
         boolean validEmail = false;
         do {
@@ -288,7 +294,7 @@ public class Supplier {
             if (matcher.matches()) {
                 validEmail = true;
             } else {
-                System.out.println("\nINVALID email format. Please enter a valid email (e.g., john@company.com or john@company.com.my).");
+                System.out.println(RED + "\nINVALID email format. Please enter a valid email (e.g., john@company.com or john@company.com.my)." + RESET);
                 System.out.println("\t\t(XXX) during input to stop and cancel the process");
                 System.out.println("Enter to continue.....");
                 scan.nextLine();
@@ -298,26 +304,26 @@ public class Supplier {
         //Category/description
         String category = "";
         boolean validCat = false;
-        do{
-        System.out.print("Enter Category/Description: ");
-        category = scan.nextLine();
-        
-        if (category.equalsIgnoreCase("XXX")) {
+        do {
+            System.out.print("Enter Category/Description: ");
+            category = scan.nextLine();
+
+            if (category.equalsIgnoreCase("XXX")) {
                 SupplierMain.SupplierMenu();  // Exit and return to the main menu
                 return;
             }
-        
-        if (!category.isBlank() && !category.isEmpty()) {
+
+            if (!category.isBlank() && !category.isEmpty()) {
                 validCat = true;
             } else {
-                System.out.println("\nPls enter the company name of the supplier, cannot be empty");
+                System.out.println(RED + "\nPls enter the category of the supplier, cannot be empty" + RESET);
                 System.out.println("\t\t(XXX) during input to stop and cancel the process");
                 System.out.println("Enter to continue.....");
                 scan.nextLine();
             }
-        
-        }while(!validCat);
-        
+
+        } while (!validCat);
+
         Supplier newSupp = new Supplier(name, supplierID, contact, email, category);
         System.out.println("Are you sure you want to add this new supplier?");
         System.out.println(newSupp.toString());
@@ -336,13 +342,13 @@ public class Supplier {
                 System.err.println("Error writing to file: " + e.getMessage());
             }
 
-            System.out.println("\n\t*****Supplier added succesfully*****\n");
-            System.out.print("Press Enter to continue...\n\n");
+            System.out.println(GREEN + "\n\t*****Supplier added succesfully*****\n" + RESET);
+            System.out.print(CYAN + "Press Enter to continue...\n\n" + RESET);
             scan.nextLine();  // Wait for the user to press Enter
             SupplierMain.SupplierMenu();  // Return to the Supplier menu
         } else {
-            System.out.println("\n\t**Cancel new supplier**");
-            System.out.print("Press Enter to continue...\n\n");
+            System.out.println(CYAN + "\n\t**Cancel new supplier**" + RESET);
+            System.out.print(CYAN + "Press Enter to continue...\n\n" + RESET);
             scan.nextLine();  // Wait for the user to press Enter
             SupplierMain.SupplierMenu();  // Return to the Supplier menu
         }
@@ -350,170 +356,171 @@ public class Supplier {
     }
 
     public static void ModifySupplier() {
-    ArrayList<Supplier> suppliers = readTextFile(); // Read existing suppliers from the file
-    Scanner scan = new Scanner(System.in);
+        ArrayList<Supplier> suppliers = readTextFile(); // Read existing suppliers from the file
+        Scanner scan = new Scanner(System.in);
 
-    boolean supplierExist = false; // Variable to track if a supplier was found
-    
-    do {
-        System.out.print("\nEnter Supplier ID to modify (or type XXX to cancel): ");
-        String searchID = scan.nextLine();
+        boolean supplierExist = false; // Variable to track if a supplier was found
 
-        if (searchID.equalsIgnoreCase("XXX")) {
-            SupplierMain.SupplierMenu(); // Exit to main menu if "XXX" is entered
-            return;
-        }
+        do {
+            System.out.print("\nEnter Supplier ID to modify (or type XXX to cancel): ");
+            String searchID = scan.nextLine();
 
-        boolean found = false; // Variable to track if the current searchID matches a supplier
-
-        // Search for the supplier with the given ID
-        for (Supplier j : suppliers) {
-            if (j.getID().equalsIgnoreCase(searchID)) {
-                found = true;
-                supplierExist = true;
-                System.out.println("\nSupplier found! Current details:");
-                System.out.println("*************************************");
-                System.out.println(j.toString());
-
-                // Modify Name
-                String newName = "";
-                boolean validName = false;
-                do {
-                    System.out.print("Enter new Name (leave blank to keep current): ");
-                    newName = scan.nextLine();
-
-                    if (newName.equalsIgnoreCase("XXX")) {
-                        SupplierMain.SupplierMenu();  // Exit to main menu if "XXX" is entered
-                        return;
-                    }
-
-                    if (newName.isEmpty()) {
-                        validName = true; // Keep current value
-                    } else if (!newName.isBlank()) {
-                        validName = true;
-                        j.setSupplierName(newName); // Update name
-                    } else {
-                        System.out.println("\nInvalid name. It cannot be just spaces.");
-                        System.out.println("\t(XXX) during input to stop and cancel the process");
-                        System.out.println("Enter to continue.....");
-                        scan.nextLine();
-                    }
-                } while (!validName);
-
-                // Modify Contact Number with validation
-                String newContact = "";
-                boolean validContact = false;
-                do {
-                    System.out.print("Enter new Contact Number (leave blank to keep current): ");
-                    newContact = scan.nextLine();
-
-                    if (newContact.equalsIgnoreCase("XXX")) {
-                        SupplierMain.SupplierMenu();  // Exit to main menu if "XXX" is entered
-                        return;
-                    }
-
-                    if (newContact.isEmpty()) {
-                        validContact = true; // Keep current value
-                    } else {
-                        String contactRegex = "^\\d{2,3}-\\d{7,8}$";
-                        if (newContact.matches(contactRegex)) {
-                            validContact = true;
-                            j.setContact(newContact); // Update contact
-                        } else {
-                            System.out.println("\nInvalid contact number format. Please use 012-3456789 or 03-12345678.");
-                            System.out.println("\t(XXX) during input to stop and cancel the process");
-                            System.out.println("Enter to continue.....");
-                            scan.nextLine();
-                        }
-                    }
-                } while (!validContact);
-
-                // Modify Email with validation
-                String newEmail = "";
-                boolean validEmail = false;
-                do {
-                    System.out.print("Enter new Email (leave blank to keep current): ");
-                    newEmail = scan.nextLine();
-
-                    if (newEmail.equalsIgnoreCase("XXX")) {
-                        SupplierMain.SupplierMenu();  // Exit to main menu if "XXX" is entered
-                        return;
-                    }
-
-                    if (newEmail.isEmpty()) {
-                        validEmail = true; // Keep current value
-                    } else {
-                        String emailRegex = "^[\\w\\d]+@[\\w\\d]+\\.com(\\.my)?$";
-                        if (newEmail.matches(emailRegex)) {
-                            validEmail = true;
-                            j.setEmail(newEmail); // Update email
-                        } else {
-                            System.out.println("\nInvalid email format. Please enter a valid email (e.g., john@company.com or john@company.com.my).");
-                            System.out.println("\t(XXX) during input to stop and cancel the process");
-                            System.out.println("Enter to continue.....");
-                            scan.nextLine();
-                        }
-                    }
-                } while (!validEmail);
-
-                // Modify Category
-                String newCategory = "";
-                boolean validCategory = false;
-                do {
-                    System.out.print("Enter new Category (leave blank to keep current): ");
-                    newCategory = scan.nextLine();
-
-                    if (newCategory.equalsIgnoreCase("XXX")) {
-                        SupplierMain.SupplierMenu();  // Exit to main menu if "XXX" is entered
-                        return;
-                    }
-
-                    if (newCategory.isEmpty()) {
-                        validCategory = true; // Keep current value
-                    } else if (!newCategory.isBlank()) {
-                        validCategory = true;
-                        j.setCategory(newCategory); // Update category
-                    } else {
-                        System.out.println("\nInvalid category. It cannot be just spaces.");
-                        System.out.println("\t(XXX) during input to stop and cancel the process");
-                        System.out.println("Enter to continue.....");
-                        scan.nextLine();
-                    }
-                } while (!validCategory);
-
-                // Display updated supplier details
-                Supplier updatedSupp = new Supplier(j.getSupplierName(), j.getID(), j.getContact(), j.getEmail(), j.getCategory());
-                System.out.println("\nAre you sure you want to update this supplier?");
-                System.out.println(updatedSupp.toString() + "\n");
-
-                // Confirmation prompt before saving changes
-                System.out.print("Type 'yes' to confirm, any key to cancel: ");
-                String confirm = scan.nextLine();
-                if (confirm.equalsIgnoreCase("yes")) {
-                    // Write the updated list back to the file
-                    writeToFile(suppliers);
-                    System.out.println("\n\t**Supplier details updated successfully!**");
-                    System.out.println("Enter to continue.....");
-                        scan.nextLine();
-                    SupplierMain.SupplierMenu();
-                } else {
-                    System.out.println("\n\t**Update canceled.**");
-                    System.out.println("Enter to continue.....");
-                        scan.nextLine();
-                    SupplierMain.SupplierMenu();
-                }
-                break;
+            if (searchID.equalsIgnoreCase("XXX")) {
+                SupplierMain.SupplierMenu(); // Exit to main menu if "XXX" is entered
+                return;
             }
-        }
-        // If no supplier was found with the given ID
-        if (!found) {
-            System.out.println("\n\tSupplier ID not found! Please try again.");
-            System.out.println("\t(XXX) during input to stop and cancel the process");
-        }
 
-    } while (!supplierExist); // Loop until a valid supplier is found or the user exits
-}
- 
+            boolean found = false; // Variable to track if the current searchID matches a supplier
+
+            // Search for the supplier with the given ID
+            for (Supplier j : suppliers) {
+                if (j.getID().equalsIgnoreCase(searchID)) {
+                    found = true;
+                    supplierExist = true;
+                    System.out.println("\nSupplier found! Current details:");
+                    System.out.println("*************************************");
+                    System.out.println(j.toString());
+
+                    // Modify Name
+                    String newName = "";
+                    boolean validName = false;
+                    do {
+                        System.out.print("Enter new Name (leave blank to keep current): ");
+                        newName = scan.nextLine();
+
+                        if (newName.equalsIgnoreCase("XXX")) {
+                            SupplierMain.SupplierMenu();  // Exit to main menu if "XXX" is entered
+                            return;
+                        }
+
+                        if (newName.isEmpty()) {
+                            validName = true; // Keep current value
+                        } else if (!newName.isBlank()) {
+                            validName = true;
+                            j.setSupplierName(newName); // Update name
+                        } else {
+                            System.out.println(RED + "\nINVALID. It cannot be just spaces." + RESET);
+                            System.out.println("\t(XXX) during input to stop and cancel the process");
+                            System.out.println("Enter to continue.....");
+                            scan.nextLine();
+                        }
+                    } while (!validName);
+
+                    // Modify Contact Number with validation
+                    String newContact = "";
+                    boolean validContact = false;
+                    do {
+                        System.out.print("Enter new Contact Number (leave blank to keep current): ");
+                        newContact = scan.nextLine();
+
+                        if (newContact.equalsIgnoreCase("XXX")) {
+                            SupplierMain.SupplierMenu();  // Exit to main menu if "XXX" is entered
+                            return;
+                        }
+
+                        if (newContact.isEmpty()) {
+                            validContact = true; // Keep current value
+                        } else {
+                            String contactRegex = "^\\d{2,3}-\\d{7,8}$";
+                            if (newContact.matches(contactRegex)) {
+                                validContact = true;
+                                j.setContact(newContact); // Update contact
+                            } else {
+                                System.out.println(RED + "\nINVALID contact number format. Please use 012-3456789 or 03-12345678." + RESET);
+                                System.out.println("\t(XXX) during input to stop and cancel the process");
+                                System.out.println("Enter to continue.....");
+                                scan.nextLine();
+                            }
+                        }
+                    } while (!validContact);
+
+                    // Modify Email with validation
+                    String newEmail = "";
+                    boolean validEmail = false;
+                    do {
+                        System.out.print("Enter new Email (leave blank to keep current): ");
+                        newEmail = scan.nextLine();
+
+                        if (newEmail.equalsIgnoreCase("XXX")) {
+                            SupplierMain.SupplierMenu();  // Exit to main menu if "XXX" is entered
+                            return;
+                        }
+
+                        if (newEmail.isEmpty()) {
+                            validEmail = true; // Keep current value
+                        } else {
+                            String emailRegex = "^[\\w\\d]+@[\\w\\d]+\\.com(\\.my)?$";
+                            if (newEmail.matches(emailRegex)) {
+                                validEmail = true;
+                                j.setEmail(newEmail); // Update email
+                            } else {
+                                System.out.println(RED + "\nInvalid email format. Please enter a valid email "
+                                        + "(e.g., john@company.com or john@company.com.my)." + RESET);
+                                System.out.println("\t(XXX) during input to stop and cancel the process");
+                                System.out.println("Enter to continue.....");
+                                scan.nextLine();
+                            }
+                        }
+                    } while (!validEmail);
+
+                    // Modify Category
+                    String newCategory = "";
+                    boolean validCategory = false;
+                    do {
+                        System.out.print("Enter new Category (leave blank to keep current): ");
+                        newCategory = scan.nextLine();
+
+                        if (newCategory.equalsIgnoreCase("XXX")) {
+                            SupplierMain.SupplierMenu();  // Exit to main menu if "XXX" is entered
+                            return;
+                        }
+
+                        if (newCategory.isEmpty()) {
+                            validCategory = true; // Keep current value
+                        } else if (!newCategory.isBlank()) {
+                            validCategory = true;
+                            j.setCategory(newCategory); // Update category
+                        } else {
+                            System.out.println(RED + "\nINVALID category. It cannot be just spaces." + RESET);
+                            System.out.println("\t(XXX) during input to stop and cancel the process");
+                            System.out.println("Enter to continue.....");
+                            scan.nextLine();
+                        }
+                    } while (!validCategory);
+
+                    // Display updated supplier details
+                    Supplier updatedSupp = new Supplier(j.getSupplierName(), j.getID(), j.getContact(), j.getEmail(), j.getCategory());
+                    System.out.println("\nAre you sure you want to update this supplier?");
+                    System.out.println(updatedSupp.toString() + "\n");
+
+                    // Confirmation prompt before saving changes
+                    System.out.print("Type 'yes' to confirm, any key to cancel: ");
+                    String confirm = scan.nextLine();
+                    if (confirm.equalsIgnoreCase("yes")) {
+                        // Write the updated list back to the file
+                        writeToFile(suppliers);
+                        System.out.println(GREEN + "\n\t**Supplier details updated successfully!**" + RESET);
+                        System.out.println("Enter to continue.....");
+                        scan.nextLine();
+                        SupplierMain.SupplierMenu();
+                    } else {
+                        System.out.println(CYAN + "\n\t**Update canceled.**" + RESET);
+                        System.out.println(CYAN + "Press Enter to continue....." + RESET);
+                        scan.nextLine();
+                        SupplierMain.SupplierMenu();
+                    }
+                    break;
+                }
+            }
+            // If no supplier was found with the given ID
+            if (!found) {
+                System.out.println(RED + "\n\tSupplier ID not found! Please try again." + RESET);
+                System.out.println("\t(XXX) during input to stop and cancel the process");
+            }
+
+        } while (!supplierExist); // Loop until a valid supplier is found or the user exits
+    }
+
     // Helper method to write the list of suppliers to the file
     private static void writeToFile(ArrayList<Supplier> suppliers) {
         String fileName = "Suppliers.txt";
@@ -521,9 +528,9 @@ public class Supplier {
         try (FileWriter writer = new FileWriter(fileName)) { // Overwrite the file
             for (Supplier supplier : suppliers) {
                 // Format the supplier data and write to the file
-                String supplierData = supplier.getSupplierName()+ "/" + supplier.getID() + "/" +
-                                      supplier.getContact() + "/" + supplier.getEmail() + "/" +
-                                      supplier.getCategory();
+                String supplierData = supplier.getSupplierName() + "/" + supplier.getID() + "/"
+                        + supplier.getContact() + "/" + supplier.getEmail() + "/"
+                        + supplier.getCategory();
                 writer.write(supplierData + "\n");
             }
             System.out.println("All changes saved to the file.");
@@ -531,62 +538,61 @@ public class Supplier {
             System.err.println("Error writing to file: " + e.getMessage());
         }
     }
-    
-    public static void RemoveSupplier() {
-    ArrayList<Supplier> suppliers = readTextFile(); // Read existing suppliers from the file
-    Scanner scan = new Scanner(System.in);
-    
-    boolean exist = false;
-    
-    do{
-    System.out.println("Enter supplier ID that you want to remove");
-    System.out.print("(F000, I000, B000): ");
-    String deleteID = scan.nextLine();
-    
-    if (deleteID.equalsIgnoreCase("XXX")) {
-        SupplierMain.SupplierMenu();
-        return;
-    }
-    
-    Supplier supplierToRemove = null;
-    for (Supplier supplier : suppliers) {
-        if (deleteID.equalsIgnoreCase(supplier.getID())) {
-            exist = true;
-            supplierToRemove = supplier;
-            break;
-        }
-    }
-    
-    if (supplierToRemove != null) {
-        System.out.println("Supplier found! Current details:");
-        System.out.println("*************************************");
-        System.out.println(supplierToRemove.toString());
-        
-        System.out.println("Are you sure you want to delete? (Y to delete, any key to cancel)");
-        String confirm = scan.nextLine();
-        
-        if (confirm.equalsIgnoreCase("Y")) {
-            suppliers.remove(supplierToRemove);
-            System.out.println("Supplier deleted successfully.");
-            writeToFile(suppliers);
-        } else {
-            System.out.println("Deletion Canceled...");
-        }
-    } else {
-        System.out.println("\n\t**Supplier ID not found....");
-        System.out.println("\t(XXX) during input to stop and cancel the process");
-    }
-    }while(!exist);
-    
-    System.out.println("Enter to continue.....");
-    scan.nextLine();
-    SupplierMain.SupplierMenu();
-}
 
+    public static void RemoveSupplier() {
+        ArrayList<Supplier> suppliers = readTextFile(); // Read existing suppliers from the file
+        Scanner scan = new Scanner(System.in);
+
+        boolean exist = false;
+
+        do {
+            System.out.println("Enter supplier ID that you want to remove");
+            System.out.print("(F000, I000, B000): ");
+            String deleteID = scan.nextLine();
+
+            if (deleteID.equalsIgnoreCase("XXX")) {
+                SupplierMain.SupplierMenu();
+                return;
+            }
+
+            Supplier supplierToRemove = null;
+            for (Supplier supplier : suppliers) {
+                if (deleteID.equalsIgnoreCase(supplier.getID())) {
+                    exist = true;
+                    supplierToRemove = supplier;
+                    break;
+                }
+            }
+
+            if (supplierToRemove != null) {
+                System.out.println("Supplier found! Current details:");
+                System.out.println("*************************************");
+                System.out.println(supplierToRemove.toString());
+
+                System.out.println("Are you sure you want to delete? (Y to delete, any key to cancel)");
+                String confirm = scan.nextLine();
+
+                if (confirm.equalsIgnoreCase("Y")) {
+                    suppliers.remove(supplierToRemove);
+                    System.out.println("Supplier deleted successfully.");
+                    writeToFile(suppliers);
+                } else {
+                    System.out.println("Deletion Canceled...");
+                }
+            } else {
+                System.out.println(RED + "\n\t**Supplier ID not found...." + RESET);
+                System.out.println("\t(XXX) during input to stop and cancel the process");
+            }
+        } while (!exist);
+
+        System.out.println(CYAN + "Enter to continue....." + RESET);
+        scan.nextLine();
+        SupplierMain.SupplierMenu();
+    }
 
     @Override
-    public String toString(){
-        return String.format("Supplier ID: %s" + "\nSupplier Name: %s" + "\nContact NO. : %s" + "\nEmail: %s" + "\nCategory: %s\n" ,supplierID
-        ,supplierName, contact, email, category);
+    public String toString() {
+        return String.format("Supplier ID: %s" + "\nSupplier Name: %s" + "\nContact NO. : %s" + "\nEmail: %s" + "\nCategory: %s\n", supplierID,
+                 supplierName, contact, email, category);
     }
 }
