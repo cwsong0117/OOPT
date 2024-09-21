@@ -15,28 +15,7 @@ import java.util.ArrayList;
  */
 public class Validation {
     
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    
-    public static boolean isValidDate(String dateStr) {
-        //unified the date format
-        try{
-            LocalDate.parse(dateStr, DATE_FORMAT);
-            return true;
-        }catch(DateTimeParseException e) {
-            return false;
-        }
-    }
-    
-    public static String getLocalDate() {
-        return LocalDate.now().toString();
-    }
-    
-    public static boolean isValidLocation(String location) {
-        //the place of placing the inventory like aisle A followed by the shelf number 001
-        return location.matches("^[A-Z]\\d{3}$"); //Regex to ensure 1 character and 3 digit
-    }
-    
-    public static boolean isValidName(String name, int n) {
+    public static boolean validate(String name, int n) {
         if(n == 1) {
             StockFood[] foods = StockFile.readFood();
             for(StockFood f : foods) {
@@ -68,7 +47,7 @@ public class Validation {
         return input != null && !input.trim().isEmpty();
     }
     
-    public static boolean checkSupplier(String supplier) {
+    public static boolean validate(String supplier) {
         Supplier readSupplier = new Supplier();
         ArrayList<Supplier> suppliers = readSupplier.readTextFile();
         

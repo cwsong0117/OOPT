@@ -123,13 +123,13 @@ public class StockIngredient extends Stock{
                 StockMenu.stockMenu();
                 return null;
             }
-            else if(!Validation.isValidName(name, num)) {
+            else if(!Validation.validate(name, num)) {
                 System.out.println("Name already exists. Please select UPDATE or enter other name.");
             }
             else if(!Validation.isNotNullOrEmpty(name)) {
                 System.out.println("Name cannot be empty. Please enter a name.");
             }
-        }while(!Validation.isValidName(name, num));
+        }while(!Validation.validate(name, num));
 
         int quantity = 0;
         do{
@@ -183,10 +183,10 @@ public class StockIngredient extends Stock{
             else if(!Validation.isNotNullOrEmpty(supplier)) {
                 System.out.println("Supplier cannot be empty. Please enter a supplier.");
             }
-            else if(!Validation.checkSupplier(supplier)) {
+            else if(!Validation.validate(supplier)) {
                 System.out.println("No such supplier in system...Please enter a valid supplier.");
             }
-        }while(!Validation.isNotNullOrEmpty(supplier) || !Validation.checkSupplier(supplier));
+        }while(!Validation.isNotNullOrEmpty(supplier) || !Validation.validate(supplier));
         
         return new StockIngredient(stockID, name, quantity, price, supplier, "", "no", 0);
         
