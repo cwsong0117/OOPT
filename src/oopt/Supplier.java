@@ -77,6 +77,8 @@ public class Supplier {
         this.category = category;
     }
     
+    
+    
 
    public static String generateNextSupplierId(char type) {
     ArrayList<Supplier> suppliers = readTextFile(); // Read existing suppliers from the file

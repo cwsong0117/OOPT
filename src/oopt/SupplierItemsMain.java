@@ -11,22 +11,19 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class SupplierMain {
-
-    public static void SupplierMenu() {
+public class SupplierItemsMain {
+    public static void SupplierItemsMenu(){
         boolean valid = false;
         int choice = 0;
-        System.out.println("\n\t\t******Welcome to Supplier Module******");
-        System.out.println("\t\t\t1.Display supplier");
-        System.out.println("\t\t\t2.Add supplier");
-        System.out.println("\t\t\t3.Modify supplier");
-        System.out.println("\t\t\t4.Remove supplier");
-        System.out.println("\t\t\t5.Manage Supplier Items/Products");
-        System.out.println("\t\t\tAny number to leave here");
-
-        do {
-            System.out.print("Choice: ");
-
+        System.out.println("\n\t\t******Welcome to Supplier's Items Module******");
+        System.out.println("\t\t\t1.Display supplier's items");
+        System.out.println("\t\t\t2.Add supplier's item(s)");
+        System.out.println("\t\t\t3.Remove supplier's item(s)");
+        System.out.println("\t\t\tAny number to go back to Supplier Module");
+        
+        do{
+        System.out.print("Choice: ");
+        
             Scanner input = new Scanner(System.in);
             try {
                 choice = input.nextInt();
@@ -34,36 +31,30 @@ public class SupplierMain {
             } catch (InputMismatchException e) {
                 valid = false;
                 System.out.println("\nInvalid input. Please enter a numeric value.");
-                System.out.println("**Try again(XXX to end program)**");
+                System.out.println("**Try again(XXX to leave)**");
                 String option = input.nextLine();
                 if (option.equalsIgnoreCase("XXX")) {
                     System.exit(0);
                 }
             }
         } while (!valid);
-
+      
         if (valid) {
             switch (choice) {
                 case 1:
                     System.out.println("\n");
-                    Supplier.displayAllsupplier();
+                    SupplierItems.displayAllItems();
                     break;
                 case 2:
-                    Supplier.AddSupplier();
+                    SupplierItems.addSupplierItems();
                     break;
                 case 3:
-                    Supplier.ModifySupplier();
-                    break;
-                case 4:
-                    Supplier.RemoveSupplier();
-                    break;
-                case 5:
-                    SupplierItemsMain.SupplierItemsMenu();
+                    SupplierItems.removeSupplierItem();
                     break;
                 default:
-                    System.exit(0);
+                    SupplierMain.SupplierMenu();
             }
 
-        }
+    }
     }
 }

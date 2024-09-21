@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author User
  */
-public abstract class Stock {
+public class Stock {
     
     private String stockID;
     private String name;

@@ -13,19 +13,18 @@ import java.util.Scanner;
  */
 public class PurchaseOrderMain {
 
-    public static void PurchaseOrderMenu() {
+    public static void PurchaseOrderMenu(){
         boolean valid = false;
         int choice = 0;
-        PurchaseOrder po = new PurchaseOrder();
-
+        
         System.out.println("\n\t\t*****Welcome to Staff, You can make an Order here for*****");
         System.out.println("\t\t\t1.Check current purchase");
         System.out.println("\t\t\t2.Make an order");
         System.out.println("\t\t\t3.Cancel purchase order");
         System.out.println("\t\t\tAny number to exit here");
-        do {
-            System.out.print("\nChoice: ");
-
+        do{
+        System.out.print("\nChoice: ");
+        
             Scanner input = new Scanner(System.in);
             try {
                 choice = input.nextInt();
@@ -41,21 +40,19 @@ public class PurchaseOrderMain {
                 }
             }
         } while (!valid);
-
+        
         switch (choice) {
             case 1:
-                po.displayAllpo();
+                PurchaseOrder.displayAllpo();
                 break;
             case 2:
-                po.addPurchaseOrderMenu();
+                PurchaseOrder.addPurchaseOrderMenu();
                 break;
             case 3:
-                po.cancelPurchaseOrder();
+                PurchaseOrder.cancelPurchaseOrder();
                 break;
             default:
-                System.out.println("Exiting...\n");
-                return;
+                System. exit(0);
         }
-
     }
 }
