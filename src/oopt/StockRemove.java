@@ -20,6 +20,7 @@ public class StockRemove {
     
         Scanner scanner = new Scanner(System.in);
         StockFile file = new StockFile();
+        Display title = new Display();
         boolean found = false;
         String ID;
         
@@ -37,10 +38,7 @@ public class StockRemove {
                     while (FoodIterator.hasNext()) {
                         StockFood f = FoodIterator.next();
                         if (f.getStockID().equalsIgnoreCase(ID)) {
-                            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n",
-                                    "ID", "Name", "Quantity", "Price", "Supplier",
-                                    "Expiry Date", "Arrival Date", "Location",
-                                    "Organic", "Allergens", "Storage Temp");
+                            title.displayFoodTitle();
                             System.out.println(f.toString() + "\n");
                             System.out.print("Confirm to delete ('y' = yes) > ");
                             String confirm = scanner.nextLine();
@@ -70,10 +68,7 @@ public class StockRemove {
                     while (BeverageIterator.hasNext()) {
                         StockBeverage b = BeverageIterator.next();
                         if (b.getStockID().equalsIgnoreCase(ID)) {
-                            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n",
-                                    "ID", "Name", "Quantity", "Price", "Supplier",
-                                    "Expiry Date", "Arrival Date", "Location",
-                                    "Organic", "Allergens", "Storage Temp");
+                            title.displayBeverageTitle();
                             System.out.println(b.toString() + "\n");
                             System.out.print("Confirm to delete ('y' = yes) > ");
                             String confirm = scanner.nextLine();
@@ -103,10 +98,7 @@ public class StockRemove {
                     while (IngredientIterator.hasNext()) {
                         StockIngredient i = IngredientIterator.next();
                         if (i.getStockID().equalsIgnoreCase(ID)) {
-                            System.out.printf("%-7s %-12s %-9s %-7s %-14s %-23s %-14s %-15s %-11s %-10s %-15s\n",
-                                    "ID", "Name", "Quantity", "Price", "Supplier",
-                                    "Expiry Date", "Arrival Date", "Location",
-                                    "Organic", "Allergens", "Storage Temp");
+                            title.displayIngredientTitle();
                             System.out.println(i.toString() + "\n");
                             System.out.print("Confirm to delete ('y' = yes) > ");
                             String confirm = scanner.nextLine();
