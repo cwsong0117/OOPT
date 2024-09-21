@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Lee Jun Ting
  */
-public class Branches {
+public class Branches implements Manage{
 
     SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -145,7 +145,8 @@ public class Branches {
         return !(post_code < 0 || post_code >= 100000);
     }
 
-    public void displayFormat() {
+    @Override
+    public void display() {
         String[] parts = address.split(",");
         parts[0] += ",";
         System.out.printf("| %-9s | %-30s | %-12s |   %05d   | %-13s |\n", branchID, parts[0], state, post_code, distance, dateForm.format(dateCreated));
@@ -808,7 +809,7 @@ class actionBranches {
         System.out.printf("| %-9s | %-30s | %-12s | %-9s | %-13s |\n", "Branch ID", "Address", "State", "Post Code", "Distance", "Date Creation");
         System.out.println("=========================================================================================");
         for (Branches dp : display) {
-            dp.displayFormat();
+            dp.display();
         }
         System.out.println("Enter to exit");
         scanner.nextLine();

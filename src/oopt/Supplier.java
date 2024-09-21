@@ -593,6 +593,6 @@ public class Supplier {
     @Override
     public String toString() {
         return String.format("Supplier ID: %s" + "\nSupplier Name: %s" + "\nContact NO. : %s" + "\nEmail: %s" + "\nCategory: %s\n", supplierID,
-                 supplierName, contact, email, category);
+                supplierName, contact, email, category);
     }
 }
