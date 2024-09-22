@@ -50,7 +50,7 @@ public class StockSearch {
                     running = false;
                     break;
                 default:
-                    return;
+                    break;
             }
         }
         stockMenu.searchStockMenu();
