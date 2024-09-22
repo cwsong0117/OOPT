@@ -92,7 +92,7 @@ public class StockIngredient extends Stock{
                                 stock.getPrice(), stock.getSupplier(),
                                 ingredientType, gluten, calory);
             
-            file.appendIngredient(ingredient);
+            
             
             System.out.print("\n");
             System.out.println("You can press any key to stop.");
@@ -100,8 +100,11 @@ public class StockIngredient extends Stock{
             String response = scanner.nextLine();
             
             if(!response.equalsIgnoreCase("y")) {
+                System.out.println("\033[0;31mStock Added Unsuccessfully\n\u001B[0m");
+                StockMenu.stockMenu();
                 running = false;
             }
+            file.appendIngredient(ingredient);
         }
         System.out.println("\n");
         Display.displayStock(num);

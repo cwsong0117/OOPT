@@ -92,8 +92,6 @@ public class StockFood extends Stock{
                                 stock.getPrice(), stock.getSupplier(),
                                 isOrganic, allergens, storageTemperature);
             
-            file.appendFood(food);
-            
             System.out.print("\n");
             System.out.println("You can press any key to stop.");
             System.out.print("Continue?('y' to yes) : ");
@@ -101,7 +99,10 @@ public class StockFood extends Stock{
             
             if(!response.equalsIgnoreCase("y")) {
                 running = false;
+                System.out.println("\033[0;31mStock Added Unsuccessfully\n\u001B[0m");
+                StockMenu.stockMenu();
             }
+            file.appendFood(food);
         }
         System.out.println("\n");
         Display.displayStock(num);
