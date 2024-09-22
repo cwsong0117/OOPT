@@ -54,7 +54,7 @@ public class StockSearch {
                     break;
             }
         }
-        stockMenu.stockMenu();
+        stockMenu.searchStockMenu();
     }
     
     public static String searchReturnID(int n) {
