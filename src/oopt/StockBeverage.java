@@ -82,6 +82,10 @@ public class StockBeverage extends Stock {
                 try {
                     System.out.print("Alcohol Content(%) : ");
                     alcoholContent = scanner.nextDouble(); // Try to read a double value
+                    if(alcoholContent == -1) {
+                        System.out.println("\033[0;31mExisting...\n" + RESET);
+                        StockMenu.stockMenu();
+                    }
                     if (alcoholContent < 0) {
                         System.out.println("\033[0;31mAlcohol content cannot be negative. Please enter a valid percentage." + RESET);
                     } else {
@@ -98,9 +102,17 @@ public class StockBeverage extends Stock {
             // Validate carbonated input (yes/no)
             System.out.print("Carbonated? (yes/no) : ");
             String isCarbonated = scanner.nextLine().toLowerCase();
+            if(isCarbonated.equals("-1")) {
+                        System.out.println("\033[0;31mExisting...\n" + RESET);
+                        StockMenu.stockMenu();
+            }
             while (!isCarbonated.equals("yes") && !isCarbonated.equals("no")) {
                 System.out.print("\033[0;31mInvalid input. Please enter 'yes' or 'no': " + RESET);
                 isCarbonated = scanner.nextLine().toLowerCase();
+                if(isCarbonated.equals("-1")) {
+                    System.out.println("\033[0;31mExisting...\n" + RESET);
+                    StockMenu.stockMenu();
+                }
             }
 
             int volume = 0;
@@ -110,6 +122,10 @@ public class StockBeverage extends Stock {
                 try {
                     System.out.print("Volume : ");
                     volume = scanner.nextInt(); // Try to read an integer
+                    if(volume == -1) {
+                        System.out.println("\033[0;31mExisting...\n" + RESET);
+                        StockMenu.stockMenu();
+                    }
                     if (volume <= 0) {
                         System.out.println("\033[0;31mVolume must be a positive number. Please enter a valid volume." + RESET);
                     } else {

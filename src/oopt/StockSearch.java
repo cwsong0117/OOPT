@@ -12,6 +12,8 @@ import java.util.Scanner;
  */
 public class StockSearch {
     
+    public static final String RESET = "\u001B[0m";
+    
     public static void searchMenu(int opt) {
         //opt represent the category as parameter that pass to this method
         
@@ -44,11 +46,11 @@ public class StockSearch {
                     searchBySupplier(opt);
                     break;
                 case 4:
-                    System.out.println("Exiting...\n\n");
+                    System.out.println("\033[0;31mExiting...\n\n" + RESET);
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid option...Please enter again...\n\n");
+                    System.out.println("\033[0;31mInvalid option...Please enter again...\n" + RESET);
                     break;
             }
         }
@@ -102,7 +104,8 @@ public class StockSearch {
             }
         }
         if(!found) {
-            System.out.println("No Such ID in file.\n");
+            System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
+            operationAfterSearch();
         }
         return id;
     }
@@ -152,7 +155,7 @@ public class StockSearch {
             }
         }
         if(!found) {
-            System.out.println("No Such Name in file.\n");
+            System.out.println("\033[0;31mNo Such Name in file.\n" + RESET);
         }
         operationAfterSearch();
     }
@@ -202,7 +205,7 @@ public class StockSearch {
             }
         }
         if(!found) {
-            System.out.println("No Such Supplier in file.\n");
+            System.out.println("\033[0;31mNo Such Supplier in file.\n" + RESET);
         }
         operationAfterSearch();
     }
@@ -212,7 +215,8 @@ public class StockSearch {
         Scanner scanner = new Scanner(System.in);
         StockMenu stockMenu = new StockMenu();
         
-        System.out.println("\n\n1. Update Stock Details");
+        System.out.println("\n==============================");
+        System.out.println("1. Update Stock Details");
         System.out.println("2. Exit");
         System.out.println("==============================");
         System.out.print("Option > ");
@@ -226,7 +230,7 @@ public class StockSearch {
                 stockMenu.stockMenu();
                 break;
             default:
-                System.out.println("Invalid Option!Please try again...\n");
+                System.out.println("\033[0;31mInvalid Option!Please try again...\n" + RESET);
         }
     }
 }

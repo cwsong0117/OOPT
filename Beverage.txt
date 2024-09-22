@@ -4,3 +4,4 @@ BV003|milk|330|7.5|horlick|0.0|no|900
 BV004|beer|135|17.2|Carlsberg|4.0|yes|320
 BV005|wine|20|179.9|Carlsberg|38.0|no|1200
 BV006|coca cola|300|2.4|coca cola|0.0|yes|250
+BV007|tea|100|2.2|ah huat|0.0|no|250

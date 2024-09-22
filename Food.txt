@@ -1,4 +1,4 @@
-FD001|Fish|300|3.3|aeon|yes|none|-1.1
+FD001|Fish|350|3.3|aeon|yes|none|-1.1
 FD002|meat|150|4.1|farm fresh|yes|none|2.0
 FD003|lamb|120|3.8|lalaland|no|none|4.0
 FD004|Cucumber|80|2.9|ECONSAVE|no|none|14.0
