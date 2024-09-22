@@ -181,7 +181,7 @@ public class Transportation {
 
 }
 
-class actionTransportation {
+class actionTransportation implements Operations{
 
     private final String fileAddress = "Transportation.txt";
     private ArrayList<Transportation> transportation = new ArrayList<Transportation>();
@@ -217,13 +217,13 @@ class actionTransportation {
 
                 switch (option) {
                     case 1:
-                        addTransportation();
+                        addNewInstance();
                         break;
                     case 2:
-                        updateTransportation();
+                        modifyInstanceInformation();
                         break;
                     case 3:
-                        removeTransportation();
+                        deleteInstance();
                         break;
                     case 4:
                         displayAll();
@@ -232,7 +232,7 @@ class actionTransportation {
                         exit = false;
                         break;
                     default:
-                        System.out.println("\nPlease enter 1-4!!");
+                        System.out.println(RED+"\nPlease enter 1-4!!"+RESET);
                         break;
 
                 }
@@ -285,7 +285,7 @@ class actionTransportation {
 
     }
 
-    public void addTransportation() {
+    public void addNewInstance() {
         dateForm.setLenient(false);
         Scanner scanner = new Scanner(System.in);
         transportation.add(new Transportation());
@@ -372,7 +372,7 @@ class actionTransportation {
         }
     }
 
-    public void updateTransportation() {
+    public void modifyInstanceInformation() {
         dateForm.setLenient(false);
         if (transportation.isEmpty()) {
             System.out.println(RED+"Without any transportation record!!"+RESET);
@@ -589,7 +589,7 @@ class actionTransportation {
 
     }
 
-    public void removeTransportation() {
+    public void deleteInstance() {
         if (transportation.isEmpty()) {
             System.out.println("\nWithout any transportation record!!\n");
         } else {
