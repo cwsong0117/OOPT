@@ -9,5 +9,6 @@ package oopt;
  * @author User
  */
 public interface Manage {
-    void display();//abstract method
+        public abstract void displayInstance();
+
 }

@@ -183,7 +183,7 @@ public class Shipment {
 
 }
 
-class actionShipment implements Operations {
+class actionShipment implements Operations, Manage {
     actionTransportation transportation = new actionTransportation();
     actionBranches branch = new actionBranches();
     public ArrayList<Shipment> shipment = new ArrayList<Shipment>();
@@ -234,7 +234,7 @@ class actionShipment implements Operations {
                     case 5:
                         writeFile();
                         readFile();
-                        displayShipment();
+                        displayInstance();
                         break;
                     case 6:
                         exit = true;
@@ -930,7 +930,7 @@ class actionShipment implements Operations {
         } while (continueInput);
     }
 
-    public void displayShipment() {
+    public void displayInstance() {
 
         System.out.println("====================================================================================================================");
         System.out.printf("%-15s %-14s %-14s %-15s %-18s %-10s %-10s %-13s\n",
