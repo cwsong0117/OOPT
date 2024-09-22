@@ -105,7 +105,7 @@ public class StockSearch {
         }
         if(!found) {
             System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
-            operationAfterSearch();
+            searchMenu(n);
         }
         return id;
     }
@@ -160,7 +160,7 @@ public class StockSearch {
             System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
             searchMenu(n);
         }
-        operationAfterSearch();
+        searchMenu(n);
     }
     
     public static void searchByName(int n) {
@@ -210,7 +210,7 @@ public class StockSearch {
         if(!found) {
             System.out.println("\033[0;31mNo Such Name in file.\n" + RESET);
         }
-        operationAfterSearch();
+        searchMenu(n);
     }
     
     public static void searchBySupplier(int n) {
@@ -260,30 +260,6 @@ public class StockSearch {
         if(!found) {
             System.out.println("\033[0;31mNo Such Supplier in file.\n" + RESET);
         }
-        operationAfterSearch();
-    }
-    
-    public static void operationAfterSearch() {
-        
-        Scanner scanner = new Scanner(System.in);
-        StockMenu stockMenu = new StockMenu();
-        
-        System.out.println("\n==============================");
-        System.out.println("1. Update Stock Details");
-        System.out.println("2. Exit");
-        System.out.println("==============================");
-        System.out.print("Option > ");
-        int option = scanner.nextInt();
-        
-        switch(option) {
-            case 1:
-                stockMenu.updateStockMenu();
-                break;
-            case 2:
-                stockMenu.stockMenu();
-                break;
-            default:
-                System.out.println("\033[0;31mInvalid Option!Please try again...\n" + RESET);
-        }
+        searchMenu(n);
     }
 }
