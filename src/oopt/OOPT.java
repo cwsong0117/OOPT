@@ -84,6 +84,10 @@ public class OOPT {
                     break;
                 default:
                     System.out.println("\033[0;31mInvalid Option. Please enter a number between 1 and 7." + RESET);
+                    System.out.print("\033[0;31mPress enter to continue" + RESET);
+                    scanner.nextLine(); // Consume the newline character
+                    scanner.nextLine(); // Wait for user to press enter
+                    System.out.println("\n");
                     break;
             }
         }
