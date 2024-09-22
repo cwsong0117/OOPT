@@ -102,7 +102,7 @@ public class StockFood extends Stock {
                         validInput = true; // Valid input was entered, exit the loop
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a valid temperature (numeric value).");
+                    System.out.println("\033[0;31mInvalid input. Please enter a valid temperature (numeric value)." + RESET);
                     scanner.next(); // Clear the invalid input from the scanner buffer
                 }
             } while (!validInput);
@@ -142,7 +142,7 @@ public class StockFood extends Stock {
             name = scanner.nextLine();
 
             if (name.equals("-1")) {
-                System.out.println("Existing...\n");
+                System.out.println("\033[0;31mExisting...\n" + RESET);
                 StockMenu.stockMenu();
                 return null;
             } else if (!Validation.validate(name, num)) {
