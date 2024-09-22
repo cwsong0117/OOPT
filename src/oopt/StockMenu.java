@@ -97,7 +97,7 @@ public class StockMenu {
     }
     
     public static void displayChoice() {
-        System.out.println("\n\n==================");
+        System.out.println("\n==================");
         System.out.println("1. Food");
         System.out.println("2. Beverage");
         System.out.println("3. Iegredient");
