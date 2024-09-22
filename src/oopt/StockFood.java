@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class StockFood extends Stock {
 
+    public static final String RESET = "\u001B[0m";
     private String isOrganic;
     private String allergens;
     private double storageTemperature;
@@ -77,15 +78,34 @@ public class StockFood extends Stock {
             System.out.print("Organic?(yes/no) : ");
             String isOrganic = scanner.nextLine().toLowerCase();
             while (!isOrganic.equals("yes") && !isOrganic.equals("no")) {
-                System.out.print("Invalid input. Please enter 'yes' or 'no': ");
+                System.out.print("\033[0;31mInvalid input. Please enter 'yes' or 'no': " + RESET);
                 isOrganic = scanner.nextLine().toLowerCase();
             }
 
             System.out.print("Allergens : ");
             String allergens = scanner.nextLine();
 
-            System.out.print("Storage Temperature : ");
-            double storageTemperature = scanner.nextDouble();
+            double storageTemperature = 0.0;
+            boolean validInput = false;
+
+            do {
+                try {
+                    System.out.print("Storage Temperature: ");
+                    storageTemperature = scanner.nextDouble(); // Try to read a double value
+                    if (storageTemperature == -1) {
+                        System.out.println("\033[0;31mExisting...\n");
+                        StockMenu.stockMenu();
+                    }
+                    if (storageTemperature <= 0) {
+                        System.out.println("\033[0;31mThe quantity cannot be zero or negative. Please enter a valid quantity." + RESET);
+                    } else {
+                        validInput = true; // Valid input was entered, exit the loop
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a valid temperature (numeric value).");
+                    scanner.next(); // Clear the invalid input from the scanner buffer
+                }
+            } while (!validInput);
 
             scanner.nextLine();
 
@@ -100,7 +120,7 @@ public class StockFood extends Stock {
 
             if (!response.equalsIgnoreCase("y")) {
                 running = false;
-                System.out.println("\033[0;31mStock Added Unsuccessfully\n\u001B[0m");
+                System.out.println("\033[0;31mStock Added Unsuccessfully\n" + RESET);
                 StockMenu.stockMenu();
             }
             file.appendFood(food);
@@ -126,9 +146,9 @@ public class StockFood extends Stock {
                 StockMenu.stockMenu();
                 return null;
             } else if (!Validation.validate(name, num)) {
-                System.out.println("Name already exists. Please select UPDATE or enter other name.");
+                System.out.println("\033[0;31mName already exists. Please select UPDATE or enter other name." + RESET);
             } else if (!Validation.isNotNullOrEmpty(name)) {
-                System.out.println("Name cannot be empty. Please enter a name.");
+                System.out.println("\033[0;31mName cannot be empty. Please enter a name." + RESET);
             }
         } while (!Validation.validate(name, num));
 
@@ -140,16 +160,16 @@ public class StockFood extends Stock {
                 System.out.print("Quantity : ");
                 quantity = scanner.nextInt(); // Try to read an integer value
                 if (quantity == -1) {
-                    System.out.println("Exiting...\n");
+                    System.out.println("\033[0;31mExiting...\n" + RESET);
                     StockMenu.stockMenu(); // Assuming StockMenu has a static stockMenu method
                 }
                 if (quantity <= 0) {
-                    System.out.println("The quantity cannot be zero or negative. Please enter a valid quantity.");
+                    System.out.println("\033[0;31mThe quantity cannot be zero or negative. Please enter a valid quantity." + RESET);
                 } else {
                     validInput = true; // Valid input was entered, exit the loop
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter an integer.");
+                System.out.println("\033[0;31mInvalid input. Please enter an integer." + RESET);
                 scanner.next(); // Clear the invalid input
             }
         } while (!validInput);
@@ -162,19 +182,19 @@ public class StockFood extends Stock {
             System.out.print("Price : ");
             priceInput = scanner.nextLine();
             if (priceInput.equals("-1")) {
-                System.out.println("Existing...\n");
+                System.out.println("\033[0;31mExisting...\n");
                 StockMenu.stockMenu();
                 return null;
             } else if (!Validation.isNotNullOrEmpty(priceInput)) {
-                System.out.println("Price cannot be empty.");
+                System.out.println("\033[0;31mPrice cannot be empty." + RESET);
             } else {
                 try {
                     price = Double.parseDouble(priceInput);
                     if (price <= 0.0) {
-                        System.out.println("Price cannot be zero or negative.");
+                        System.out.println("\033[0;31mPrice cannot be zero or negative." + RESET);
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Invald price format. Please enter a valid price.");
+                    System.out.println("\033[0;31mInvald price format. Please enter a valid price." + RESET);
                 }
             }
         } while (price <= 0);
@@ -185,13 +205,13 @@ public class StockFood extends Stock {
             supplier = scanner.nextLine();
 
             if (supplier.equals("-1")) {
-                System.out.println("Existing...\n");
+                System.out.println("\033[0;31mExisting...\n" + RESET);
                 StockMenu.stockMenu();
                 return null;
             } else if (!Validation.isNotNullOrEmpty(supplier)) {
-                System.out.println("Supplier cannot be empty. Please enter a supplier.");
+                System.out.println("\033[0;31mSupplier cannot be empty. Please enter a supplier." + RESET);
             } else if (!Validation.validate(supplier)) {
-                System.out.println("No such supplier in system...Please enter a valid supplier.");
+                System.out.println("\033[0;31mNo such supplier in system...Please enter a valid supplier." + RESET);
             }
         } while (!Validation.isNotNullOrEmpty(supplier) || !Validation.validate(supplier));
 
