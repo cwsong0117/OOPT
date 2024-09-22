@@ -158,8 +158,9 @@ public class StockSearch {
         }
         if(!found) {
             System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
-            operationAfterSearch();
+            searchMenu(n);
         }
+        operationAfterSearch();
     }
     
     public static void searchByName(int n) {
