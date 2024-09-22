@@ -31,7 +31,7 @@ public class StockMenu {
             System.out.println("\033[1;34m |_|____ ______ ______ ______ ______ ______ ______ ______ ______ _____|___/___ ______ ______ ______ ______ ____|_|" + RESET);
             System.out.println("\033[34m |______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|" + RESET);
             System.out.println("\n");
-            System.out.println("Enter '-1' to back to this menu.");
+            System.out.println("\033[33mEnter '-1' to back to this menu." + RESET);
             System.out.println("====================================\n");
             System.out.println("1: ADD NEW Stock");
             System.out.println("2. UPDATE Stock Level");
@@ -48,42 +48,42 @@ public class StockMenu {
 
                 switch(option) {
                     case 1:
-                        System.out.print("Add Stock Option Selected...\n");
+                        System.out.print("\033[5;34mAdd Stock Option Selected...\n" + RESET);
                         System.out.println("=====================================\n");
                         addStockMenu();
                         break;
                     case 2:
-                        System.out.println("Update Stock Option Selected...\n");
+                        System.out.println("\033[5;34mUpdate Stock Option Selected...\n" + RESET);
                         System.out.println("=====================================\n");
                         updateStockMenu();
                         break;
                     case 3:
-                        System.out.print("Display Stock Option Selected...\n");
+                        System.out.print("\033[5;34mDisplay Stock Option Selected...\n" + RESET);
                         System.out.println("=====================================\n");
                         displayStockMenu();
                         break;
                     case 4:
-                        System.out.print("Remove Stock Level Option Selected...\n");
+                        System.out.print("\033[5;34mRemove Stock Level Option Selected...\n" + RESET);
                         System.out.println("=====================================\n");
                         removeStockMenu();
                         break;
                     case 5:
-                        System.out.print("Search Stock Level Option Selected...\n");
+                        System.out.print("\033[5;34mSearch Stock Level Option Selected...\n" + RESET);
                         System.out.println("=====================================\n");
                         searchStockMenu();
                         break;
                     case 6:
-                        System.out.print("Stock Level Checking...\n");
+                        System.out.print("\033[5;34mStock Level Checking...\n" + RESET);
                         System.out.println("=====================================\n");
                         stockBalanceAlert();
                         break;
                     case 7:
-                        System.out.print("Exiting...\n\n");
+                        System.out.print("\033[0;31mExiting...\n\n" + RESET);
                         System.out.println("=====================================\n");
                         running = false;
                         break;
                     default:
-                        System.out.print("Invalid Option...\n");
+                        System.out.print("\033[0;31mInvalid Option...\n" + RESET);
                         System.out.println("=====================================\n");
                         break;
                 }
