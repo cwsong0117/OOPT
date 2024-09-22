@@ -181,7 +181,7 @@ public class Transportation {
 
 }
 
-class actionTransportation implements Operations{
+class actionTransportation implements Operations, Manage{
 
     private final String fileAddress = "Transportation.txt";
     private ArrayList<Transportation> transportation = new ArrayList<Transportation>();
@@ -226,7 +226,7 @@ class actionTransportation implements Operations{
                         deleteInstance();
                         break;
                     case 4:
-                        displayAll();
+                        displayInstance();
                         break;
                     case 5:
                         exit = false;
@@ -625,7 +625,7 @@ class actionTransportation implements Operations{
         }
     }
 
-    public void displayAll() {
+    public void displayInstance() {
         Scanner scanner = new Scanner(System.in);
         //plateNo + "|" + weight_capacity + "|" + net_weight + "|" + vehicle_status + "|" + dateForm.format(vehicle_license) + "|"
         System.out.println(" ________________________________________________________________________________________________");
