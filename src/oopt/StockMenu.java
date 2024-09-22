@@ -48,13 +48,13 @@ public class StockMenu {
 
                 switch(option) {
                     case 1:
-                        System.out.print("\033[5;34mAdd Stock Option Selected...\n" + RESET);
+                        System.out.println("\033[5;34mAdd Stock Option Selected..." + RESET);
                         System.out.println("\033[5;34mEnter '-1' in any field to quit adding." + RESET);
                         System.out.println("=====================================\n");
                         addStockMenu();
                         break;
                     case 2:
-                        System.out.println("\033[5;34mUpdate Stock Option Selected...\n" + RESET);
+                        System.out.println("\033[5;34mUpdate Stock Option Selected..." + RESET);
                         System.out.println("\033[5;34mEnter '-1' to quit updating." + RESET);
                         System.out.println("=====================================\n");
                         updateStockMenu();
