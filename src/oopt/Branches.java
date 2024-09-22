@@ -148,15 +148,15 @@ public class Branches {
     public void displayFormat() {
         String[] parts = address.split(",");
         parts[0] += ",";
-        System.out.printf("| %-9s | %-30s | %-12s |   %05d   | %-13s |\n", branchID, parts[0], state, post_code, distance, dateForm.format(dateCreated));
+        System.out.printf("| %-9s | %-30s | %-14s |   %05d   | %-13s |\n", branchID, parts[0], state, post_code, distance, dateForm.format(dateCreated));
         for (int i = 1; i < parts.length; i++) {
             if (i < parts.length - 1) {
                 parts[i] += ",";
             }
             parts[i] = parts[i].trim();
-            System.out.printf("| %-9s | %-30s | %-12s |   %5s   | %-13s |\n", " ", parts[i], " ", " ", " ", " ");
+            System.out.printf("| %-9s | %-30s | %-14s |   %5s   | %-13s |\n", " ", parts[i], " ", " ", " ", " ");
         }
-        System.out.printf("| %-9s | %-30s | %-12s |   %-5s   | %-13s |\n", " ", " ", " ", " ", " ", " ");
+        System.out.printf("| %-9s | %-30s | %-14s |   %-5s   | %-13s |\n", " ", " ", " ", " ", " ", " ");
         System.out.println("=========================================================================================");
 
     }
@@ -834,9 +834,9 @@ class actionBranches implements Operations {
     public void displayBranch(ArrayList<Branches> display) {
         //String branchID, double distance, String address, String state, int post_code, Date dateCreated
         Scanner scanner = new Scanner(System.in);
-        System.out.println("=========================================================================================");
-        System.out.printf("| %-9s | %-30s | %-12s | %-9s | %-13s |\n", "Branch ID", "Address", "State", "Post Code", "Distance", "Date Creation");
-        System.out.println("=========================================================================================");
+        System.out.println("===========================================================================================");
+        System.out.printf("| %-9s | %-30s | %-14s | %-9s | %-13s |\n", "Branch ID", "Address", "State", "Post Code", "Distance", "Date Creation");
+        System.out.println("===========================================================================================");
         for (Branches dp : display) {
             dp.displayFormat();
         }
