@@ -95,7 +95,6 @@ public class StockMenu {
             }
             return;
         }
-        scanner.close();
     }
     
     public static void displayChoice() {
@@ -140,9 +139,8 @@ public class StockMenu {
                     break;
 
             }
-            stockMenu();;
+            stockMenu();
         }
-        scanner.close();
     }
     
     public static void displayStockMenu() {
@@ -173,7 +171,6 @@ public class StockMenu {
             }
             stockMenu();;
         }
-        scanner.close();
     }
     
     public static void removeStockMenu() {
@@ -204,7 +201,6 @@ public class StockMenu {
             }
             stockMenu();;
         }
-        scanner.close();
     }
     
     public static void searchStockMenu() {
@@ -242,7 +238,6 @@ public class StockMenu {
             }
             stockMenu();;
         }
-        scanner.close();
     }
     
     public static void updateStockMenu() {
@@ -273,7 +268,6 @@ public class StockMenu {
             }
             stockMenu();
         }
-        scanner.close();
     }
     
     public static void stockBalanceAlert() {
@@ -304,6 +298,5 @@ public class StockMenu {
             }
             stockMenu();
         }
-        scanner.close();
     }
 }

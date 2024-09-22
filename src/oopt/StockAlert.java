@@ -64,6 +64,9 @@ public class StockAlert {
                 }
             }
         }
+        System.out.println("\nPress any key to continue...");
+        scanner.nextLine();
+        scanner.nextLine();
         System.out.println("\n");
         s.stockMenu();
     }

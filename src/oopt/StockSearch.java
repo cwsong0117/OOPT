@@ -50,7 +50,6 @@ public class StockSearch {
                     running = false;
                     break;
                 default:
-                    System.out.println("\033[0;31mInvalid option...Please enter again...\n" + RESET);
                     return;
             }
         }
