@@ -169,7 +169,7 @@ public class StockMenu {
                     break;
 
             }
-            stockMenu();;
+            stockMenu();
         }
     }
     
@@ -236,7 +236,7 @@ public class StockMenu {
                     break;
 
             }
-            stockMenu();;
+            stockMenu();
         }
     }
     
