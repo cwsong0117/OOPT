@@ -15,15 +15,17 @@ import java.util.Scanner;
  * @author User
  */
 public class StockRemove {
+
     public static final String RESET = "\u001B[0m";
+
     public static void removeStock(int n) {
-    
+
         Scanner scanner = new Scanner(System.in);
         StockFile file = new StockFile();
         Display title = new Display();
         boolean found = false;
         String ID;
-        
+
         try {
             switch (n) {
                 case 1:
@@ -44,14 +46,18 @@ public class StockRemove {
                             String confirm = scanner.nextLine();
                             if (confirm.equalsIgnoreCase("y")) {
                                 FoodIterator.remove(); // Remove the item from the list safely
-                                System.out.println("\nFood Item Deleted Successfully...\n");
+                                System.out.println("\n\033[0;31mFood Item Deleted Successfully...\n" + RESET);
                                 found = true;
+                                file.writeFood(remainFoods.toArray(new StockFood[0]));
+                            } else {
+                                found = true;
+                                System.out.println("\n\033[0;31mStock Removed Unsuccessfully\n" + RESET);
                             }
-                            file.writeFood(remainFoods.toArray(new StockFood[0]));
                         }
+
                     }
                     if (!found) {
-                        System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
+                        System.out.println("\n\033[0;31mNo Such ID in file.\n" + RESET);
                     }
                     StockMenu.stockMenu();
                     break;
@@ -74,14 +80,18 @@ public class StockRemove {
                             String confirm = scanner.nextLine();
                             if (confirm.equalsIgnoreCase("y")) {
                                 BeverageIterator.remove(); // Remove the item from the list safely
-                                System.out.println("\nBeverage Item Deleted Successfully...\n");
+                                System.out.println("\n\033[0;31mFood Item Deleted Successfully...\n" + RESET);
                                 found = true;
+                                file.writeFood(remainBeverages.toArray(new StockFood[0]));
+                            } else {
+                                found = true;
+                                System.out.println("\n\033[0;31mStock Removed Unsuccessfully\n" + RESET);
                             }
-                            file.writeBeverage(remainBeverages.toArray(new StockBeverage[0]));
                         }
+
                     }
                     if (!found) {
-                        System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
+                        System.out.println("\n\033[0;31mNo Such ID in file.\n" + RESET);
                     }
                     StockMenu.stockMenu();
                     break;
@@ -104,14 +114,18 @@ public class StockRemove {
                             String confirm = scanner.nextLine();
                             if (confirm.equalsIgnoreCase("y")) {
                                 IngredientIterator.remove(); // Remove the item from the list safely
-                                System.out.println("\nIngredient Item Deleted Successfully...\n");
+                                System.out.println("\n\033[0;31mFood Item Deleted Successfully...\n" + RESET);
                                 found = true;
+                                file.writeFood(remainIngredients.toArray(new StockFood[0]));
+                            } else {
+                                found = true;
+                                System.out.println("\n\033[0;31mStock Removed Unsuccessfully\n" + RESET);
                             }
-                            file.writeIngredient(remainIngredients.toArray(new StockIngredient[0]));
                         }
+
                     }
                     if (!found) {
-                        System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
+                        System.out.println("\n\033[0;31mNo Such ID in file.\n" + RESET);
                     }
                     StockMenu.stockMenu();
                     break;
