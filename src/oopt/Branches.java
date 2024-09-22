@@ -174,7 +174,7 @@ public class Branches {
 
 }
 
-class actionBranches {
+class actionBranches implements Operations {
     public SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
     private String fileAddress = "Branches.txt";
     private ArrayList<Branches> branches = new ArrayList<Branches>();
@@ -212,13 +212,13 @@ class actionBranches {
 
                 switch (option) {
                     case 1:
-                        addBranch();
+                        addNewInstance();
                         break;
                     case 2:
-                        modifyBranch();
+                        modifyInstanceInformation();
                         break;
                     case 3:
-                        removeBranch();
+                        deleteInstance();
                         break;
                     case 4:
                         searchBranch();
@@ -285,7 +285,7 @@ class actionBranches {
         }
     }
 
-    public void addBranch() {
+    public void addNewInstance() {
         Scanner scanner = new Scanner(System.in);
         boolean continueInput; //use for try and catch
         branches.add(new Branches());
@@ -384,7 +384,7 @@ class actionBranches {
         System.out.println(RED+"\nBranch ID: " + branches.get(index).getBranchID() + " is added!!"+ RESET);
     }
 
-    public void modifyBranch() {
+    public void modifyInstanceInformation() {
         dateForm.setLenient(false);
         if (branches.isEmpty()) {
             System.out.println("Without any branch record!");
@@ -571,7 +571,7 @@ class actionBranches {
         }
     }
 
-    public void removeBranch() {
+    public void deleteInstance() {
         if (branches.isEmpty()) {
             System.out.println(RED+"\nWithout any branches record!!\n"+ RESET);
         } else {
