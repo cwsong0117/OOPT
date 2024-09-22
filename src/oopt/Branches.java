@@ -24,7 +24,7 @@ public class Branches {
     private String state;
     private int post_code;
     private Date dateCreated;
-    
+
     public Branches() {
         dateCreated = new Date();
     }
@@ -47,8 +47,8 @@ public class Branches {
         this.post_code = post_code;
         this.dateCreated = dateCreated;
     }
-    
-    public Branches(String branchID){
+
+    public Branches(String branchID) {
         this.branchID = branchID;
         this.distance = 0;
         this.address = "";
@@ -84,7 +84,7 @@ public class Branches {
     public Date getDateCreated() {
         return dateCreated;
     }
-    
+
     public void setBranchID(String branchID) {
         this.branchID = branchID;
     }
@@ -175,6 +175,7 @@ public class Branches {
 }
 
 class actionBranches implements Operations {
+
     public SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
     private String fileAddress = "Branches.txt";
     private ArrayList<Branches> branches = new ArrayList<Branches>();
@@ -200,13 +201,12 @@ class actionBranches implements Operations {
                 System.out.println(BLUE + "|                                  |" + RESET);
                 System.out.println(BLUE + "+==================================+" + RESET);
 
-                
                 System.out.println("\n1. Add NEW Branch");
                 System.out.println("2. Update Branch Information");
                 System.out.println("3. Remove Branch");
                 System.out.println("4. Search Branch");
                 System.out.println("5. Exit");
-                System.out.print(PURPLE+"Enter your choose: "+RESET);
+                System.out.print(PURPLE + "Enter your choose: " + RESET);
                 option = scanner.nextInt();
                 scanner.nextLine();
 
@@ -227,12 +227,12 @@ class actionBranches implements Operations {
                         exit = false;
                         break;
                     default:
-                        System.out.println(RED+"\nPlease enter 1-5!!"+ RESET);
+                        System.out.println(RED + "\nPlease enter 1-5!!" + RESET);
                         break;
                 }
 
             } catch (InputMismatchException ex) {
-                System.out.println(RED+"\nPlease enter 1-5!!"+ RESET);
+                System.out.println(RED + "\nPlease enter 1-5!!" + RESET);
                 scanner.nextLine();
             }
 
@@ -248,7 +248,7 @@ class actionBranches implements Operations {
             }
             write.close();
         } catch (IOException e) {
-            System.out.println(RED+"\nError opening file!!"+ RESET);
+            System.out.println(RED + "\nError opening file!!" + RESET);
         }
 
     }
@@ -279,9 +279,9 @@ class actionBranches implements Operations {
             }
             read.close();
         } catch (FileNotFoundException ex) {
-            System.out.println(RED+"\nError openning file!!"+ RESET);
+            System.out.println(RED + "\nError openning file!!" + RESET);
         } catch (ParseException e) {
-            System.out.println(RED+"\nInvalid file data"+ RESET);
+            System.out.println(RED + "\nInvalid file data" + RESET);
         }
     }
 
@@ -294,37 +294,39 @@ class actionBranches implements Operations {
         if (index != 0) {
             branches.get(index).generateID(branches.get(index - 1).getBranchID());
         }
+        System.out.println(BLUE + "+==================================+" + RESET);
+        System.out.println(BLUE + "|                                  |" + RESET);
+        System.out.println(BLUE + "|            " + GREEN + "Add Branch " + BLUE + "           |" + RESET);
+        System.out.println(BLUE + "|                                  |" + RESET);
+        System.out.println(BLUE + "+==================================+" + RESET);
 
-        System.out.println(RED+"\nNew Branch ID: " + branches.get(index).getBranchID()+ RESET);
+        System.out.println("\nNew Branch ID: " + branches.get(index).getBranchID());
 
         do {
             continueInput = true;
             try {
                 String[] state = {"Kuala Lumpur", "Selangor", "Kuantan", "Putrajaya", "Petaling Jaya"};
                 System.out.println("Select Branch State:");
-                System.out.println("1. Kuala Lumpur");
-                System.out.println("2. Selangor");
-                System.out.println("3. Kuantan");
-                System.out.println("4. Putrajaya");
-                System.out.println("5. Petaling Jaya");
-                System.out.print(PURPLE+"Enter your option: "+RESET);
+                for (int i = 0; i < state.length; i++) {
+                    System.out.println((i + 1) + ". " + state[i]);
+                }
+                System.out.print(PURPLE + "Enter your option: " + RESET);
                 int option = scanner.nextInt();
+                branches.get(index).setState(state[option - 1]);
                 scanner.nextLine();
                 continueInput = false;
-                branches.get(index).setState(state[option - 1]);
-
             } catch (InputMismatchException e) {
-                System.out.println(RED+"\nYour input is invalid!!Please enter 1-5."+ RESET);
+                System.out.println(RED + "\nYour input is invalid!!Please enter 1-5." + RESET);
                 scanner.nextLine();
             } catch (Exception ex) {
-                System.out.println(RED+"\nYour input is invalid!!Please enter 1-5."+ RESET);
+                System.out.println(RED + "\nYour input is invalid!!Please enter 1-5." + RESET);
             }
         } while (continueInput);
 
         do {
             try {
                 continueInput = true;
-                System.out.print(PURPLE+"Enter Post Code: "+RESET);
+                System.out.print(PURPLE + "Enter Post Code: " + RESET);
                 int postCode = scanner.nextInt();
                 scanner.nextLine();
                 branches.get(index).setPost_code(postCode);
@@ -332,10 +334,10 @@ class actionBranches implements Operations {
                 if (branches.get(index).validatePostCode()) {
                     continueInput = false;
                 } else {
-                    System.out.println(RED+"\nInvalid input!!Please try agian(exampler: 68000)."+ RESET);
+                    System.out.println(RED + "\nInvalid input!!Please try agian(exampler: 68000)." + RESET);
                 }
             } catch (InputMismatchException e) {
-                System.out.println(RED+"\nInvalid input!!Please try agian(exampler: 68000)."+ RESET);
+                System.out.println(RED + "\nInvalid input!!Please try agian(exampler: 68000)." + RESET);
                 scanner.nextLine();
             }
 
@@ -344,12 +346,12 @@ class actionBranches implements Operations {
         do {
             //address
             do {
-                System.out.println(PURPLE+"Enter Branch Address:"+RESET);
+                System.out.println(PURPLE + "Enter Branch Address:" + RESET);
                 String address = scanner.nextLine();
                 branches.get(index).setAddress(address);
                 //validate (count_letter < 10 || countNon > countNum + count_letter || count_comma < 1)
                 if (!branches.get(index).validateAddress()) {
-                    System.out.println(RED+"\nAddress is invalid!!Please try again."+ RESET);
+                    System.out.println(RED + "\nAddress is invalid!!Please try again." + RESET);
                     continueInput = true;
                 } else {
                     continueInput = false;
@@ -362,7 +364,7 @@ class actionBranches implements Operations {
                 // check address, state, and post code
                 if (branches.get(index).equals(branches.get(i))) {
                     continueInput = true;
-                    System.out.println(RED+"\nThe address is repeated!!Please try again."+ RESET);
+                    System.out.println(RED + "\nThe address is repeated!!Please try again." + RESET);
                 }
             }
         } while (continueInput);
@@ -370,24 +372,24 @@ class actionBranches implements Operations {
         do {
             continueInput = true;
             try {
-                System.out.print(PURPLE+"Enter Distance Between Warehouse and Branch(in km): "+RESET);
+                System.out.print(PURPLE + "Enter Distance Between Warehouse and Branch(in km): " + RESET);
                 double distance = scanner.nextDouble();
                 scanner.nextLine();
                 branches.get(index).setDistance(Math.abs(distance));
                 continueInput = false;
             } catch (InputMismatchException ex) {
-                System.out.println(RED+"\nInvalid input! Please try again."+ RESET);
+                System.out.println(RED + "\nInvalid input! Please try again." + RESET);
                 scanner.nextLine();
             }
         } while (continueInput);
 
-        System.out.println(RED+"\nBranch ID: " + branches.get(index).getBranchID() + " is added!!"+ RESET);
+        System.out.println(GREEN + "\nBranch ID: " + branches.get(index).getBranchID() + " is added!!" + RESET);
     }
 
     public void modifyInstanceInformation() {
         dateForm.setLenient(false);
         if (branches.isEmpty()) {
-            System.out.println("Without any branch record!");
+            System.out.println(RED + "Without any branch record!" + RESET);
 
         } else {
             Scanner scanner = new Scanner(System.in);
@@ -397,8 +399,13 @@ class actionBranches implements Operations {
 
             //find ID
             do {
+                System.out.println(BLUE + "+==================================+" + RESET);
+                System.out.println(BLUE + "|                                  |" + RESET);
+                System.out.println(BLUE + "|         " + GREEN + "Modify Branch " + BLUE + "           |" + RESET);
+                System.out.println(BLUE + "|                                  |" + RESET);
+                System.out.println(BLUE + "+==================================+" + RESET);
 
-                System.out.print(PURPLE+"\nEnter Branch ID(XXX to exit): "+RESET);
+                System.out.print(PURPLE + "\nEnter Branch ID(XXX to exit): " + RESET);
                 id = scanner.nextLine();
                 id = id.toUpperCase();
                 id = id.replace(" ", "");
@@ -424,30 +431,30 @@ class actionBranches implements Operations {
                                 continueInput = true;
                                 try {
 
-                                    System.out.print(PURPLE+"Enter your option: "+RESET);
+                                    System.out.print(PURPLE + "Enter your option: " + RESET);
                                     option = scanner.nextInt();
                                     scanner.nextLine();
                                     continueInput = false;
                                 } catch (InputMismatchException ex) {
                                     scanner.nextLine();
-                                    System.out.println(RED+"\nInvalid Input!!Please Enter 1-5."+ RESET);
+                                    System.out.println(RED + "\nInvalid Input!!Please Enter 1-4." + RESET);
                                 }
                             } while (continueInput);
 
                             switch (option) {
                                 case 1:
 
-                                    System.out.println(RED+"\nCurrent Distance: " + branches.get(index).getDistance() + "km"+ RESET);
+                                    System.out.println("\nCurrent Distance: " + branches.get(index).getDistance() + "km");
                                     continueInput = true;
                                     do {
                                         try {
-                                            System.out.print(PURPLE+"Change to(km): "+RESET);
+                                            System.out.print(PURPLE + "Change to(km): " + RESET);
                                             double distance = scanner.nextDouble();
                                             scanner.nextLine();
                                             branches.get(index).setDistance(distance);
                                             continueInput = false;
                                         } catch (InputMismatchException ex) {
-                                            System.out.println(RED+"\nInvalid Input Please Try Again!!"+ RESET);
+                                            System.out.println(RED + "\nInvalid Input Please Try Again!!" + RESET);
                                             scanner.nextLine();
                                         }
                                     } while (continueInput);
@@ -464,11 +471,11 @@ class actionBranches implements Operations {
                                         }
                                         do {
 
-                                            System.out.println("Address Change to:");
+                                            System.out.println(PURPLE + "Address Change to:" + RESET);
                                             newAddress = scanner.nextLine();
                                             branches.get(index).setAddress(newAddress);
                                             if (!branches.get(index).validateAddress()) {
-                                                System.out.println(RED+"\nInvalid Input!Please try again"+ RESET);
+                                                System.out.println(RED + "\nInvalid Input!Please try again" + RESET);
                                             }
                                         } while (!branches.get(index).validateAddress());
 
@@ -479,22 +486,20 @@ class actionBranches implements Operations {
                                             try {
                                                 String[] state = {"Kuala Lumpur", "Selangor", "Kuantan", "Putrajaya", "Petaling Jaya"};
                                                 System.out.println("Select Branch State:");
-                                                System.out.println("1. Kuala Lumpur");
-                                                System.out.println("2. Selangor");
-                                                System.out.println("3. Kuantan");
-                                                System.out.println("4. Putrajaya");
-                                                System.out.println("5. Petaling Jaya");
-                                                System.out.print(PURPLE+"Enter your option: "+RESET);
+                                                for (int i = 0; i < state.length; i++) {
+                                                    System.out.println((i + 1) + ". " + state[i]);
+                                                }
+                                                System.out.print(PURPLE + "Enter your option: " + RESET);
                                                 option = scanner.nextInt();
-                                                scanner.nextLine();
-                                                continueInput = false;
                                                 branches.get(index).setState(state[option - 1]);
+                                                continueInput = false;
+                                                scanner.nextLine();
 
                                             } catch (InputMismatchException e) {
-                                                System.out.println(RED+"\nYour input is invalid!!Please enter 1-5."+ RESET);
+                                                System.out.println(RED + "\nYour input is invalid!!Please enter 1-5." + RESET);
                                                 scanner.nextLine();
                                             } catch (Exception ex) {
-                                                System.out.println(RED+"\nYour input is invalid!!Please enter 1-5."+ RESET);
+                                                System.out.println(RED + "\nYour input is invalid!!Please enter 1-5." + RESET);
                                             }
                                         } while (continueInput);
 
@@ -503,7 +508,7 @@ class actionBranches implements Operations {
                                             continueInput = true;
                                             try {
 
-                                                System.out.print(PURPLE+"Enter Post Code: "+RESET);
+                                                System.out.print(PURPLE + "Enter Post Code: " + RESET);
                                                 int postCode = scanner.nextInt();
                                                 scanner.nextLine();
                                                 branches.get(index).setPost_code(postCode);
@@ -511,10 +516,10 @@ class actionBranches implements Operations {
                                                 if (branches.get(index).validatePostCode()) {
                                                     continueInput = false;
                                                 } else {
-                                                    System.out.println(RED+"\nInvalid input!!Please try agian(exampler: 68000)."+ RESET);
+                                                    System.out.println(RED + "\nInvalid input!!Please try agian(exampler: 68000)." + RESET);
                                                 }
                                             } catch (InputMismatchException e) {
-                                                System.out.println(RED+"\nInvalid input!!Please try agian(exampler: 68000)."+ RESET);
+                                                System.out.println(RED + "\nInvalid input!!Please try agian(exampler: 68000)." + RESET);
                                                 scanner.nextLine();
                                             }
 
@@ -523,11 +528,12 @@ class actionBranches implements Operations {
                                         continueInput = false;
                                         for (Branches br : branches) {
                                             // check address, state, and post code
-                                            if (branches.get(index).getBranchID().equals(br.getBranchID())) {
-                                                break;
-                                            } else if (branches.get(index).equals(br)) {
-                                                continueInput = true;
-                                                System.out.println(RED+"\nThe address is repeated!!Please try again."+ RESET);
+
+                                            if (branches.get(index).equals(br)) {
+                                                if (!branches.get(index).getBranchID().equals(br.getBranchID())) {
+                                                    continueInput = true;
+                                                    System.out.println(RED + "\nThe address is repeated!!Please try again." + RESET);
+                                                }
                                             }
                                         }
                                     } while (continueInput);
@@ -538,16 +544,16 @@ class actionBranches implements Operations {
                                     do {
                                         continueInput = true;
                                         try {
-                                            System.out.print(PURPLE+"Enter Date(format: DD/MM/YYYY): "+RESET);
+                                            System.out.print(PURPLE + "Enter Date(format: DD/MM/YYYY): " + RESET);
                                             Date date = dateForm.parse(scanner.nextLine());
                                             continueInput = false;
                                             branches.get(index).setDateCreated(date);
                                             if (!branches.get(index).validateDate()) {
-                                                System.out.println(RED+"\nInvalid Input. Can't write about the future"+ RESET);
+                                                System.out.println(RED + "\nInvalid Input. Can't write about the future" + RESET);
                                             }
 
                                         } catch (ParseException e) {
-                                            System.out.println(RED+"\nInvalid format!Please follow the format."+ RESET);
+                                            System.out.println(RED + "\nInvalid format!Please follow the format." + RESET);
                                         }
                                     } while (continueInput || !branches.get(index).validateDate());
                                     break;
@@ -555,17 +561,17 @@ class actionBranches implements Operations {
                                     exit = true;
                                     break;
                                 default:
-                                    System.out.println(RED+"\nInvalid input please enter 1-4"+ RESET);
+                                    System.out.println(RED + "\nInvalid input please enter 1-4" + RESET);
                                     break;
                             }
 
                         } while (!exit);
                     } else {
-                        System.out.println(RED+"\nID: " + id + "not found!"+ RESET);
+                        System.out.println(RED + "\nID: " + id + " not found!" + RESET);
                     }
 
                 } else {
-                    System.out.println("Exited!");
+                    System.out.println("\nExited!");
                 }
             } while (!exit);
         }
@@ -573,7 +579,7 @@ class actionBranches implements Operations {
 
     public void deleteInstance() {
         if (branches.isEmpty()) {
-            System.out.println(RED+"\nWithout any branches record!!\n"+ RESET);
+            System.out.println(RED + "\nWithout any branches record!!\n" + RESET);
         } else {
             Scanner scanner = new Scanner(System.in);
             int index = 0;
@@ -584,7 +590,12 @@ class actionBranches implements Operations {
             do {
                 exit = false;
                 found = false;
-                System.out.print(PURPLE+"Enter branch ID want to remove(XXX to exit): "+RESET);
+                System.out.println(BLUE + "+==================================+" + RESET);
+                System.out.println(BLUE + "|                                  |" + RESET);
+                System.out.println(BLUE + "|         " + GREEN + "Remove Branch " + BLUE + "           |" + RESET);
+                System.out.println(BLUE + "|                                  |" + RESET);
+                System.out.println(BLUE + "+==================================+" + RESET);
+                System.out.print(PURPLE + "Enter branch ID want to remove(XXX to exit): " + RESET);
                 branchId = scanner.nextLine();
                 branchId = branchId.replace(" ", "");
                 branchId = branchId.toUpperCase();
@@ -597,19 +608,24 @@ class actionBranches implements Operations {
 
                 if (found) {
                     branches.remove(index);
-                    System.out.println(branchId + " was removed!!");
+                    System.out.println(GREEN + branchId + " was removed!!" + RESET);
                 } else if (branchId.equals("XXX")) {
                     exit = true;
                 } else {
-                    System.out.println(RED+"\n" + branchId + " not found!!"+ RESET);
+                    System.out.println(RED + "\n" + branchId + " not found!!" + RESET);
                 }
             } while (!exit);
         }
     }
 
     public void searchBranch() {
+        System.out.println(BLUE + "+==================================+" + RESET);
+        System.out.println(BLUE + "|                                  |" + RESET);
+        System.out.println(BLUE + "|             " + GREEN + "Search Branch " + BLUE + "              |" + RESET);
+        System.out.println(BLUE + "|                                  |" + RESET);
+        System.out.println(BLUE + "+==================================+" + RESET);
         if (branches.isEmpty()) {
-            System.out.println(RED+"\nWithout any branches record!!\n"+ RESET);
+            System.out.println(RED + "\nWithout any branches record!!\n" + RESET);
         } else {
             Scanner scanner = new Scanner(System.in);
             int index = 0;
@@ -629,11 +645,11 @@ class actionBranches implements Operations {
                 System.out.println("5. State");
                 System.out.println("6. Exit");
                 try {
-                    System.out.print(PURPLE+"Enter your selection: "+RESET);
+                    System.out.print(PURPLE + "Enter your selection: " + RESET);
                     option = scanner.nextInt();
                     scanner.nextLine();
                 } catch (InputMismatchException ex) {
-                    System.out.println(RED+"\nPlease enter 1-6!!"+ RESET);
+                    System.out.println(RED + "\nPlease enter 1-6!!" + RESET);
                     scanner.nextLine();
                 }
 
@@ -643,7 +659,7 @@ class actionBranches implements Operations {
                             continueInput = true;
                             found = false;
 
-                            System.out.print(PURPLE+"\nEnter Branch ID(XXX to exit):"+RESET);
+                            System.out.print(PURPLE + "\nEnter Branch ID(XXX to exit):" + RESET);
                             String id = scanner.nextLine();
                             id = id.trim().replace(" ", "").toUpperCase();
                             if (!id.equals("XXX")) {
@@ -657,7 +673,7 @@ class actionBranches implements Operations {
                                 }
 
                                 if (!found) {
-                                    System.out.println(RED+"\nBranch ID: " + id + " didn't found!!Please try again."+ RESET);
+                                    System.out.println(RED + "\nBranch ID: " + id + " didn't found!!Please try again." + RESET);
                                 }
                             } else {
                                 System.out.println("\nExited Search ID.");
@@ -670,7 +686,7 @@ class actionBranches implements Operations {
                         do {
                             continueInput = true;
                             try {
-                                System.out.print(PURPLE+"Enter the distance(in km): "+RESET);
+                                System.out.print(PURPLE + "Enter the distance(in km): " + RESET);
                                 double distance = scanner.nextDouble();
                                 scanner.nextLine();
                                 continueInput = false;
@@ -681,12 +697,12 @@ class actionBranches implements Operations {
                                 }
 
                                 if (display.isEmpty()) {
-                                    System.out.println(RED+"\nDidn't found branch within " + distance + "km."+ RESET);
+                                    System.out.println(RED + "\nDidn't found branch within " + distance + "km." + RESET);
                                 } else {
                                     displayBranch(display);
                                 }
                             } catch (InputMismatchException ex) {
-                                System.out.println(RED+"\nInvalid input!Please try again."+ RESET);
+                                System.out.println(RED + "\nInvalid input!Please try again." + RESET);
                             }
                         } while (continueInput);
                         break;
@@ -698,12 +714,12 @@ class actionBranches implements Operations {
                         do {
                             continueInput = true;
                             try {
-                                System.out.print(PURPLE+"Enter post code(example: 90000): "+RESET);
+                                System.out.print(PURPLE + "Enter post code(example: 90000): " + RESET);
                                 postCode = scanner.nextInt();
                                 scanner.nextLine();
                                 continueInput = false;
                             } catch (InputMismatchException ex) {
-                                System.out.println(RED+"\nInvalid input please try again."+ RESET);
+                                System.out.println(RED + "\nInvalid input please try again." + RESET);
                                 scanner.nextLine();
                             }
                         } while (continueInput);
@@ -711,23 +727,25 @@ class actionBranches implements Operations {
                             try {
                                 String[] state = {"Kuala Lumpur", "Selangor", "Kuantan", "Putrajaya", "Petaling Jaya"};
                                 System.out.println("Select Branch State:");
-                                System.out.println("1. Kuala Lumpur");
-                                System.out.println("2. Selangor");
-                                System.out.println("3. Kuantan");
-                                System.out.println("4. Putrajaya");
-                                System.out.println("5. Petaling Jaya");
-                                System.out.print(PURPLE+"Enter your option: "+RESET);
+                                for (int i = 0; i < state.length; i++) {
+                                    System.out.println((i + 1) + ". " + state[i]);
+                                }
+
+                                System.out.print(PURPLE + "Enter your option: " + RESET);
                                 int select = scanner.nextInt();
                                 scanner.nextLine();
                                 s_state = state[select - 1];
                                 continueInput = false;
                             } catch (InputMismatchException ex) {
-                                System.out.println(RED+"\nInvalid input please try again."+ RESET);
+                                System.out.println(RED + "\nInvalid input please try again." + RESET);
+                                scanner.nextLine();
+                            } catch (Exception e) {
+                                System.out.println(RED + "\nInvalid input please try again." + RESET);
                                 scanner.nextLine();
                             }
                         } while (continueInput);
 
-                        System.out.println(PURPLE+"Enter address:"+ RESET);
+                        System.out.println(PURPLE + "Enter address:" + RESET);
                         String address = scanner.nextLine();
                         Branches br = new Branches(address, s_state, postCode);
                         found = false;
@@ -740,14 +758,14 @@ class actionBranches implements Operations {
                         if (found) {
                             displayBranch(display);
                         } else {
-                            System.out.println(RED+"\nDidn't found the address."+ RESET);
+                            System.out.println(RED + "\nDidn't found the address." + RESET);
                         }
                         break;
                     case 4:
                         continueInput = true;
                         do {
                             try {
-                                System.out.print(PURPLE+" \nEnter Post Code:"+RESET);
+                                System.out.print(PURPLE + " \nEnter Post Code:" + RESET);
                                 int post_code = scanner.nextInt();
                                 scanner.nextLine();
                                 continueInput = false;
@@ -765,7 +783,7 @@ class actionBranches implements Operations {
                                 }
 
                             } catch (InputMismatchException ex) {
-                                System.out.println(RED+"\nInvalid input!Please try again."+ RESET);
+                                System.out.println(RED + "\nInvalid input!Please try again." + RESET);
                             }
                         } while (continueInput);
                         break;
@@ -780,7 +798,7 @@ class actionBranches implements Operations {
                                 System.out.println("3. Kuantan");
                                 System.out.println("4. Putrajaya");
                                 System.out.println("5. Petaling Jaya");
-                                System.out.print(PURPLE+"Enter your option: "+RESET);
+                                System.out.print(PURPLE + "Enter your option: " + RESET);
                                 int select = scanner.nextInt();
                                 scanner.nextLine();
                                 s_state = state[select - 1];
@@ -795,11 +813,11 @@ class actionBranches implements Operations {
                                 if (found) {
                                     displayBranch(display);
                                 } else {
-                                    System.out.println(RED+"\nNo any branch in " + s_state+ RESET);
+                                    System.out.println(RED + "\nNo any branch in " + s_state + RESET);
                                 }
 
                             } catch (InputMismatchException ex) {
-                                System.out.println(RED+"\nInvalid input please enter 1-5."+ RESET);
+                                System.out.println(RED + "\nInvalid input please enter 1-5." + RESET);
                                 scanner.nextLine();
                             }
                         } while (continueInput);
@@ -822,7 +840,7 @@ class actionBranches implements Operations {
         for (Branches dp : display) {
             dp.displayFormat();
         }
-        System.out.println(PURPLE+"Enter to exit"+RESET);
+        System.out.println(PURPLE + "Enter to exit" + RESET);
         scanner.nextLine();
     }
 
@@ -834,7 +852,7 @@ class actionBranches implements Operations {
         boolean continueInput = true;
 
         if (branches.isEmpty()) {
-            System.out.println(RED+"\nWithout any Branches!!"+ RESET);
+            System.out.println(RED + "\nWithout any Branches!!" + RESET);
         } else {
             System.out.println("Select Branch ID:");
             for (Branches br : branches) {
@@ -843,18 +861,18 @@ class actionBranches implements Operations {
             }
             do {
                 try {
-                    System.out.print(PURPLE+"Enter (1-" + count + "): "+RESET);
+                    System.out.print(PURPLE + "Enter (1-" + count + "): " + RESET);
                     int option = scanner.nextInt();
                     scanner.nextLine();
                     continueInput = false;
                     if (option > count || option <= 0) {
                         continueInput = true;
-                        System.out.println(RED+"\nInvalid Input!Please try again."+ RESET);
+                        System.out.println(RED + "\nInvalid Input!Please try again." + RESET);
                     } else {
                         temp = branches.get(option - 1);
                     }
                 } catch (InputMismatchException ex) {
-                    System.out.println(RED+"\nInvalid Input!Please try again."+ RESET);
+                    System.out.println(RED + "\nInvalid Input!Please try again." + RESET);
                     scanner.nextLine();
                 }
             } while (continueInput);
@@ -862,27 +880,25 @@ class actionBranches implements Operations {
         }
         return temp.getBranchID();
     }
-    
-    public boolean findBranches(String branchId){
+
+    public boolean findBranches(String branchId) {
         readFile();
-        for(Branches br: branches){
-            if(br.getBranchID().equals(branchId)){
+        for (Branches br : branches) {
+            if (br.getBranchID().equals(branchId)) {
                 return true;
             }
         }
         return false;
     }
-    
-    public double getBranchesDistance(String branchId){
+
+    public double getBranchesDistance(String branchId) {
         readFile();
-        for(Branches br: branches){
-            if(br.getBranchID().equals(branchId)){
+        for (Branches br : branches) {
+            if (br.getBranchID().equals(branchId)) {
                 return br.getDistance();
             }
         }
         return 0;
     }
-    
+
 }
-
-
