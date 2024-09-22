@@ -4,6 +4,7 @@
  */
 package oopt;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -137,17 +138,26 @@ public class StockBeverage extends Stock {
         }while(!Validation.validate(name, num));
         
         int quantity = 0;
-        do{
-            System.out.print("Quantity : ");
-            quantity = scanner.nextInt();
-            if (quantity == -1) {
-                System.out.println("Existing...\n");
-                StockMenu.stockMenu();
+        boolean validInput = false;
+
+        do {
+            try {
+                System.out.print("Quantity : ");
+                quantity = scanner.nextInt(); // Try to read an integer value
+                if (quantity == -1) {
+                    System.out.println("Exiting...\n");
+                    StockMenu.stockMenu(); // Assuming StockMenu has a static stockMenu method
+                }
+                if (quantity <= 0) {
+                    System.out.println("The quantity cannot be zero or negative. Please enter a valid quantity.");
+                } else {
+                    validInput = true; // Valid input was entered, exit the loop
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter an integer.");
+                scanner.next(); // Clear the invalid input
             }
-            else if(quantity <= 0) {
-                System.out.println("The price cannot be zero or negative. Please enter a price");
-            }
-        }while(quantity <= 0);
+        } while (!validInput);
         
         scanner.nextLine();
 
