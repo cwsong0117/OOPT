@@ -183,7 +183,7 @@ public class Shipment {
 
 }
 
-class actionShipment {
+class actionShipment implements Operations {
     actionTransportation transportation = new actionTransportation();
     actionBranches branch = new actionBranches();
     public ArrayList<Shipment> shipment = new ArrayList<Shipment>();
@@ -220,13 +220,13 @@ class actionShipment {
 
                 switch (option) {
                     case 1:
-                        addShipment();
+                        addNewInstance();
                         break;
                     case 2:
-                        modifyShipment();
+                        modifyInstanceInformation();
                         break;
                     case 3:
-                        deleteShipmentRecord();
+                        deleteInstance();
                         break;
                     case 4:
                         updateShipmentStatus();
@@ -306,7 +306,7 @@ class actionShipment {
         }
     }
 
-    public void addShipment() {
+    public void addNewInstance() {
         int index = shipment.size();
         shipment.add(new Shipment());
         if (index != 0) {
@@ -498,7 +498,7 @@ class actionShipment {
 
     }
 
-    public void modifyShipment() {
+    public void modifyInstanceInformation() {
         dateForm.setLenient(false);
         timeForm.setLenient(false);
         Scanner scanner = new Scanner(System.in);
@@ -738,7 +738,7 @@ class actionShipment {
         }
     }
 
-    public void deleteShipmentRecord() {
+    public void deleteInstance() {
         Scanner scanner = new Scanner(System.in);
         boolean continueInput, exit = false, found;
 
