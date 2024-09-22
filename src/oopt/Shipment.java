@@ -189,7 +189,7 @@ class actionShipment implements Operations, Manage {
     public ArrayList<Shipment> shipment = new ArrayList<Shipment>();
     public SimpleDateFormat dateForm = new SimpleDateFormat("dd/MM/yyyy");
     public SimpleDateFormat timeForm = new SimpleDateFormat("HHmm");
-    private String fileAddress = "Shipment.txt";
+    private final String fileAddress = "Shipment.txt";
     public final String RED = "\u001B[31m";
     public final String CYAN = "\u001B[36m";
     public final String BLUE = "\u001B[34m";
@@ -319,6 +319,12 @@ class actionShipment implements Operations, Manage {
         boolean continueInput = true;
 
         boolean empty = false;
+        
+        System.out.println(BLUE + "\n+==================================+" + RESET);
+        System.out.println(BLUE + "|                                  |" + RESET);
+        System.out.println(BLUE + "|          " + GREEN + "Add Shipment" + BLUE + "            |" + RESET);
+        System.out.println(BLUE + "|                                  |" + RESET);
+        System.out.println(BLUE + "+==================================+" + RESET);
 
         //let user select which branch and get the branch information
         System.out.println("\nShipment ID: " + shipment.get(index).getShipmentId());
@@ -507,6 +513,12 @@ class actionShipment implements Operations, Manage {
             boolean found = false, continueInput, exit = false;
 
             do {
+                System.out.println(BLUE + "\n+==================================+" + RESET);
+                System.out.println(BLUE + "|                                  |" + RESET);
+                System.out.println(BLUE + "|         " + GREEN + "Modify Shipment" + BLUE + "          |" + RESET);
+                System.out.println(BLUE + "|                                  |" + RESET);
+                System.out.println(BLUE + "+==================================+\n\n" + RESET);
+                
                 System.out.print(PURPLE+"Enter Shipment ID to modify(SPXXXXX): "+RESET);
                 String id = scanner.nextLine();
                 id = id.replace(" ", "").toUpperCase();
@@ -754,6 +766,12 @@ class actionShipment implements Operations, Manage {
                 }
                 if (have) {
                     do {
+        System.out.println(BLUE + "\n+============================================+" + RESET);
+        System.out.println(BLUE + "|                                              |" + RESET);
+        System.out.println(BLUE + "|          " + GREEN + "Remove Cancelled Shipment" + BLUE + "           |" + RESET);
+        System.out.println(BLUE + "|                                              |" + RESET);
+        System.out.println(BLUE + "+==============================================+\n\n" + RESET);
+                        
                         System.out.println("Delete for");
                         System.out.println("1. Specific Shipment ID(Only Cancelled)");
                         System.out.println("2. All Cancelled Shipment");
@@ -827,6 +845,12 @@ class actionShipment implements Operations, Manage {
         boolean continueInput = true;
 
         do {
+            System.out.println(BLUE + "\n+==================================+" + RESET);
+        System.out.println(BLUE + "|                                  |" + RESET);
+        System.out.println(BLUE + "|      " + GREEN + "Update Shipment Status" + BLUE + "      |" + RESET);
+        System.out.println(BLUE + "|                                  |" + RESET);
+        System.out.println(BLUE + "+==================================+\n\n" + RESET);
+            
             System.out.println("Update with: ");
             System.out.println("1. Specific Shipment ID");
             System.out.println("2. Automatically");
