@@ -38,7 +38,7 @@ public class SupplierItemsMain {
                 System.out.println("**Try again(XXX to leave)**");
                 String option = input.nextLine();
                 if (option.equalsIgnoreCase("XXX")) {
-                    System.exit(0);
+                    StaffLogin.staffMenu();
                 }
             }
         } while (!valid);

@@ -46,7 +46,7 @@ public class PurchaseOrderMain {
                 String option = input.nextLine();
                 if (option.equalsIgnoreCase("XXX")) {
                     System.out.println("\nGoodbye.....");
-                    System.exit(0);
+                    StaffLogin.staffMenu();
                 }
             }
         } while (!valid);

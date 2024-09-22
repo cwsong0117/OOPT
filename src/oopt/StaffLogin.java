@@ -16,8 +16,12 @@ import java.io.File;
 public class StaffLogin {
 
     final static List<Employee> people = new ArrayList<>();
-
+    
     public static void main(String[] args) {
+        staffMenu();
+    }
+
+    public static void staffMenu() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welcome to the Staff Login System");

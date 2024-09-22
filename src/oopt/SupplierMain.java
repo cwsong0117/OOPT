@@ -48,7 +48,7 @@ public class SupplierMain {
                 System.out.println("**Try again(XXX to end program)**");
                 String option = input.nextLine();
                 if (option.equalsIgnoreCase("XXX")) {
-                    System.exit(0);
+                    StaffLogin.staffMenu();
                 }
             }
         } while (!valid);
