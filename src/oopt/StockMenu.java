@@ -12,13 +12,15 @@ import java.util.Scanner;
  * @author User
  */
 public class StockMenu {
+
     public static final String RESET = "\u001B[0m";
+
     public static void stockMenu() {
-    
+
         Boolean running = true;
         Scanner scanner = new Scanner(System.in);
-        
-        while(running) {
+
+        while (running) {
             System.out.println("\n");
             System.out.println("\033[34m  ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ " + RESET);
             System.out.println("\033[1;34m |______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|" + RESET);
@@ -41,12 +43,13 @@ public class StockMenu {
             System.out.println("6. LOW-LEVEL Stock Check");
             System.out.println("7. EXIT");
             System.out.println("\n====================================");
-            System.out.print("Your Option : ");
+            // Handle invalid non-integer input using try-catch
             try {
+                System.out.print("Your Option: ");
                 int option = scanner.nextInt();  // Read input
                 System.out.println("\n=====================================");
 
-                switch(option) {
+                switch (option) {
                     case 1:
                         System.out.println("\033[5;34mAdd Stock Option Selected..." + RESET);
                         System.out.println("\033[5;34mEnter '-1' in any field to quit adding." + RESET);
@@ -90,13 +93,12 @@ public class StockMenu {
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input! Please enter a valid option number.");
-                scanner.next();  // Consume the invalid token to avoid infinite loop
+                System.out.println("\033[0;31mInvalid input. Please enter a valid number." + RESET);
+                scanner.next();  // Clear the invalid input
             }
-            return;
         }
     }
-    
+
     public static void displayChoice() {
         System.out.println("\n==================");
         System.out.println("1. Food");
@@ -106,18 +108,18 @@ public class StockMenu {
         System.out.println("==================");
         System.out.print("Option > ");
     }
-    
+
     public static void addStockMenu() {
         displayChoice();
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         int option;
-        
-        while(running) {
+
+        while (running) {
             option = scanner.nextInt();
             System.out.print("\n");
 
-            switch(option) {
+            switch (option) {
                 case 1:
                     System.out.println("\033[0;32mFood Category Selected...\n" + RESET);
                     StockFood.foodIn(option);
@@ -142,19 +144,19 @@ public class StockMenu {
             stockMenu();
         }
     }
-    
+
     public static void displayStockMenu() {
-        
+
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         Display d = new Display();
-        
-        while(running) {
+
+        while (running) {
             displayChoice();
             int option = scanner.nextInt();
             System.out.print("\n");
 
-            switch(option) {
+            switch (option) {
                 case 1:
                 case 2:
                 case 3:
@@ -172,19 +174,19 @@ public class StockMenu {
             stockMenu();
         }
     }
-    
+
     public static void removeStockMenu() {
-        
+
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         StockRemove r = new StockRemove();
-        
-        while(running) {
+
+        while (running) {
             displayChoice();
             int option = scanner.nextInt();
             System.out.print("\n");
 
-            switch(option) {
+            switch (option) {
                 case 1:
                 case 2:
                 case 3:
@@ -202,19 +204,19 @@ public class StockMenu {
             stockMenu();;
         }
     }
-    
+
     public static void searchStockMenu() {
-        
+
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         StockSearch s = new StockSearch();
-        
-        while(running) {
+
+        while (running) {
             displayChoice();
             int option = scanner.nextInt();
             System.out.print("\n");
 
-            switch(option) {
+            switch (option) {
                 case 1:
                     System.out.println("\033[0;32mFood Category Selected...\n" + RESET);
                     s.searchMenu(option);
@@ -239,19 +241,19 @@ public class StockMenu {
             stockMenu();
         }
     }
-    
+
     public static void updateStockMenu() {
-        
+
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         StockUpdate u = new StockUpdate();
-        
-        while(running) {
+
+        while (running) {
             displayChoice();
             int option = scanner.nextInt();
             System.out.print("\n");
 
-            switch(option) {
+            switch (option) {
                 case 1:
                 case 2:
                 case 3:
@@ -269,19 +271,19 @@ public class StockMenu {
             stockMenu();
         }
     }
-    
+
     public static void stockBalanceAlert() {
-        
+
         Scanner scanner = new Scanner(System.in);
         Boolean running = true;
         StockAlert a = new StockAlert();
-        
-        while(running) {
+
+        while (running) {
             displayChoice();
             int option = scanner.nextInt();
             System.out.print("\n");
 
-            switch(option) {
+            switch (option) {
                 case 1:
                 case 2:
                 case 3:
