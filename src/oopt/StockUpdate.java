@@ -20,7 +20,7 @@ public class StockUpdate {
         StockSearch s = new StockSearch();
 
         //Search Stock that need to update using ID
-        String id = s.searchByID(n);
+        String id = s.searchReturnID(n);
 
         //Enter the amount of stock receive
         int quantity = 0;

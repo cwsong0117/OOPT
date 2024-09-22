@@ -57,7 +57,7 @@ public class StockSearch {
         stockMenu.stockMenu();
     }
     
-    public static String searchByID(int n) {
+    public static String searchReturnID(int n) {
         //n means the number entered by user,food, beverage or ingredient
         //search and display the relevant id
         Scanner scanner = new Scanner(System.in);
@@ -108,6 +108,58 @@ public class StockSearch {
             operationAfterSearch();
         }
         return id;
+    }
+    
+    public static void searchByID(int n) {
+        //n means the number entered by user,food, beverage or ingredient
+        //search and display the relevant id
+        Scanner scanner = new Scanner(System.in);
+        StockFile file = new StockFile();
+        boolean found = false;
+        Display d = new Display();
+        
+        System.out.print("Enter the ID : ");
+        String id = scanner.nextLine();
+        
+        Display display = new Display();
+        if(n == 1) {
+            StockFood[] foods = file.readFood();
+            
+            display.displayFoodTitle();
+        
+            for(StockFood f : foods) {
+                if(f.getStockID().equalsIgnoreCase(id)) {
+                    System.out.println(f.toString() + "\n");
+                    found = true;
+                }
+            }
+        }else if(n == 2) {
+            StockBeverage[] beverages = file.readBeverage();
+            
+            display.displayBeverageTitle();
+        
+            for(StockBeverage b : beverages) {
+                if(b.getStockID().equalsIgnoreCase(id)) {
+                    System.out.println(b.toString() + "\n");
+                    found = true;
+                }
+            }
+        }else if(n == 3) {
+            StockIngredient[] ingredients = file.readIngredient();
+            
+            display.displayIngredientTitle();
+        
+            for(StockIngredient i : ingredients) {
+                if(i.getStockID ().equalsIgnoreCase(id)) {
+                    System.out.println(i.toString() + "\n");
+                    found = true;
+                }
+            }
+        }
+        if(!found) {
+            System.out.println("\033[0;31mNo Such ID in file.\n" + RESET);
+            operationAfterSearch();
+        }
     }
     
     public static void searchByName(int n) {
