@@ -118,15 +118,15 @@ public class StockMenu {
 
             switch(option) {
                 case 1:
-                    System.out.println("Food Category Selected...");
+                    System.out.println("\033[0;32mFood Category Selected...\n" + RESET);
                     StockFood.foodIn(option);
                     break;
                 case 2:
-                    System.out.println("Beverage Category Selected...");
+                    System.out.println("\033[0;32mBeverage Category Selected...\n" + RESET);
                     StockBeverage.beverageIn(option);
                     break;
                 case 3:
-                    System.out.println("Ingredient Category Selected...");
+                    System.out.println("\033[0;32mIngredient Category Selected...\n" + RESET);
                     StockIngredient.ingredientIn(option);
                     break;
                 case 4:
@@ -218,15 +218,15 @@ public class StockMenu {
 
             switch(option) {
                 case 1:
-                    System.out.println("Food Category Selected...");
+                    System.out.println("\033[0;32mFood Category Selected...\n" + RESET);
                     s.searchMenu(option);
                     break;
                 case 2:
-                    System.out.println("Beverage Category Selected...");
+                    System.out.println("\033[0;32mBeverage Category Selected...\n" + RESET);
                     s.searchMenu(option);
                     break;
                 case 3:
-                    System.out.println("Ingredient Category Selected...");
+                    System.out.println("\033[0;32mIngredient Category Selected...\n" + RESET);
                     s.searchMenu(option);
                     break;
                 case 4:
