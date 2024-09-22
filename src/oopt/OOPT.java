@@ -91,7 +91,6 @@ public class OOPT {
                     break;
             }
         }
-        scanner.close();
     }
 
 }
