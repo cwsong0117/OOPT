@@ -63,12 +63,12 @@ public class StockMenu {
                         displayStockMenu();
                         break;
                     case 4:
-                        System.out.print("\033[5;34mRemove Stock Level Option Selected...\n" + RESET);
+                        System.out.print("\033[5;34mRemove Stock Option Selected...\n" + RESET);
                         System.out.println("=====================================\n");
                         removeStockMenu();
                         break;
                     case 5:
-                        System.out.print("\033[5;34mSearch Stock Level Option Selected...\n" + RESET);
+                        System.out.print("\033[5;34mSearch Stock Option Selected...\n" + RESET);
                         System.out.println("=====================================\n");
                         searchStockMenu();
                         break;
