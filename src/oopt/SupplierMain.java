@@ -48,6 +48,7 @@ public class SupplierMain {
                 System.out.println("**Try again(XXX to end program)**");
                 String option = input.nextLine();
                 if (option.equalsIgnoreCase("XXX")) {
+                    System.out.println("\nGoodbye.....\n\n\n");
                     StaffLogin.staffMenu();
                 }
             }
