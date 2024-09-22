@@ -643,6 +643,7 @@ class actionShipment implements Operations, Manage {
                                             } while (continueInput);
                                             error = !StockUpdate.updateStock(stock[count - 1], qty[count - 1]);
                                             if (error) {
+                                                qty[count - 1] = 0;
                                                 count--;
                                             }
 
