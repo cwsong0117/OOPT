@@ -11,6 +11,8 @@ import java.util.Scanner;
  * @author User
  */
 public class StockUpdate {
+    
+    public static final String RESET = "\u001B[0m";
 
     public static void updateStock(int n) {
 
@@ -23,13 +25,13 @@ public class StockUpdate {
         //Enter the amount of stock receive
         int quantity = 0;
         do {
-            System.out.println("\nStock Received: ");
+            System.out.print("\nStock Received: ");
             quantity = scanner.nextInt();
             if (quantity == -1) {
-                System.out.println("Exiting...\n");
+                System.out.println("\033[0;31mExiting...\n" + RESET);
                 StockMenu.stockMenu();
             } else if (quantity <= 0) {
-                System.out.println("Cannot be zero or negative...\n");
+                System.out.println("\033[0;31mCannot be zero or negative...\n" + RESET);
             }
         } while (quantity <= 0);
 
@@ -48,7 +50,7 @@ public class StockUpdate {
             }
             if (found) {
                 file.writeFood(foods); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\033[0;31mStock level updated successfully." + RESET);
             }
         } else if (n == 2) { // Update stock level for beverage
             StockBeverage[] beverages = file.readBeverage();
@@ -62,7 +64,7 @@ public class StockUpdate {
             }
             if (found) {
                 file.writeBeverage(beverages); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\033[0;31mStock level updated successfully." + RESET);
             }
         } else if (n == 3) { // Update stock level for ingredient
             StockIngredient[] ingredients = file.readIngredient();
@@ -76,12 +78,12 @@ public class StockUpdate {
             }
             if (found) {
                 file.writeIngredient(ingredients); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\033[0;31mStock level updated successfully." + RESET);
             }
         }
 
         if (!found) {
-            System.out.println("Failed to update stock level. ID not found.");
+            System.out.println("\033[0;31mFailed to update stock level. ID not found." + RESET);
         }
     }
 
@@ -91,7 +93,7 @@ public class StockUpdate {
         boolean found = false;
 
         if (quantity < 0) {
-            System.out.println("\nInvalid quantity cannot less than 0!!");
+            System.out.println("\n\033[0;31mInvalid quantity cannot less than 0!" + RESET);
             return false;
         }
 
@@ -109,7 +111,7 @@ public class StockUpdate {
             }
             if (found) {
                 file.writeFood(foods); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\033[0;31mStock level updated successfully." + RESET);
             }
         } else if (stockID.startsWith("BV")) { // Update stock level for beverage
             StockBeverage[] beverages = file.readBeverage();
@@ -125,7 +127,7 @@ public class StockUpdate {
             }
             if (found) {
                 file.writeBeverage(beverages); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\033[0;31mStock level updated successfully." + RESET);
             }
         } else if (stockID.startsWith("IG")) { // Update stock level for ingredient
             StockIngredient[] ingredients = file.readIngredient();
@@ -141,12 +143,12 @@ public class StockUpdate {
             }
             if (found) {
                 file.writeIngredient(ingredients); // Save updated data back to file
-                System.out.println("Stock level updated successfully.");
+                System.out.println("\033[0;31mStock level updated successfully." + RESET);
             }
         }
 
         if (!found) {
-            System.out.println("\nFailed to update stock level. ID not found or quantity is too large!!");
+            System.out.println("\n\033[0;31mFailed to update stock level. ID not found or quantity is too large!" + RESET);
         }
         return found;
 
@@ -199,7 +201,7 @@ public class StockUpdate {
         }
 
         if (!found) {
-            System.out.println("Failed to update stock level. ID not found.");
+            System.out.println("\033[0;31mFailed to update stock level. ID not found." + RESET);
         }
     }
 }

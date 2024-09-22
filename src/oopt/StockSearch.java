@@ -74,7 +74,7 @@ public class StockSearch {
         
             for(StockFood f : foods) {
                 if(f.getStockID().equalsIgnoreCase(id)) {
-                    System.out.println(f.toString());
+                    System.out.println(f.toString() + "\n");
                     found = true;
                 }
             }
@@ -85,7 +85,7 @@ public class StockSearch {
         
             for(StockBeverage b : beverages) {
                 if(b.getStockID().equalsIgnoreCase(id)) {
-                    System.out.println(b.toString());
+                    System.out.println(b.toString() + "\n");
                     found = true;
                 }
             }
@@ -96,7 +96,7 @@ public class StockSearch {
         
             for(StockIngredient i : ingredients) {
                 if(i.getStockID ().equalsIgnoreCase(id)) {
-                    System.out.println(i.toString());
+                    System.out.println(i.toString() + "\n");
                     found = true;
                 }
             }
@@ -104,7 +104,6 @@ public class StockSearch {
         if(!found) {
             System.out.println("No Such ID in file.\n");
         }
-        operationAfterSearch();
         return id;
     }
     
@@ -125,7 +124,7 @@ public class StockSearch {
         
             for(StockFood f : foods) {
                 if(f.getName().equalsIgnoreCase(name)) {
-                    System.out.println(f.toString());
+                    System.out.println(f.toString() + "\n");
                     found = true;
                 }
             }
@@ -136,7 +135,7 @@ public class StockSearch {
         
             for(StockBeverage b : beverages) {
                 if(b.getName().equalsIgnoreCase(name)) {
-                    System.out.println(b.toString());
+                    System.out.println(b.toString() + "\n");
                     found = true;
                 }
             }
@@ -147,7 +146,7 @@ public class StockSearch {
         
             for(StockIngredient i : ingredients) {
                 if(i.getName().equalsIgnoreCase(name)) {
-                    System.out.println(i.toString());
+                    System.out.println(i.toString() + "\n");
                     found = true;
                 }
             }
@@ -186,7 +185,7 @@ public class StockSearch {
         
             for(StockBeverage b : beverages) {
                 if(b.getSupplier().equalsIgnoreCase(supplier)) {
-                    System.out.println(b.toString());
+                    System.out.println(b.toString() + "\n");
                     found = true;
                 }
             }
@@ -197,7 +196,7 @@ public class StockSearch {
         
             for(StockIngredient i : ingredients) {
                 if(i.getSupplier().equalsIgnoreCase(supplier)) {
-                    System.out.println(i.toString());
+                    System.out.println(i.toString() + "\n");
                     found = true;
                 }
             }
